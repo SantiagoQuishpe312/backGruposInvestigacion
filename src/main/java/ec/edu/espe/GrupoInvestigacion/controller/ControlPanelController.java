@@ -1,9 +1,6 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
-import ec.edu.espe.GrupoInvestigacion.dto.DtoChecklist;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoControlPanel;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjStrategies;
-import ec.edu.espe.GrupoInvestigacion.service.IServiceChecklist;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceControlPanel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

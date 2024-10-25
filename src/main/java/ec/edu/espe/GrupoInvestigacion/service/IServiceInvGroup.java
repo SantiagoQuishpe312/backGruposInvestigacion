@@ -1,6 +1,5 @@
 package ec.edu.espe.GrupoInvestigacion.service;
 
-import ec.edu.espe.GrupoInvestigacion.dto.DtoChecklist;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
 
 import java.util.List;

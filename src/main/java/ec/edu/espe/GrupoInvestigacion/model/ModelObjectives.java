@@ -9,30 +9,31 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = " UZITGOBJECTIVES", schema = "UTIC")
+@Table(name = " UZITGSPECIFIC_OBJ", schema = "UTIC")
+//actualizar el nombre a specific
 public class ModelObjectives {
     @Id
-    @GeneratedValue(generator = "UZITGOBJECTIVES_Sequence", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UZITGSPECIFIC_OBJ_Sequence", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGOBJECTIVES_Sequence", sequenceName = "UZISGOBJECTIVES")
-    @Column(name = "UZITGOBJECTIVES_ID")
+    @Column(name = "UZITGSPECIFIC_OBJ_ID")
     private Long id;
 
-    @Column(name = "UZITGOBJECTIVES_OBJ", nullable = false)
+    @Column(name = "UZITGSPECIFIC_OBJ_OBJ", nullable = false)
     private String objective;
 
 
-    @Column(name = "UZITGOBJECTIVES_USER_CREATE")
+    @Column(name = "UZITGSPECIFIC_OBJ_USER_CREATE")
     private String userCreate;
 
-    @Column(name = "UZITGOBJECTIVES_DATE_CREATE")
+    @Column(name = "UZITGSPECIFIC_OBJ_DATE_CREATE")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreate;
 
-    @Column(name = "UZITGOBJECTIVES_USER_MODIFICAT")
+    @Column(name = "UZITGSPECIFIC_OBJ_USER_MODIFIC")
     private String userModificate;
 
-    @Column(name = "UZITGOBJECTIVES_DATE_MODIFICAT")
+    @Column(name = "UZITGSPECIFIC_OBJ_DATE_MODIFIC")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;

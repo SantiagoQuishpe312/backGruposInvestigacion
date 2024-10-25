@@ -3,7 +3,6 @@ package ec.edu.espe.GrupoInvestigacion.service;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoEvents;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoEvents;
 import ec.edu.espe.GrupoInvestigacion.mapper.EventsMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDislink;
 import ec.edu.espe.GrupoInvestigacion.model.ModelEvents;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

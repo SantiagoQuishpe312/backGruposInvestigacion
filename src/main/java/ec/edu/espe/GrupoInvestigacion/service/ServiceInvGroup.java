@@ -6,8 +6,6 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoInvGroup;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoUser;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
 import ec.edu.espe.GrupoInvestigacion.mapper.InvGroupMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelCreationReq;
-import ec.edu.espe.GrupoInvestigacion.model.ModelExhibit;
 import ec.edu.espe.GrupoInvestigacion.model.ModelInvGroup;
 import ec.edu.espe.GrupoInvestigacion.model.ModelUser;
 import org.springframework.beans.BeanUtils;
