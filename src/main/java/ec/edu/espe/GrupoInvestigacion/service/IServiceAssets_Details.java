@@ -10,5 +10,4 @@ public interface IServiceAssets_Details {
     Long save(DtoAssets_Details dtoAssetsDetails);
     void update(DtoAssets_Details dtoAssetsDetails);
 
-
 }
