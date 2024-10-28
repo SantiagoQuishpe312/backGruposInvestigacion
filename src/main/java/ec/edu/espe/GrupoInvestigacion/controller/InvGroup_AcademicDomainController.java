@@ -15,7 +15,7 @@ import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.PRIVATE_PAT
 import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.V1_API_VERSION;
 
 @RestController
-@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/acad-creas")
+@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/invGroup_academicDomain")
 @CrossOrigin(origins = "*")
 @Tag(name = "AcadCreaController", description = "Controlador para gestionar creación de domininio académico")
 

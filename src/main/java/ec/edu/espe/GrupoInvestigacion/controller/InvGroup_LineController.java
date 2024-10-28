@@ -15,7 +15,7 @@ import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.PRIVATE_PAT
 import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.V1_API_VERSION;
 
 @RestController
-@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/line-creas")
+@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/invGroup_lines")
 @CrossOrigin(origins = "*")
 @Tag(name = "LineCreaController resource", description = "Controlador para gestionar peticiones de creación de líneas de investigación")
 public class InvGroup_LineController {

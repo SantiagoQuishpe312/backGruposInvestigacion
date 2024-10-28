@@ -16,7 +16,7 @@ import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.PRIVATE_PAT
 import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.V1_API_VERSION;
 
 @RestController
-@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/crea-areas")
+@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/invGroup_area")
 @CrossOrigin(origins = "*")
 @Tag(name = "CreaAreaController", description = "Controlador para gestionar petición de creación de areas")
 public class InvGroup_AreaController {

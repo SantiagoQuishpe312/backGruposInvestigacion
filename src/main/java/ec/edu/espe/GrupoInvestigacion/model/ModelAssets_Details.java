@@ -16,37 +16,37 @@ public class ModelAssets_Details {
     @Column(name = "UZITGASSETS_DETAILS_ID")
     private Long id;
 
-    @Column(name = "UZITGASSETS_DETAILS_DESCRIPTION")
+    @Column(name = "UZITGASSETS_DETAILS_DESCRIPTIO")
     private String description;
 
     @Column(name = "UZITGASSETS_DETAILS_CODE")
     private String code;
 
-    @Column(name = "UZITGASSETS_DETAILS_ADQUISITION_DATE")
+    @Column(name = "UZITGASSETS_DETAILS_ADQUISITIO")
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.DATE)
     private Date adquisitionDate;
 
-    @Column(name = "UZITGASSETS_DETAILS_CURRENT_STATUS")
+    @Column(name = "UZITGASSETS_DETAILS_CURRENT_ST")
     private String currentStatus;
 
-    @Column(name = "UZITGASSETS_DETAILS_CURRENT_LOCATION")
+    @Column(name = "UZITGASSETS_DETAILS_CURRENT_LO")
     private String currentLocation;
 
-    @Column(name = "UZITGASSETS_DETAILS_USER_CREATE")
+    @Column(name = "UZITGASSETS_DETAILS_USER_CREAT")
     private String userCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "UZITGASSETS_DETAILS_DATE_CREATE")
+    @Column(name = "UZITGASSETS_DETAILS_DATE_CREAT")
     private Date dateCreate;
 
-    @Column(name = "UZITGASSETS_DETAILS_USER_MODIFICATE")
+    @Column(name = "UZITGASSETS_DETAILS_USER_MODIF")
     private String userModificate;
 
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "UZITGASSETS_DETAILS_DATE_MODIFICATE")
+    @Column(name = "UZITGASSETS_DETAILS_DATE_MODIF")
     private Date dateModificate;
 
     @ManyToOne
