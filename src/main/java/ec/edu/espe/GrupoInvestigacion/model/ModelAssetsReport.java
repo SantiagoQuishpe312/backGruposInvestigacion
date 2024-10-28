@@ -54,5 +54,4 @@ public class ModelAssetsReport {
     @JoinColumn(name = "UZITGINV_GROUP", nullable = false)
     private ModelInvGroup modelInvGroup;
 
-
 }
