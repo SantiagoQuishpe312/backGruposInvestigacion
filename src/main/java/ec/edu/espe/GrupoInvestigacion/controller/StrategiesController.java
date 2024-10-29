@@ -1,7 +1,5 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjGetStrategies;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjectives;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoStrategies;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceStrategies;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,11 +41,11 @@ public class StrategiesController {
         return new ResponseEntity<>(strategyService.findByObj(id), HttpStatus.OK);
     }
 
-    @Operation(summary = "Obtener todas las estrategias por objetivo")
+  /*  @Operation(summary = "Obtener todas las estrategias por objetivo")
     @GetMapping("/complete/{idPlan}")
     public ResponseEntity<List<DtoObjGetStrategies>> getComplete(@PathVariable Long idPlan) {
         return new ResponseEntity<>(strategyService.findComplete(idPlan), HttpStatus.OK);
-    }
+    }*/
 
     @Operation(summary = "Crear una nueva estrategia")
     @PostMapping("/create")

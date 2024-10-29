@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,9 +18,8 @@ public class ModelStrategies {
 
     @Column(name = "UZITGSTRATEGIES_STRATEGY")
     private String strategy;
-
-    @Column(name = "UZITGSTRATEGIES_ODS")
-    private String sdg;
+    @Column(name = "UZITGSTRATEGIES_STATE")
+    private Boolean state;
 
     @Column(name = "UZITGSTRATEGIES_USER_CREATE")
     private String userCreate;
@@ -38,6 +38,10 @@ public class ModelStrategies {
     private Date dateModificate;
 
     @ManyToOne
-    @JoinColumn(name = "UZITGOBJECTIVES_ID", nullable = false)
-    private ModelObjectives modelObjectives;
+    @JoinColumn(name = "UZITGINST_STRATEGIC_OBJ_ID", nullable = false)
+    private ModelInstStrategicObj modelInstStrategicObj;
+
+    @OneToMany(mappedBy = "modelStrategies",cascade = CascadeType.ALL)
+    private List<ModelObj_Strategies_ODS> modelObjStrategiesOds;
+
 }

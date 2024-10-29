@@ -1,13 +1,10 @@
 package ec.edu.espe.GrupoInvestigacion.service;
 
-import ec.edu.espe.GrupoInvestigacion.dao.DaoObjectives;
+import ec.edu.espe.GrupoInvestigacion.dao.DaoInstStrategicObj;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoStrategies;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjGetStrategies;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjectives;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoStrategies;
-import ec.edu.espe.GrupoInvestigacion.mapper.ObjectivesMapper;
+import ec.edu.espe.GrupoInvestigacion.mapper.SpecificObjectivesMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.StrategiesMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelObjectives;
 import ec.edu.espe.GrupoInvestigacion.model.ModelStrategies;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +22,13 @@ public class ServiceStrategies implements IServiceStrategies {
     @Autowired
     private DaoStrategies daoStrategies;
     @Autowired
-    private DaoObjectives daoObjectives;
+    private DaoInstStrategicObj daoInstStrategicObj;
 
     @Autowired
     private StrategiesMapper strategiesMapper;
 
     @Autowired
-    private ObjectivesMapper objectivesMapper;
+    private SpecificObjectivesMapper specificObjectivesMapper;
     @Override
     public List<DtoStrategies> findAll() {
         return daoStrategies.findAllEnable()
@@ -48,10 +45,10 @@ public class ServiceStrategies implements IServiceStrategies {
                 .map(strategiesMapper::toDto)
                 .collect(Collectors.toList());
     }
-    @Override
+   /* @Override
     public List<DtoObjGetStrategies> findComplete(Long idPlan) {
         // Obtienes la lista de objetivos con sus estrategias utilizando el DAO
-        Optional<List<ModelObjectives>> modelObjectives = daoObjectives.findByDev(idPlan);
+        Optional<List<ModelObjectives>> modelObjectives = daoInstStrategicObj.findByIdObj(idPlan);
 
         // Si la lista no está vacía, mapeas cada objetivo a su respectivo DTO
         if (modelObjectives.isPresent() && !modelObjectives.get().isEmpty()) {
@@ -89,6 +86,8 @@ public class ServiceStrategies implements IServiceStrategies {
     }
 
 
+
+    */
 
     @Override
     public DtoStrategies find(Long id) {

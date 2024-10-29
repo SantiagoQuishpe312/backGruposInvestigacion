@@ -1,9 +1,9 @@
 package ec.edu.espe.GrupoInvestigacion.service;
 
-import ec.edu.espe.GrupoInvestigacion.dao.DaoObjectives;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjectives;
-import ec.edu.espe.GrupoInvestigacion.mapper.ObjectivesMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelObjectives;
+import ec.edu.espe.GrupoInvestigacion.dao.DaoSpecificObjectives;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoSpecificObjectives;
+import ec.edu.espe.GrupoInvestigacion.mapper.SpecificObjectivesMapper;
+import ec.edu.espe.GrupoInvestigacion.model.ModelSpecificObjectives;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,50 +18,50 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class ServiceObjectives implements IServiceObjectives {
+public class ServiceSpecificObjectives implements IServiceSpecificObjectives {
 
     @Autowired
-    private DaoObjectives daoObjectives;
+    private DaoSpecificObjectives daoSpecificObjectives;
 
     @Autowired
-    private ObjectivesMapper objectivesMapper;
+    private SpecificObjectivesMapper specificObjectivesMapper;
 
     @Override
-    public DtoObjectives find(Long id) {
-        return objectivesMapper.toDto(daoObjectives.findByIdEnable(id).orElse(new ModelObjectives()));
+    public DtoSpecificObjectives find(Long id) {
+        return specificObjectivesMapper.toDto(daoSpecificObjectives.findByIdEnable(id).orElse(new ModelSpecificObjectives()));
     }
 
     @Override
-    public List<DtoObjectives> findAll() {
-        return daoObjectives.findAllEnable()
+    public List<DtoSpecificObjectives> findAll() {
+        return daoSpecificObjectives.findAllEnable()
                 .orElse(new ArrayList<>())
                 .stream()
-                .map(objectivesMapper::toDto)
+                .map(specificObjectivesMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<DtoObjectives> findByDev(Long id) {
-        return daoObjectives.findByDev(id)
+    /*@Override
+    public List<DtoSpecificObjectives> findByDev(Long id) {
+        return daoSpecificObjectives.findByDev(id)
                 .orElse(new ArrayList<>())
                 .stream()
-                .map(objectivesMapper::toDto)
+                .map(specificObjectivesMapper::toDto)
                 .collect(Collectors.toList());
-    }
+    }*/
     @Override
-    public Long save(DtoObjectives dto) {
-        ModelObjectives model = objectivesMapper.toEntity(dto);
-        ModelObjectives createdEntity = daoObjectives.save(model);
+    public Long save(DtoSpecificObjectives dto) {
+        ModelSpecificObjectives model = specificObjectivesMapper.toEntity(dto);
+        ModelSpecificObjectives createdEntity = daoSpecificObjectives.save(model);
         return createdEntity.getId();
     }
 
     @Override
-    public void update(DtoObjectives dtoObjectives){
-        ModelObjectives existingEntity=daoObjectives.findByIdEnable(dtoObjectives.getIdObjetivo()).orElse(null);
+    public void update(DtoSpecificObjectives dtoSpecificObjectives){
+        ModelSpecificObjectives existingEntity= daoSpecificObjectives.findByIdEnable(dtoSpecificObjectives.getIdObjetivo()).orElse(null);
         if(existingEntity!=null){
-            ModelObjectives updatedEntity=objectivesMapper.toEntity(dtoObjectives);
+            ModelSpecificObjectives updatedEntity= specificObjectivesMapper.toEntity(dtoSpecificObjectives);
             BeanUtils.copyProperties(updatedEntity,existingEntity,getNullPropertyNames(updatedEntity));
-            daoObjectives.save(existingEntity);
+            daoSpecificObjectives.save(existingEntity);
         }
     }
     private String[] getNullPropertyNames(Object source) {

@@ -17,20 +17,17 @@ public class ModelBookChapter {
     @Column(name = "UZITGBOOK_CHAPTER_ID")
     private Long id;
 
-    @Column(name = "UZITGBOOK_CHAPTER_NUMBER")
-    private Long number;
-
     @Column(name = "UZITGBOOK_CHAPTER_TITLE")
     private String title;
 
     @Column(name = "UZITGBOOK_CHAPTER_AUTHOR")
     private String author;
 
-    @Column(name = "UZITGBOOK_CHAPTER_BOOK")
-    private String book;
+    @Column(name = "UZITGBOOK_CHAPTER_EDITORIAL ")
+    private String editorial;
 
-    @Column(name = "UZITGBOOK_CHAPTER_INDEX")
-    private String index;
+    @Column(name = "UZITGBOOK_CHAPTER_ISBN")
+    private String isbn;
 
     @Column(name = "UZITGBOOK_CHAPTER_USER_CREATE")
     private String userCreate;

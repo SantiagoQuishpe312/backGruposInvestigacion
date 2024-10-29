@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 @Data
 public class DtoObjGetStrategies {
-    private DtoObjectives Obj;
+    private DtoSpecificObjectives Obj;
     private List<DtoStrategies> Str;
 
 }

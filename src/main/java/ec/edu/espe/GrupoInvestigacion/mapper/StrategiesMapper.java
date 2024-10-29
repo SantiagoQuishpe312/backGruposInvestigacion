@@ -9,9 +9,9 @@ import org.mapstruct.Mapping;
 public interface StrategiesMapper {
 
     @Mapping(source = "id", target = "idEstrategia")
-    @Mapping(source = "modelObjectives.id", target = "idObjetivo")
+    @Mapping(source = "modelInstStrategicObj.id", target = "idObjetivo")
     @Mapping(source = "strategy", target = "estrategia")
-    @Mapping(source = "sdg", target = "ods")
+    @Mapping(source = "state", target = "estado")
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "dateCreate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -19,9 +19,9 @@ public interface StrategiesMapper {
     DtoStrategies toDto(ModelStrategies model);
 
     @Mapping(source = "idEstrategia", target = "id")
-    @Mapping(source = "idObjetivo", target = "modelObjectives.id")
+    @Mapping(source = "idObjetivo", target = "modelInstStrategicObj.id")
     @Mapping(source = "estrategia", target = "strategy")
-    @Mapping(source = "ods", target = "sdg")
+    @Mapping(source = "estado", target = "state")
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")

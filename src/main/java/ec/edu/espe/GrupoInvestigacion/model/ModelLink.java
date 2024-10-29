@@ -24,6 +24,9 @@ public class ModelLink {
     @Column(name = "UZITGLINK_STATE")
     private Character state;
 
+    @Column(name = "UZITGLINK_STATUS")
+    private Character status;
+
     @Column(name = "UZITGLINK_TYPE")
     private String type;
 

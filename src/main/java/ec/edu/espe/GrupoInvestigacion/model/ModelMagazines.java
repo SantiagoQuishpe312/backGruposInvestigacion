@@ -15,9 +15,6 @@ public class ModelMagazines {
     @Column(name = "UZITGMAGAZINES_ID")
     private Long id;
 
-    @Column(name = "UZITGMAGAZINES_NUMBER")
-    private Long number;
-
     @Column(name = "UZITGMAGAZINES_TITLE")
     private String title;
 
@@ -30,11 +27,11 @@ public class ModelMagazines {
     @Column(name = "UZITGMAGAZINES_INDEX")
     private String index;
 
-    @Column(name = "UZITGMAGAZINES_IF_JRC")
-    private String ifJrc;
+    @Column(name = "UZITGMAGAZINES_DOI_ISSN")
+    private String doi;
 
-    @Column(name = "UZITGMAGAZINES_IF_SJR")
-    private String ifSjr;
+    @Column(name = "QUARTIL_IF_SJR ")
+    private String quartilIfSjr;
 
     @Column(name = "UZITGMAGAZINES_USER_CREATE")
     private String userCreate;

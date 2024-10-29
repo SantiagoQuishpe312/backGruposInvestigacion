@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = " UZITGSPECIFIC_OBJ", schema = "UTIC")
 //actualizar el nombre a specific
-public class ModelObjectives {
+public class ModelSpecificObjectives {
     @Id
     @GeneratedValue(generator = "UZITGSPECIFIC_OBJ_Sequence", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGOBJECTIVES_Sequence", sequenceName = "UZISGOBJECTIVES")
@@ -38,10 +38,12 @@ public class ModelObjectives {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
 
-    @ManyToOne
-    @JoinColumn(name = "UZITGDEVELOPMENT_PLAN_ID", nullable = false)
-    private ModelDevelopmentPlan modelDevelopmentPlan;
-    @OneToMany(mappedBy = "modelObjectives", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ModelStrategies> strategies;
+    @OneToMany(mappedBy = "modelSpecificObjectives",cascade = CascadeType.ALL)
+    private List<ModelObj_Strategies_ODS> modelObjStrategiesOds;
+    @OneToMany(mappedBy = "modelSpecificObjectives",cascade = CascadeType.ALL)
+    private List<ModelCompliance> modelCompliance;
+    @OneToMany(mappedBy = "modelSpecificObjectives",cascade = CascadeType.ALL)
+    private List<ModelControlPanel> modelControlPanel;
+
 
 }

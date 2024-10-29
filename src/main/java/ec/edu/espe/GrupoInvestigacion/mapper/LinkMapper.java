@@ -13,6 +13,8 @@ public interface LinkMapper {
     @Mapping(source = "justificacion", target = "justification")
     @Mapping(source = "observaciones", target = "observations")
     @Mapping(source = "estado", target = "state")
+    @Mapping(source = "estatus", target = "status")
+
     @Mapping(source = "tipo", target = "type")
 
     @Mapping(source = "usuarioCreacion", target = "userCreate")
@@ -27,6 +29,8 @@ public interface LinkMapper {
     @Mapping(source = "justification", target = "justificacion")
     @Mapping(source = "observations", target = "observaciones")
     @Mapping(source = "state", target = "estado")
+    @Mapping(source = "status", target = "estatus")
+
     @Mapping(source = "type", target = "tipo")
 
     @Mapping(source = "userCreate", target = "usuarioCreacion")

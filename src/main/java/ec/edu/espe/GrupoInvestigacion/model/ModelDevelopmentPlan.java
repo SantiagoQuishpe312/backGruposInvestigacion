@@ -51,8 +51,7 @@ public class ModelDevelopmentPlan {
     @ManyToOne
     @JoinColumn(name = "UZITGINV_GROUP_ID")
     private ModelInvGroup modelInvGroup;
-    @OneToMany(mappedBy = "modelDevelopmentPlan")
-    private List<ModelObjectives> modelObjectives;
+
     @OneToMany(mappedBy = "modelDevelopmentPlan")
     private List<ModelControlPanel> modelControlPanel;
 

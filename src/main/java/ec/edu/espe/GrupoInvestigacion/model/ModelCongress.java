@@ -16,9 +16,6 @@ public class ModelCongress {
     @Column(name = "UZITGCONGRESS_ID")
     private Long id;
 
-    @Column(name = "UZITGCONGRESS_NUMBER")
-    private Long number;
-
     @Column(name = "UZITGCONGRESS_TITLE")
     private String title;
 
@@ -28,11 +25,11 @@ public class ModelCongress {
     @Column(name = "UZITGCONGRESS_CONGRESS")
     private String congress;
 
-    @Column(name = "UZITGCONGRESS_INDEX")
+    @Column(name = "UZITGCONGRESS_DOI")
     private String index;
 
-    @Column(name = "UZITGCONGRESS_IF_JCR_SJR")
-    private String ifJcrSjr;
+    @Column(name = "UZITGCONGRESS_IF_SJR ")
+    private String ifSjr;
 
     @Column(name = "UZITGCONGRESS_QUARTIL")
     private String quartil;

@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.print.attribute.standard.MediaSize;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -39,4 +40,8 @@ public class ModelInstStrategicObj {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UZITGINST_STRATEGIC_OBJ_DATE_M")
     private Date dateModificate;
+
+    @OneToMany(mappedBy = "modelInstStrategicObj")
+    private List<ModelStrategies> modelStrategies;
+
 }

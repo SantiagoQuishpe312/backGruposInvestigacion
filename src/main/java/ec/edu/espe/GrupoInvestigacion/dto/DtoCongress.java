@@ -12,8 +12,8 @@ public class DtoCongress {
     private String titulo;
     private String autores;
     private String congreso;
-    private String indice;
-    private String ifJcrSjr;
+    private String doi;
+    private String ifSjr;
     private String cuartil;
     private String usuarioCreacion;
     private Date fechaCreacion;

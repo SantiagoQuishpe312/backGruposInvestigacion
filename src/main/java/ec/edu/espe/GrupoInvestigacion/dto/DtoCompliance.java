@@ -6,17 +6,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class DtoMagazines {
-    private Long idRevista;
-    private Long idInformeActividades;
-    private String titulo;
-    private String autores;
-    private String revista;
-    private String indice;
-    private String doi;
-    private String ifsjr;
+public class DtoCompliance {
+    private Long idReporteActividades;
+    private Long idObjEspecifico;
+    private String verificable;
+    private BigDecimal porcentaje;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModificacion;
     private Date fechaModificacion;
+
 }

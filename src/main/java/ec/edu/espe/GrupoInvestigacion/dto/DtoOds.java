@@ -5,10 +5,10 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class DtoStrategies {
-    private Long idEstrategia;
-    private Long idObjetivo;
-    private String estrategia;
+public class DtoOds {
+    private Long id;
+    private String descripcion;
+    private String ods;
     private Boolean estado;
     private String usuarioCreacion;
     private Date fechaCreacion;

@@ -11,6 +11,7 @@ public class DtoLink {
     private String justificacion;
     private String observaciones;
     private Character estado;
+    private Character estatus;
     private String tipo;
     private String usuarioCreacion;
     private Date fechaCreacion;

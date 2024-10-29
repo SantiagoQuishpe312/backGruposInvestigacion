@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -16,30 +17,41 @@ public class ModelControlPanel {
     @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGCONTROLPANEL_Sequence", sequenceName = "UZISGCONTROLPANEL")
     @Column(name = "UZITGCONTROLPANEL_ID")
     private Long id;
-    @Column(name = "UZITGCONTROLPANEL_SPECIFIC_OBJ", nullable = false)
-    private String specificObj;
-
     @Column(name = "UZITGCONTROLPANEL_ACTIVITY", nullable = false)
     private String activity;
-    @Column(name = "UZITGCONTROLPANEL_RESPONSIBLE", nullable = false)
-    private String responsible;
-    @Column(name = "UZITGCONTROLPANEL_INDICATOR", nullable = false)
-    private String indicator;
+
+    @Column(name = "UZITGCONTROLPANEL_INDICATOR_NA", nullable = false)
+    private String indicatorName;
+
+    @Column(name = "UZITGCONTROLPANEL_INDICATOR_TY")
+    private String indicatorType;
+
+    @Column(name = "UZITGCONTROLPANEL_INDICATOR_FO")
+    private String indicatorForm;
+
+    @Column(name = "UZITGCONTROLPANEL_INDICATOR_CO")
+    private String indicatorCondicional;
+
+    @Column(name = "UZITGCONTROLPANEL_INDICATOR_AC")
+    private String indicatorAccumulative;
 
     @Column(name = "UZITGCONTROLPANEL_GOALS1")
-    private String goals1;
+    private BigDecimal goals1;
 
     @Column(name = "UZITGCONTROLPANEL_GOALS2")
-    private String goals2;
+    private BigDecimal goals2;
+
     @Column(name = "UZITGCONTROLPANEL_GOALS3")
-    private String goals3;
+    private BigDecimal goals3;
+
     @Column(name = "UZITGCONTROLPANEL_GOALS4")
-    private String goals4;
+    private BigDecimal goals4;
+
     @Column(name = "UZITGCONTROLPANEL_FINANCING")
-    private Float financing;
+    private BigDecimal financing;
+
     @Column(name = "UZITGCONTROLPANEL_OBSERVATION", nullable = false)
     private String observation;
-
 
     @Column(name = "UZITGCONTROLPANEL_USER_CREATE")
     private String userCreate;
@@ -58,9 +70,16 @@ public class ModelControlPanel {
     private Date dateModificate;
 
 
+
     @ManyToOne
     @JoinColumn(name = "UZITGDEVELOPMENT_PLAN_ID", nullable = false)
     private ModelDevelopmentPlan modelDevelopmentPlan;
+    @ManyToOne
+    @JoinColumn(name = "UZITGSPECIFIC_OBJ_ID ", nullable = false)
+    private ModelSpecificObjectives modelSpecificObjectives;
 
+    @ManyToOne
+    @JoinColumn(name = "UZITGUSER_ID",nullable = false)
+    private ModelUser modelUser;
 
 }
