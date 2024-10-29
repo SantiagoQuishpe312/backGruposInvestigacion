@@ -52,6 +52,13 @@ public class LineController {
         return new ResponseEntity<>(lineService.findAreaByLine(id), HttpStatus.OK);
 
     }
+
+    @Operation(summary = "Obtiene las lineas de investigación dependiendo del area al que pertenezca")
+    @GetMapping ("/getLineByArea/{id}")
+    public ResponseEntity<List<DtoLine>> getLineByArea(@PathVariable Long id){
+        return new ResponseEntity<>(lineService.findLineByArea(id), HttpStatus.OK);
+
+    }
     @Operation(summary = "Actualizar una linea de investigacion existente")
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateLine(@PathVariable Long id, @RequestBody DtoLine dtoLine){

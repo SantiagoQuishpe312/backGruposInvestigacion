@@ -15,4 +15,7 @@ public interface IServiceLine {
     public List<DtoLineGetArea> findAllAreaByLine(Long id);
 
     void update(DtoLine dtoLine);
+    public List<DtoLine> findLineByArea(Long id);
+
+
 }

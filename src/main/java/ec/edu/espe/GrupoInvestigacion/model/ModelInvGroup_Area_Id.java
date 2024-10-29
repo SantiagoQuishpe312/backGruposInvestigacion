@@ -10,7 +10,7 @@ import java.util.Date;
 @Embeddable
 public class ModelInvGroup_Area_Id implements Serializable {
     @ManyToOne
-    @JoinColumn(name = "UZTGINV_GROUP_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "UZITGINV_GROUP_ID", insertable = false, updatable = false)
     private ModelInvGroup modelInvGroup;
     @ManyToOne
     @JoinColumn(name = "UZITGAREA_ID", insertable = false, updatable = false)

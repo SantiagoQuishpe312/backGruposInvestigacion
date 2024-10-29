@@ -8,6 +8,8 @@ import java.util.Date;
 public class DtoInstStrategicObj {
     private Long idObjetivoEstrategico;
     private String objetivo;
+    private Boolean estado;
+
     private String usuarioCreadoObj;
     private Date fechaCreacionObj;
     private String usuarioModificadoObj;

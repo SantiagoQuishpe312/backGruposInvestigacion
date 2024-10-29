@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface InstStrategicObjMapper {
     @Mapping(target = "idObjetivoEstrategico", source = "id")
     @Mapping(target = "objetivo", source = "obj")
+    @Mapping(target = "estado", source = "state")
     @Mapping(target = "usuarioCreadoObj", source = "userCreate")
     @Mapping(target = "fechaCreacionObj", source = "dateCreate")
     @Mapping(target = "usuarioModificadoObj", source = "userModificate")
@@ -17,6 +18,8 @@ public interface InstStrategicObjMapper {
     DtoInstStrategicObj toDTO(ModelInstStrategicObj modelInstStrategicObj);
     @Mapping(target = "id", source = "idObjetivoEstrategico")
     @Mapping(target = "obj", source = "objetivo")
+    @Mapping(target = "state", source = "estado")
+
     @Mapping(target = "userCreate", source = "usuarioCreadoObj")
     @Mapping(target = "dateCreate", source = "fechaCreacionObj")
     @Mapping(target = "userModificate",source = "usuarioModificadoObj")

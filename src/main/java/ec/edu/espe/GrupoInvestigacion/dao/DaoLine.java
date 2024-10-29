@@ -20,4 +20,7 @@ public interface DaoLine extends CrudRepository<ModelLine, Long> {
     Optional<ModelArea> findLineAreaById(@Param("id") Long id);
     @Query(value = "SELECT ml.modelArea FROM ModelLine ml")
     public Optional<List<ModelLine>> findAllLinesAreas();
+
+    @Query(value = "SELECT ml FROM ModelLine ml WHERE ml.modelArea.id = :id")
+    public Optional<List<ModelLine>> findLineByArea(@Param("id") Long id);
 }

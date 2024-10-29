@@ -21,6 +21,9 @@ public class ModelInstStrategicObj {
     @Column(name = "UZITGINST_STRATEGIC_OBJ_OBJ")
     private String obj;
 
+    @Column(name = "UZITGINST_STRATEGIC_OBJ_STATE")
+    private Boolean state;
+
     @Column(name = "UZITGINST_STRATEGIC_OBJ_USER_C")
     private String userCreate;
 

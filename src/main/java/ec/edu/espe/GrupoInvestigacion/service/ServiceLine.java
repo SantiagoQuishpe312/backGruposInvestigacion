@@ -97,6 +97,15 @@ public class ServiceLine implements IServiceLine {
         }
     }
 
+    @Override
+    public List<DtoLine> findLineByArea(Long id) {
+        return daoLine.findLineByArea(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(lineMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
     private String[] getNullPropertyNames(Object source) {
         try {
             final BeanInfo beanInfo = Introspector.getBeanInfo(source.getClass());
