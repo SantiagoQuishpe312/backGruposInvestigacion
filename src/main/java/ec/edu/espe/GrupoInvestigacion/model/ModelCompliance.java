@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "UZITGCOMPLIANCE ",schema = "UTIC")
 public class ModelCompliance {
-@EmbeddedId
+    @EmbeddedId
     private ModelComplianceId id;
 
     @Column(name = "UZITGCOMPLIANCE_VERIFIABLE")

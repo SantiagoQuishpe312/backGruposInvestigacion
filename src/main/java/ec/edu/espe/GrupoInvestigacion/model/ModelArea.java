@@ -41,6 +41,8 @@ public class ModelArea {
     private Date dateModificate;
 
     @OneToMany(mappedBy = "modelArea")
+    private List<ModelInvGroup_Area> modelInvGroupArea;
+    @OneToMany(mappedBy = "modelArea")
     private List<ModelLine> modelLine;
 
 }

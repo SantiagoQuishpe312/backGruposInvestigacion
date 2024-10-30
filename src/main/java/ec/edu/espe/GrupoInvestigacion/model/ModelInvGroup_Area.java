@@ -28,6 +28,7 @@ public class ModelInvGroup_Area {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
+
     @ManyToOne
     @JoinColumn(name = "UZITGAREA_ID", insertable = false, updatable = false)
     private ModelArea modelArea;

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -53,5 +54,8 @@ public class ModelAssetsReport {
     @ManyToOne
     @JoinColumn(name = "UZITGINV_GROUP", nullable = false)
     private ModelInvGroup modelInvGroup;
+
+    @OneToMany(mappedBy = "modelAssetReport")
+    private List<ModelAssets_Details> modelAssetsDetails;
 
 }

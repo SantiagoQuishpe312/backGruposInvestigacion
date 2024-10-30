@@ -13,7 +13,6 @@ public class DtoDevelopmentPlan {
     private String contexto;
     private String alcance;
     private String objGeneral;
-    private String objEstrategico;
     private String usuarioCreacionUsuario;
     private Date fechaCreacionUsuario;
     private String usuarioModificacionUsuario;

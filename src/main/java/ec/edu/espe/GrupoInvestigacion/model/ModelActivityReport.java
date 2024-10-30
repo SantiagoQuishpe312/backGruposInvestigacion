@@ -60,9 +60,13 @@ public class ModelActivityReport {
     private List<ModelPostGradTesis> modelPostGradTesis;
     @OneToMany(mappedBy = "modelActivityReport")
     private List<ModelEvents> modelEvents;
+    @OneToMany(mappedBy = "modelResearchProjec")
+    private  List<ModelResearchProjec> modelResearchProjec;
 
     @OneToMany(mappedBy = "modelActivityReport")
     private List<ModelObjStrategies> modelObjStrategies;
+    @OneToMany(mappedBy = "modelComplience")
+    private List<ModelCompliance> modelCompliance;
 
     @ManyToOne
     @JoinColumn(name = "UZITGINV_GROUP_ID", nullable = false)

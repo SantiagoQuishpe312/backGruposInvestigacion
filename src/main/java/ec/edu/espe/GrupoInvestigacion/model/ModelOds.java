@@ -23,7 +23,7 @@ public class ModelOds {
     private String ods;
 
     @Column(name = "UZITGODS_STATE", nullable = false)
-    private String state;
+    private Boolean state;
 
     @Column(name = "UZITGODS_USER_CREATE")
     private String userCreate;

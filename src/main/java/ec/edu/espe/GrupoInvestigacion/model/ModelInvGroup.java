@@ -64,7 +64,6 @@ public class ModelInvGroup {
     @OneToMany(mappedBy = "modelInvGroup")
     private List<ModelRelevanceReport> modelRelevanceReport;
 
-
     @OneToMany(mappedBy = "modelInvGroup")
     private List<ModelInvGroup_Area> modelInvGroupArea;
 

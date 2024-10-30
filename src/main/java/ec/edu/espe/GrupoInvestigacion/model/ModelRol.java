@@ -37,6 +37,7 @@ public class ModelRol {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
+
     @OneToMany(mappedBy = "modelRol", cascade = CascadeType.ALL)
     private List<ModelUserRol> modelUserRol;
 

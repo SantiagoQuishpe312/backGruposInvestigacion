@@ -44,4 +44,7 @@ public class ModelInstStrategicObj {
     @OneToMany(mappedBy = "modelInstStrategicObj")
     private List<ModelStrategies> modelStrategies;
 
+    @OneToMany(mappedBy = "modelInstStrategicObj")
+    private List<ModelDevelopmentPlan> modelDevelopmentPlans;
+
 }

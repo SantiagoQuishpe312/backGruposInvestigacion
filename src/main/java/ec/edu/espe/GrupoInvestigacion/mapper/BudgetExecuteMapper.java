@@ -11,6 +11,7 @@ import org.mapstruct.Mapping;
 public interface BudgetExecuteMapper {
     @Mapping(source = "id", target = "idPresupuesto")
     @Mapping(source = "modelActivityReport.id", target = "idInformeActividades")
+    @Mapping(source = "activity", target = "actividad")
     @Mapping(source = "budgetItem", target = "item")
     @Mapping(source = "assignedValue", target = "valorAsignado")
     @Mapping(source = "committedValue", target = "valorComprometido")
@@ -24,6 +25,7 @@ public interface BudgetExecuteMapper {
 
     @Mapping(source = "idPresupuesto", target = "id")
     @Mapping(source = "idInformeActividades", target = "modelActivityReport.id")
+    @Mapping(source = "actividad", target = "activity")
     @Mapping(source = "item", target = "budgetItem")
     @Mapping(source = "valorAsignado", target = "assignedValue")
     @Mapping(source = "valorComprometido", target = "committedValue")

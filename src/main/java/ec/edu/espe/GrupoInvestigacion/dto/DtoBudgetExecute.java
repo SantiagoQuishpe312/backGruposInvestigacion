@@ -8,6 +8,7 @@ import java.util.Date;
 public class DtoBudgetExecute {
     private Long IdPresupuesto;
     private Long idInformeActividades;
+    private String actividad;
     private String item;
     private BigDecimal valorAsignado;
     private BigDecimal valorComprometido;

@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -69,7 +70,8 @@ public class ModelControlPanel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
 
-
+    @OneToMany(mappedBy = "modalAnnualControl")
+    private List<ModelAnnualControl> modelAnnualControl;
 
     @ManyToOne
     @JoinColumn(name = "UZITGDEVELOPMENT_PLAN_ID", nullable = false)

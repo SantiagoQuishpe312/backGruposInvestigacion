@@ -17,6 +17,9 @@ public class ModelBudgetExecute {
     @Column(name = "UZITGBUDGET_EXECUTE_ID")
     private Long id;
 
+    @Column(name = "UZITGBUDGET_EXECUTE_ACTIVITY")
+    private String activity;
+
     @Column(name = "UZITGBUDGET_EXECUTE_BUDGET_ITE")
     private String budgetItem;
 

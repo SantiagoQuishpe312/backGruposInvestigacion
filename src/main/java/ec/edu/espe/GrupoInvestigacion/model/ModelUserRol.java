@@ -18,6 +18,7 @@ private ModelUserRolId id;
     @ManyToOne
     @JoinColumn(name = "UZITGROL_ID", insertable = false, updatable = false)
     private ModelRol modelRol;
+
     @Column(name = "UZITGUSER_ROL_USER_CREATE", length = 50)
     private String userCreate;
 

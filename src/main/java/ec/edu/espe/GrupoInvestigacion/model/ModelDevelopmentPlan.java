@@ -23,10 +23,9 @@ public class ModelDevelopmentPlan {
     private String context;
     @Column(name = "UZITGDEVELOPMENT_PLAN_SCOPE")
     private String scope;
-    @Column(name = "UZITGDEVELOPMENT_PLAN_GENERAL_OBJ")
+    @Column(name = "UZITGDEVELOPMENT_PLAN_GENERAL_")
     private String generalObj;
-    @Column(name = "UZITGDEVELOPMENT_PLAN_STRAT_OBJ")
-    private String stategicObj;
+
     @Column(name = "UZITGDEVELOPMENT_PLAN_TYPE")
     private Character type;
 
@@ -48,11 +47,21 @@ public class ModelDevelopmentPlan {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
+
     @ManyToOne
     @JoinColumn(name = "UZITGINV_GROUP_ID")
     private ModelInvGroup modelInvGroup;
+    @ManyToOne
+    @JoinColumn(name = "UZITGINST_STRATEGIC_OBJ_ID")
+    private  ModelInstStrategicObj modelInstStrategicObj;
 
     @OneToMany(mappedBy = "modelDevelopmentPlan")
     private List<ModelControlPanel> modelControlPanel;
+    @OneToMany(mappedBy = "modelDevelopmentPlan")
+    private List<ModelDeveNati> modelDeveNati;
+    @OneToMany(mappedBy = "modelDevelopmentPlan")
+    private List<ModelDeveUppe> modelDeveUppe;
+    @OneToMany(mappedBy = "modelDevelopmentPlan")
+    private List<ModelDeveLega>modelDeveLega;
 
 }

@@ -36,7 +36,7 @@ public class ModelAnnualOperativePlan {
     private Date dateModificate;
 
     @ManyToOne
-    @JoinColumn(name = "UZITGINV_GROUP", nullable = false)
+    @JoinColumn(name = "UZITGINV_GROUP_ID", nullable = false)
     private ModelInvGroup modelInvGroup;
 
     @OneToMany(mappedBy = "modelAnnualOperativePlan")

@@ -62,6 +62,8 @@ public class ModelUser {
     @Column(name = "UZITGUSER_USER_MODIFICATE")
     private String userModificate;
 
+    @OneToMany(mappedBy = "modelUser", cascade =  CascadeType.ALL)
+    private List<ModelControlPanel> controlPanel;
     @OneToMany(mappedBy = "modelUser", cascade = CascadeType.ALL)
     private List<ModelInvGroup> modelInvGroup;
     @OneToMany(mappedBy = "modelUser", cascade = CascadeType.ALL)
