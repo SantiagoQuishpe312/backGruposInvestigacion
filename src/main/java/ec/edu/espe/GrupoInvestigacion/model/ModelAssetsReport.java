@@ -55,7 +55,7 @@ public class ModelAssetsReport {
     @JoinColumn(name = "UZITGINV_GROUP", nullable = false)
     private ModelInvGroup modelInvGroup;
 
-    @OneToMany(mappedBy = "modelAssetReport")
+    @OneToMany(mappedBy = "modelAssetsReport")
     private List<ModelAssets_Details> modelAssetsDetails;
 
 }

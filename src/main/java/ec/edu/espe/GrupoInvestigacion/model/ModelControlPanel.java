@@ -70,7 +70,7 @@ public class ModelControlPanel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
 
-    @OneToMany(mappedBy = "modalAnnualControl")
+    @OneToMany(mappedBy = "modelControlPanel")
     private List<ModelAnnualControl> modelAnnualControl;
 
     @ManyToOne

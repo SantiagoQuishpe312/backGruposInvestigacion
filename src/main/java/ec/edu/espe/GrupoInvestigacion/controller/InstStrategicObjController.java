@@ -36,14 +36,14 @@ public class InstStrategicObjController {
     }
 
     @Operation(summary = "Crear nuevos objetivos estrategicos")
-    @GetMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<Long>createInstStrategicObj(@RequestBody DtoInstStrategicObj dtoInstStrategicObj) {
         Long savedInstStrategicObj = instStrategicObjservice.save(dtoInstStrategicObj);
         return new ResponseEntity<>(savedInstStrategicObj, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Actualizar objetivos estrategicos")
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateInstStrategicObj(@PathVariable Long id, @RequestBody DtoInstStrategicObj dtoInstStrategicObj) {
         DtoInstStrategicObj existingInstStrategicObj = instStrategicObjservice.find(id);
         if (existingInstStrategicObj == null) {

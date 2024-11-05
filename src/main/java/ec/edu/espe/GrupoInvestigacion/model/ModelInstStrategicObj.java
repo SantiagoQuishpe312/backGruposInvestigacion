@@ -15,7 +15,7 @@ import java.util.List;
 public class ModelInstStrategicObj {
     @Id
     @GeneratedValue(generator = "UZITGINST_STRATEGIC_OBJ_Sequence",strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(schema = "UTIC", allocationSize =  1, name = "UZITGINST_STRATEGIC_OBJ_Sequence", sequenceName = "UZITGINST_STRATEGIC_OBJ")
+    @SequenceGenerator(schema = "UTIC", allocationSize =  1, name = "UZITGINST_STRATEGIC_OBJ_Sequence", sequenceName = "UZISGINST_STRATEGIC_OBJ")
     @Column(name = "UZITGINST_STRATEGIC_OBJ_ID")
     private Long id;
 

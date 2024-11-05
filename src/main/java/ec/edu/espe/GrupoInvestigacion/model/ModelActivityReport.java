@@ -60,12 +60,12 @@ public class ModelActivityReport {
     private List<ModelPostGradTesis> modelPostGradTesis;
     @OneToMany(mappedBy = "modelActivityReport")
     private List<ModelEvents> modelEvents;
-    @OneToMany(mappedBy = "modelResearchProjec")
+    @OneToMany(mappedBy = "modelActivityReport")
     private  List<ModelResearchProjec> modelResearchProjec;
 
     @OneToMany(mappedBy = "modelActivityReport")
     private List<ModelObjStrategies> modelObjStrategies;
-    @OneToMany(mappedBy = "modelComplience")
+    @OneToMany(mappedBy = "modelActivityReport")
     private List<ModelCompliance> modelCompliance;
 
     @ManyToOne
