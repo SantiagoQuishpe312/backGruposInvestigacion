@@ -9,7 +9,6 @@ public class DtoLink {
     private Long idGrupoInv;
     private Long idUser;
     private String justificacion;
-    private String observaciones;
     private Character estado;
     private Character estatus;
     private String tipo;

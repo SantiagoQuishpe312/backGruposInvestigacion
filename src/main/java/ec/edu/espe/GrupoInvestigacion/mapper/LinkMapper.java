@@ -11,7 +11,6 @@ public interface LinkMapper {
     @Mapping(source = "idGrupoInv", target = "modelInvGroup.id")
     @Mapping(source = "idUser", target = "modelUser.idUser")
     @Mapping(source = "justificacion", target = "justification")
-    @Mapping(source = "observaciones", target = "observations")
     @Mapping(source = "estado", target = "state")
     @Mapping(source = "estatus", target = "status")
 
@@ -27,7 +26,6 @@ public interface LinkMapper {
     @Mapping(source = "modelInvGroup.id", target = "idGrupoInv")
     @Mapping(source = "modelUser.idUser", target = "idUser")
     @Mapping(source = "justification", target = "justificacion")
-    @Mapping(source = "observations", target = "observaciones")
     @Mapping(source = "state", target = "estado")
     @Mapping(source = "status", target = "estatus")
 

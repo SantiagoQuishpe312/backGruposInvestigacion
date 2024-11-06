@@ -18,9 +18,6 @@ public class ModelLink {
     @Column(name = "UZITGLINK_JUSTIFICATION")
     private String justification;
 
-    @Column(name = "UZITGLINK_OBSERVATIONS")
-    private String observations;
-
     @Column(name = "UZITGLINK_STATE")
     private Character state;
 
