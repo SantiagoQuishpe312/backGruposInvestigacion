@@ -35,6 +35,9 @@ public class ModelRelevanceReport {
     @Column(name = "UZITGRELEVANCE_REPORT_ODS_PLAN")
     private Boolean odsPlan;
 
+    @Column(name = "UZITGRELEVANCE_REPORT_ACADEMIC")
+    private Boolean academicRelevance;
+
     @Column(name = "UZITGRELEVANCE_REPORT_COORDINA", nullable = false)
     private Boolean coordinator;
 
