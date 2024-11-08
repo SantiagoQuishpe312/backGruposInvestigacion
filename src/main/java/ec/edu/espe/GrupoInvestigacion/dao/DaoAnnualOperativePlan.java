@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DaoAnnualOperativePlan extends CrudRepository<ModelAnnualOperativePlan,Long>{
-    @Query(value="SELECT ac FROM ModelAnnualOperativePlan ac WHERE ac.id=:id")
+    @Query("SELECT ac FROM ModelAnnualOperativePlan ac WHERE ac.id=:id")
     public Optional<ModelAnnualOperativePlan> findByIdEnable(Long id);
 
-    @Query(value="SELECT ac FROM ModelAnnualOperativePlan ac")
+    @Query("SELECT ac FROM ModelAnnualOperativePlan ac")
     public Optional<List<ModelAnnualOperativePlan>> findAllEnable();
 }
