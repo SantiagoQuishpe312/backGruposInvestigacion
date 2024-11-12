@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 public interface DevelopmentPlanMapper {
     @Mapping(source = "id", target = "idPlanDesarrollo")
     @Mapping(source = "modelInvGroup.id",target = "idGrupoInv")
+    @Mapping(source = "modelInstStrategicObj.id",target = "idObjetivoInst")
+
     @Mapping(source = "context",target = "contexto")
     @Mapping(source = "scope",target = "alcance")
     @Mapping(source = "generalObj",target = "objGeneral")
@@ -22,6 +24,7 @@ public interface DevelopmentPlanMapper {
 
     @Mapping(source = "idPlanDesarrollo", target = "id")
     @Mapping(source = "idGrupoInv",target = "modelInvGroup.id")
+    @Mapping(source = "idObjetivoInst",target = "modelInstStrategicObj.id")
     @Mapping(source = "contexto",target = "context")
     @Mapping(source = "alcance",target = "scope")
     @Mapping(source = "objGeneral",target = "generalObj")

@@ -8,6 +8,7 @@ import java.util.Date;
 public class DtoDevelopmentPlan {
     private Long idPlanDesarrollo;
     private Long idGrupoInv;
+    private Long idObjetivoInst;
     private Character tipo;
     private Character estado;
     private String contexto;

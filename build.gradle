@@ -33,7 +33,10 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
+	testImplementation 'org.mockito:mockito-core:5.2.0' // Cambia la versión si es necesario
+	testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
+	testImplementation 'com.h2database:h2'
+
 }
 
 tasks.named('test') {
