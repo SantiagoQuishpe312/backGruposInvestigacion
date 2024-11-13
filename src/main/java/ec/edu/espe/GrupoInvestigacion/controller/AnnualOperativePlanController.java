@@ -36,14 +36,14 @@ public class AnnualOperativePlanController {
     }
 
     @Operation(summary = "Creal nuevos planes operativos")
-    @GetMapping("/created")
+    @PostMapping("/created")
     public ResponseEntity<Long> createAnnualOperativePlan(@RequestBody DtoAnnualOperativePlan dtoAnnualOperativePlan) {
         Long savedAnnualOperativePlan = annualOperativePlanService.save(dtoAnnualOperativePlan);
         return new ResponseEntity<>(savedAnnualOperativePlan, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Actualizar planes operativos")
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateAnnualOperativePlan(@PathVariable Long id, @RequestBody DtoAnnualOperativePlan dtoAnnualOperativePlan) {
         DtoAnnualOperativePlan existingAnnualOperativePlan = annualOperativePlanService.findById(id);
         if(existingAnnualOperativePlan == null) {

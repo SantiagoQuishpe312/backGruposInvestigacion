@@ -35,14 +35,14 @@ public class AssetsReportController {
     }
 
     @Operation(summary = "Crear nuevos reportes")
-    @GetMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<Long> createAssetsReport(@RequestBody DtoAssetsReport dtoAssetsReport) {
         Long savedAssetsReport = assetsReportService.save(dtoAssetsReport);
         return new ResponseEntity<>(savedAssetsReport, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Actualizar reporte")
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateAssetsReport(@PathVariable Long id, @RequestBody DtoAssetsReport dtoAssetsReport){
         DtoAssetsReport existingAssetsReport = assetsReportService.find(id);
         if(existingAssetsReport == null){

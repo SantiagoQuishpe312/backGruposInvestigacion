@@ -34,13 +34,13 @@ public class AssetsDetailsController {
         return new ResponseEntity<>(assets_detailsService.find(id), HttpStatus.OK);
     }
     @Operation(summary = "Crea nuevos detalles de activo")
-    @GetMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<Long>createAssetsDetails(@RequestBody DtoAssets_Details dtoAssetsDetail) {
         Long savedAssetsDetails = assets_detailsService.save(dtoAssetsDetail);
         return new ResponseEntity<>(savedAssetsDetails, HttpStatus.CREATED);
     }
     @Operation(summary = "Actualizar detalles de un Activo")
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateAssetsDetails(@PathVariable Long id, @RequestBody DtoAssets_Details dtoAssetsDetail) {
         DtoAssets_Details existingAssetsDetails = assets_detailsService.find(id);
         if (existingAssetsDetails == null) {
