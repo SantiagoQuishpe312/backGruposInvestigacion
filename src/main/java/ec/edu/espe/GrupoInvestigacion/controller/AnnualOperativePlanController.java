@@ -30,7 +30,7 @@ public class AnnualOperativePlanController {
     }
 
     @Operation(summary = "Obtener Planes operativos anuales por id")
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DtoAnnualOperativePlan> getAnnualOperativePlanById(@PathVariable Long id) {
         return new ResponseEntity<>(annualOperativePlanService.findById(id), HttpStatus.OK);
     }
