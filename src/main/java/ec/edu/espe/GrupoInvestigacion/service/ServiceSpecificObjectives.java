@@ -40,14 +40,14 @@ public class ServiceSpecificObjectives implements IServiceSpecificObjectives {
                 .collect(Collectors.toList());
     }
 
-    /*@Override
+    @Override
     public List<DtoSpecificObjectives> findByDev(Long id) {
-        return daoSpecificObjectives.findByDev(id)
+        return daoSpecificObjectives.findByPlan(id)
                 .orElse(new ArrayList<>())
                 .stream()
                 .map(specificObjectivesMapper::toDto)
                 .collect(Collectors.toList());
-    }*/
+    }
     @Override
     public Long save(DtoSpecificObjectives dto) {
         ModelSpecificObjectives model = specificObjectivesMapper.toEntity(dto);

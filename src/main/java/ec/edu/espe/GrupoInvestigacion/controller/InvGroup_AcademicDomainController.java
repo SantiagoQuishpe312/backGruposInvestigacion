@@ -1,6 +1,8 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
+import ec.edu.espe.GrupoInvestigacion.dto.DtoAcademicDomain;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup_AcademicDomain;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoReqGetAcademicDom;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceInvGroup_AcademicDomain;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,10 +44,10 @@ public class InvGroup_AcademicDomainController {
         Long saved=invGroupAcademicDomainService.save(dtoInvGroupAcademicDomain);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
-   /* @Operation(summary = "Obtiene los dominios academicos por el id del Formulario de Creacion")
-    @GetMapping ("/byreq/{id}")
-    public ResponseEntity <DtoReqGetAcademicDom> reqGetAcademicDom(@PathVariable Long id){
-        return new ResponseEntity<>(invGroupAcademicDomainService.findByReq(id),HttpStatus.OK);
-    }*/
+    @Operation(summary = "Obtiene los dominios academicos por el id del Formulario de Creacion")
+    @GetMapping ("/byGroup/{id}")
+    public ResponseEntity <List<DtoAcademicDomain>> reqGetAcademicDom(@PathVariable Long id){
+        return new ResponseEntity<>(invGroupAcademicDomainService.findByGroup(id),HttpStatus.OK);
+    }
 
 }

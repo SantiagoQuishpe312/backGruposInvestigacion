@@ -8,7 +8,7 @@ public interface IServiceSpecificObjectives {
     List<DtoSpecificObjectives> findAll();
 
     DtoSpecificObjectives find(Long id);
-    //List<DtoSpecificObjectives> findByDev(Long id);
+    List<DtoSpecificObjectives> findByDev(Long id);
     Long save(DtoSpecificObjectives dtoSpecificObjectives);
     void update(DtoSpecificObjectives dtoSpecificObjectives);
 }

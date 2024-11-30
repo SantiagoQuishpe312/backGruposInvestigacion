@@ -2,6 +2,7 @@ package ec.edu.espe.GrupoInvestigacion.service;
 
 
 import ec.edu.espe.GrupoInvestigacion.dao.*;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoAcademicDomain;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoCreationReq;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup_AcademicDomain;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoReqGetAcademicDom;
@@ -70,16 +71,13 @@ private AcademicDomainMapper academicDomainMapper;
         daoInvGroupAcademicDomain.save(modelInvGroupAcademicDomains);
         return acadDomId;
     }
-    /*@Override
-    public DtoReqGetAcademicDom findByReq(Long id){
-        Optional<List<ModelAcademicDomain>> modelAcademicDomains= daoInvGroupAcademicDomain.findAcademicDomain(id);
-        DtoReqGetAcademicDom dtoReqGetAcademicDom=new DtoReqGetAcademicDom();
-        if(!modelAcademicDomains.isEmpty()){
-            dtoReqGetAcademicDom.setCreacion(daoCreationReq.findByIdEnable(id).map(creationReqMapper::toDto).orElse(new DtoCreationReq()));
-            dtoReqGetAcademicDom.setDominio(modelAcademicDomains.get().stream().map(academicDomainMapper::toDTO).collect(Collectors.toList()));
-            return dtoReqGetAcademicDom;
-        }
-        throw new RuntimeException("No se encontraron Dominios Academicos para el Formulario");
-    }*/
+    @Override
+    public List<DtoAcademicDomain> findByGroup(Long id){
+    return daoInvGroupAcademicDomain.findAcademicDomain(id)
+        .orElse(new ArrayList<>())
+        .stream()
+        .map(academicDomainMapper::toDTO)
+        .collect(Collectors.toList());
+    }
 
 }

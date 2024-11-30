@@ -1,7 +1,9 @@
 package ec.edu.espe.GrupoInvestigacion.service;
 
 
+import ec.edu.espe.GrupoInvestigacion.dto.DtoArea;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup_Line;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLine;
 
 import java.util.List;
 
@@ -10,5 +12,5 @@ public interface IServiceInvGroup_Line {
 
     public List<DtoInvGroup_Line> find(Long id);
     Long save(DtoInvGroup_Line dtoLineCrea);
-   // public DtoReqGetLine findByReq(Long id);
+    public List<DtoLine> findByGroup(Long id);
 }

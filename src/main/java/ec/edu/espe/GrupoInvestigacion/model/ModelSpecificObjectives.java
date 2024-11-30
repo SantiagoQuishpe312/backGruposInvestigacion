@@ -13,7 +13,7 @@ import java.util.List;
 //actualizar el nombre a specific
 public class ModelSpecificObjectives {
     @Id
-    @GeneratedValue(generator = "UZITGSPECIFIC_OBJ_Sequence", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UZITGOBJECTIVES_Sequence", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGOBJECTIVES_Sequence", sequenceName = "UZISGOBJECTIVES")
     @Column(name = "UZITGSPECIFIC_OBJ_ID")
     private Long id;

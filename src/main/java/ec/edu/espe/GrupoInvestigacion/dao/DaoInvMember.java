@@ -29,5 +29,6 @@ public interface DaoInvMember extends CrudRepository<ModelInvMember, Long> {
     @Query(value = "SELECT mig.modelUser FROM ModelInvMember mig WHERE mig.modelInvGroup.id =:id")
     public Optional<List<ModelUser>> findMembersInfoByGroup(Long id);
 
+
 }
 

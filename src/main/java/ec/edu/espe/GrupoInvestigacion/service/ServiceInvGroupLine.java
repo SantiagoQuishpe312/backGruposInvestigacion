@@ -4,6 +4,7 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoInvGroup;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoLine;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoInvGroup_Line;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup_Line;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLine;
 import ec.edu.espe.GrupoInvestigacion.mapper.InvGroupMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.InvGroup_LineMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.LineMapper;
@@ -60,15 +61,12 @@ public class ServiceInvGroupLine implements IServiceInvGroup_Line {
         daoInvGroupLine.save(modelInvGroupLine);
         return lineId;
     }
-    /*@Override
-    public DtoReqGetLine findByReq(Long id){
-        Optional<List<ModelLine>> modelLines= daoInvGroupLine.findLine(id);
-        DtoReqGetLine dtoReqGetLine=new DtoReqGetLine();
-        if(!modelLines.isEmpty()){
-            dtoReqGetLine.setCreacion(daoCreationReq.findByIdEnable(id).map(creationReqMapper::toDto).orElse(new DtoCreationReq()));
-            dtoReqGetLine.setLinea(modelLines.get().stream().map(lineMapper::toDto).collect(Collectors.toList()));
-            return dtoReqGetLine;
-        }
-        throw new RuntimeException("No se encontraron Areas Academicos para el Formulario");
-    }*/
+    @Override
+    public List<DtoLine> findByGroup(Long id){
+   return daoInvGroupLine.findLine(id)
+           .orElse(new ArrayList<>())
+           .stream()
+           .map(lineMapper::toDto)
+           .collect(Collectors.toList());
+    }
 }

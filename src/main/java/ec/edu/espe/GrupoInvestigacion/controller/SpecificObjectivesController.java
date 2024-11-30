@@ -29,11 +29,11 @@ public class SpecificObjectivesController {
         return new ResponseEntity<>(objectiveService.findAll(), HttpStatus.OK);
     }
 
-   /* @Operation(summary = "Obtener todos los objetivos por el id del plan de desarrollo")
+    @Operation(summary = "Obtener todos los objetivos por el id del plan de desarrollo")
     @GetMapping("/bydev/{id}")
     public ResponseEntity<List<DtoSpecificObjectives>> getObjectivesByDev(@PathVariable Long id) {
         return new ResponseEntity<>(objectiveService.findByDev(id), HttpStatus.OK);
-    }*/
+    }
     @Operation(summary = "Obtener un objetivo por su ID")
     @GetMapping("/{id}")
     public ResponseEntity<DtoSpecificObjectives> getObjectiveById(@PathVariable Long id) {

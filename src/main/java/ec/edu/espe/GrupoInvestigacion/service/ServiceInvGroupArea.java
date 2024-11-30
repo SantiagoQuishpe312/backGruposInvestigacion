@@ -32,6 +32,8 @@ public class ServiceInvGroupArea implements IServiceInvGroup_Area {
     private DaoInvGroup daoInvGroup;
     @Autowired
     private DaoArea daoArea;
+    @Autowired
+    private AreaMapper areaMapper;
 
     @Autowired
     public ServiceInvGroupArea(DaoInvGroup_Area daoInvGroupArea, InvGroup_AreaMapper invGroupAreaMapper) {
@@ -71,15 +73,12 @@ public class ServiceInvGroupArea implements IServiceInvGroup_Area {
         daoInvGroupArea.save(modelInvGroupArea);
         return areaId;
     }
-   /* @Override
-    public DtoReqGetArea findByReq(Long id){
-        Optional<List<ModelArea>> modelAreas= daoInvGroupArea.findArea(id);
-        DtoReqGetArea dtoReqGetArea=new DtoReqGetArea();
-        if(!modelAreas.isEmpty()){
-            dtoReqGetArea.setCreacion(daoCreationReq.findByIdEnable(id).map(creationReqMapper::toDto).orElse(new DtoCreationReq()));
-            dtoReqGetArea.setArea(modelAreas.get().stream().map(areaMapper::toDto).collect(Collectors.toList()));
-            return dtoReqGetArea;
-        }
-        throw new RuntimeException("No se encontraron Areas Academicos para el Formulario");
-    }*/
+    @Override
+    public List<DtoArea> findByGroup(Long id){
+    return daoInvGroupArea.findArea(id)
+            .orElse(new ArrayList<>())
+            .stream()
+            .map(areaMapper::toDto)
+            .collect(Collectors.toList());
+    }
 }

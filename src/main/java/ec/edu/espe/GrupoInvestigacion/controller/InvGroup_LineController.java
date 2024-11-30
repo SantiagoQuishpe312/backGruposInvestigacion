@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup_Line;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLine;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceInvGroup_Line;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,9 +42,9 @@ public class InvGroup_LineController {
         Long saved=lineCreaService.save(dtoInvGroupLine);
         return new ResponseEntity<>(saved,HttpStatus.CREATED);
     }
-    /*@Operation(summary = "Obtiene las líneas por el id del Formulario de Creacion")
-    @GetMapping ("/byreq/{id}")
-    public ResponseEntity <DtoReqGetLine> reqGetLine(@PathVariable Long id){
-        return new ResponseEntity<>(lineCreaService.findByReq(id),HttpStatus.OK);
-    }*/
+    @Operation(summary = "Obtiene las líneas por el id del Formulario de Creacion")
+    @GetMapping ("/byGroup/{id}")
+    public ResponseEntity <List<DtoLine>> reqGetLine(@PathVariable Long id){
+        return new ResponseEntity<>(lineCreaService.findByGroup(id),HttpStatus.OK);
+    }
 }

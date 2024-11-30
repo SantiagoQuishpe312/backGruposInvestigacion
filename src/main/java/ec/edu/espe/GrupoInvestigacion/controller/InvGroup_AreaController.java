@@ -1,5 +1,6 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
+import ec.edu.espe.GrupoInvestigacion.dto.DtoArea;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup_Area;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoReqGetArea;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceInvGroup_Area;
@@ -42,10 +43,10 @@ public class InvGroup_AreaController {
         Long savedCreaArea=creaAreaService.save(dtoInvGroupArea);
         return new ResponseEntity<>(savedCreaArea,HttpStatus.CREATED);
     }
-   /* @Operation(summary = "Obtiene las areas por el id del Formulario de Creacion")
-    @GetMapping ("/byreq/{id}")
-    public ResponseEntity <DtoReqGetArea> reqGetArea(@PathVariable Long id){
-        return new ResponseEntity<>(creaAreaService.findByReq(id),HttpStatus.OK);
+    @Operation(summary = "Obtiene las areas por el id del Formulario de Creacion")
+    @GetMapping ("/byGroup/{id}")
+    public ResponseEntity <List<DtoArea>> reqGetArea(@PathVariable Long id){
+        return new ResponseEntity<>(creaAreaService.findByGroup(id),HttpStatus.OK);
     }
-*/
+
 }
