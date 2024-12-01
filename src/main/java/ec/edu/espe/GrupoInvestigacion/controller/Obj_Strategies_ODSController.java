@@ -1,5 +1,6 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
+import ec.edu.espe.GrupoInvestigacion.dto.DtoObjGetStrategies;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoObj_Strategies_ODS;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceObj_Strategies_ODS;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,6 +27,12 @@ public class Obj_Strategies_ODSController {
     @GetMapping("/objective/{id}")
     public ResponseEntity<List<DtoObj_Strategies_ODS>> getByObj(@PathVariable Long id){
         return new ResponseEntity<>(serviceObjStrategiesOds.findByObj(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Obtener datos por el Id del Plan de Desarrollo")
+    @GetMapping("/developmentPlan/{id}")
+    public ResponseEntity<List<DtoObjGetStrategies>> getCompleteByObj(@PathVariable Long id){
+        return new ResponseEntity<>(serviceObjStrategiesOds.findCompleteByPlan(id), HttpStatus.OK);
     }
 
     @Operation(summary = "Crear una nueva relacion de control")

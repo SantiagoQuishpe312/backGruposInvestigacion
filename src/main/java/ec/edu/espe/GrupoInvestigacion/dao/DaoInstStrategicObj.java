@@ -14,4 +14,7 @@ public interface DaoInstStrategicObj extends CrudRepository<ModelInstStrategicOb
 
     @Query("SELECT iso FROM ModelInstStrategicObj iso WHERE iso.id=:id")
     public Optional<ModelInstStrategicObj> findByIdObj(@Param("id") Long id);
+
+
+
 }

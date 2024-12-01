@@ -18,4 +18,5 @@ public interface DaoSpecificObjectives extends JpaRepository<ModelSpecificObject
     @Query("SELECT o FROM ModelSpecificObjectives o JOIN o.modelControlPanel p WHERE p.modelDevelopmentPlan.id = :planId")
     Optional<List<ModelSpecificObjectives>> findByPlan(@Param("planId") Long planId);
 
+
 }
