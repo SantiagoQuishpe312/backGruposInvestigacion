@@ -16,6 +16,8 @@ public interface UserMapper {
     @Mapping(source = "identification", target = "cedula")
     @Mapping(source = "institution", target = "institucion")
     @Mapping(source = "position", target = "cargo")
+    @Mapping(source = "nationality", target = "nacionalidad")
+
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "createdDate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -32,6 +34,7 @@ public interface UserMapper {
     @Mapping(source = "cedula", target = "identification")
     @Mapping(source = "institucion", target = "institution")
     @Mapping(source = "cargo", target = "position")
+    @Mapping(source = "nacionalidad", target = "nationality")
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "createdDate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")

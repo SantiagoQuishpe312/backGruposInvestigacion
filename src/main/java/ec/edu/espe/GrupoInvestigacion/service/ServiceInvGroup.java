@@ -1,13 +1,11 @@
 package ec.edu.espe.GrupoInvestigacion.service;
 
-import ec.edu.espe.GrupoInvestigacion.dao.DaoAcademicDomain;
-import ec.edu.espe.GrupoInvestigacion.dao.DaoCreationReq;
-import ec.edu.espe.GrupoInvestigacion.dao.DaoInvGroup;
-import ec.edu.espe.GrupoInvestigacion.dao.DaoUser;
+import ec.edu.espe.GrupoInvestigacion.dao.*;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
-import ec.edu.espe.GrupoInvestigacion.mapper.InvGroupMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelInvGroup;
-import ec.edu.espe.GrupoInvestigacion.model.ModelUser;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroupGetData;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoUser;
+import ec.edu.espe.GrupoInvestigacion.mapper.*;
+import ec.edu.espe.GrupoInvestigacion.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +13,7 @@ import org.springframework.stereotype.Service;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,12 +23,27 @@ public class ServiceInvGroup implements IServiceInvGroup {
     @Autowired
     private DaoUser daoUser;
     @Autowired
+    private DaoInvMember daoInvMember;
+    @Autowired
+    private DaoInvGroup_Area daoArea;
+    @Autowired
+    private DaoInvGroup_Line daoLine;
+
+    @Autowired
     private DaoCreationReq daoCreationReq;
     @Autowired
     private InvGroupMapper invGroupMapper;
 
     @Autowired
-    private DaoAcademicDomain daoAcademicDomain;
+    private UserMapper userMapper;
+    @Autowired
+    private AcademicDomainMapper academicDomainMapper;
+    @Autowired
+    private LineMapper lineMapper;
+    @Autowired
+    private AreaMapper areaMapper;
+    @Autowired
+    private DaoInvGroup_AcademicDomain daoAcademicDomain;
     @Autowired
 
     public ServiceInvGroup(DaoInvGroup daoInvGroup, DaoUser daoUser,InvGroupMapper invGroupMapper, DaoCreationReq daoCreationReq){
@@ -101,4 +111,23 @@ public class ServiceInvGroup implements IServiceInvGroup {
             return new String[0];
         }
     }
-}
+
+    @Override
+    public DtoInvGroupGetData findAllData(Long id){
+        Optional<ModelInvGroup> modelInvGroup=daoInvGroup.findByIdEnable(id);
+        Optional<List<ModelUser>> modelUser=daoInvMember.findMembersInfoByGroup(id);
+        Optional<List<ModelArea>> modelAreas=daoArea.findArea(id);
+        Optional<List<ModelAcademicDomain>> modelAcademicDomains=daoAcademicDomain.findAcademicDomain(id);
+        Optional<List<ModelLine>> modelLines=daoLine.findLine(id);
+        DtoInvGroupGetData dtoInvGroupGetData=new DtoInvGroupGetData();
+        if(!modelInvGroup.isEmpty()){
+            dtoInvGroupGetData.setInvGroup(modelInvGroup.map(invGroupMapper::toDto).orElse(new DtoInvGroup()));
+            dtoInvGroupGetData.setLine(modelLines.orElse(new ArrayList<>()).stream().map(lineMapper::toDto).collect(Collectors.toList()));
+       dtoInvGroupGetData.setArea(modelAreas.orElse(new ArrayList<>()).stream().map(areaMapper::toDto).collect(Collectors.toList()));
+       dtoInvGroupGetData.setAcademicDomain(modelAcademicDomains.orElse(new ArrayList<>()).stream().map(academicDomainMapper::toDTO).collect(Collectors.toList()));
+       dtoInvGroupGetData.setUsers(modelUser.orElse(new ArrayList<>()).stream().map(userMapper::toDto).collect(Collectors.toList()));
+      dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(modelInvGroup.get().getModelUser().getIdUser()).map(userMapper::toDto).orElse(new DtoUser()));
+       return dtoInvGroupGetData;
+    }
+        throw new RuntimeException("No se encontraron datos");
+}}

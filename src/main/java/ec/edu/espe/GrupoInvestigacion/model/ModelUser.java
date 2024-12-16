@@ -46,6 +46,9 @@ public class ModelUser {
     @Column(name = "UZITGUSER_USER_POSITION")
     private String position;
 
+    @Column(name = "UZITGUSER_NATIONALITY")
+    private String nationality;
+
     @Column(name = "UZITGUSER_DATE_CREATE")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)

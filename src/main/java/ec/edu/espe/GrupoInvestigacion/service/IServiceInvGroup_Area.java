@@ -12,4 +12,5 @@ public interface IServiceInvGroup_Area {
     public List<DtoInvGroup_Area> find(Long id);
     Long save(DtoInvGroup_Area dtoInvGroupArea);
     public List<DtoArea> findByGroup(Long id);
+    void delete(Long groupId, Long idArea);
 }

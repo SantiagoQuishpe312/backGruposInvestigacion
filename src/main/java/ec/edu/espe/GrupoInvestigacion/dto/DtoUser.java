@@ -16,6 +16,7 @@ public class DtoUser {
     private String departamento;
     private String institucion;
     private String cargo;
+    private String nacionalidad;
     private Date fechaCreacion;
     private Date fechaModificacion;
     private String usuarioCreacion;

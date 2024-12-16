@@ -50,4 +50,10 @@ public class InvGroup_AcademicDomainController {
         return new ResponseEntity<>(invGroupAcademicDomainService.findByGroup(id),HttpStatus.OK);
     }
 
+    @Operation(summary = "Eliminar ")
+    @DeleteMapping("/{acadId}/group/{groupId}")
+    public ResponseEntity<Void> delete(@PathVariable Long acadId, @PathVariable Long groupId) {
+        invGroupAcademicDomainService.delete(groupId,acadId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

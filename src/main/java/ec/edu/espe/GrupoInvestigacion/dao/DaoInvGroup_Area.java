@@ -18,4 +18,6 @@ public interface DaoInvGroup_Area extends CrudRepository<ModelInvGroup_Area, Lon
 
     @Query(value="SELECT a.modelArea FROM  ModelInvGroup_Area a WHERE a.modelInvGroup.id=:id")
     public Optional<List<ModelArea>> findArea(Long id);
+    @Query(value = "SELECT a FROM ModelInvGroup_Area a WHERE a.modelInvGroup.id =:id and a.modelArea.id=:idArea")
+    public Optional<ModelInvGroup_Area> findByIds(Long id,Long idArea);
 }

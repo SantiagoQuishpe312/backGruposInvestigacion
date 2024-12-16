@@ -11,4 +11,7 @@ public interface IServiceRelevanceReport {
     public DtoRelevanceReport find(Long id);
     Long save(DtoRelevanceReport dtoRelevanceReport);
     void update(DtoRelevanceReport dtoRelevanceReport);
+    public DtoRelevanceReport findGroup(Long id);
+
+
 }

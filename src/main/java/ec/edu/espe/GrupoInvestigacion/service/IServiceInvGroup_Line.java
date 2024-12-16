@@ -13,4 +13,6 @@ public interface IServiceInvGroup_Line {
     public List<DtoInvGroup_Line> find(Long id);
     Long save(DtoInvGroup_Line dtoLineCrea);
     public List<DtoLine> findByGroup(Long id);
+    void delete (Long groupId, Long lineId);
+    void deleteByArea(Long id);
 }

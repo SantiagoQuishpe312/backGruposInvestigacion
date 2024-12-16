@@ -47,4 +47,17 @@ public class InvGroup_LineController {
     public ResponseEntity <List<DtoLine>> reqGetLine(@PathVariable Long id){
         return new ResponseEntity<>(lineCreaService.findByGroup(id),HttpStatus.OK);
     }
+    @Operation(summary = "Eliminar ")
+    @DeleteMapping("/{lineId}/group/{groupId}")
+    public ResponseEntity<Void> delete(@PathVariable Long lineId, @PathVariable Long groupId) {
+        lineCreaService.delete(groupId,lineId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Operation(summary = "Eliminar ")
+    @DeleteMapping("/deleteByArea/{id}")
+    public ResponseEntity<Void> deleteByArea(@PathVariable Long id) {
+        lineCreaService.deleteByArea(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

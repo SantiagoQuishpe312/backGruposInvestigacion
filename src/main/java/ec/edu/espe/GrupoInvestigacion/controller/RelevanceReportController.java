@@ -34,6 +34,13 @@ public class RelevanceReportController {
         return new ResponseEntity<>(serviceRelevanceReport.find(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Obtener un informe de pertinencia por su ID")
+    @GetMapping("/group/{id}")
+    public ResponseEntity<DtoRelevanceReport> getByGroup(@PathVariable Long id) {
+        return new ResponseEntity<>(serviceRelevanceReport.findGroup(id), HttpStatus.OK);
+    }
+
+
     @Operation(summary = "Crear un nuevo informe de pertinencia")
     @PostMapping("/create")
     public ResponseEntity<Long> create(@RequestBody DtoRelevanceReport dtoRelevanceReport) {

@@ -49,4 +49,10 @@ public class InvGroup_AreaController {
         return new ResponseEntity<>(creaAreaService.findByGroup(id),HttpStatus.OK);
     }
 
+    @Operation(summary = "Eliminar ")
+    @DeleteMapping("/{areaId}/group/{groupId}")
+    public ResponseEntity<Void> delete(@PathVariable Long areaId, @PathVariable Long groupId) {
+        creaAreaService.delete(groupId,areaId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

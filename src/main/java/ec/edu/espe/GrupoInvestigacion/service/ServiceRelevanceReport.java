@@ -37,6 +37,11 @@ private RelevanceReportMapper relevanceReportMapper;
     public DtoRelevanceReport find(Long id) {
         return relevanceReportMapper.toDto(daoRelevanceReport.findByIdEnable(id).orElse(new ModelRelevanceReport()));
     }
+    @Override
+    public DtoRelevanceReport findGroup(Long id) {
+        return relevanceReportMapper.toDto(daoRelevanceReport.findByGroup(id).orElse(new ModelRelevanceReport()));
+    }
+
 
     @Override
     public Long save(DtoRelevanceReport dtoRelevanceReport) {

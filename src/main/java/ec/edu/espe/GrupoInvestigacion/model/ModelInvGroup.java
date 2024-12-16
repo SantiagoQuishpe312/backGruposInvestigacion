@@ -50,6 +50,9 @@ public class ModelInvGroup {
     @Column(name = "UZITGINV_GROUP_VISION")
     private String vision;
 
+    @Column(name = "UZITGINV_GROUP_DEPARTMENT")
+    private String department;
+
     @OneToMany(mappedBy = "modelInvGroup", cascade = CascadeType.ALL)
     private List<ModelCreationReq> modelCreationReq;
     @OneToMany(mappedBy = "modelInvGroup", cascade = CascadeType.ALL)

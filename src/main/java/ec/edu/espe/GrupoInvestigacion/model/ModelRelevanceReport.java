@@ -21,34 +21,34 @@ public class ModelRelevanceReport {
     private String memoN;
 
     @Column(name = "UZITGRELEVANCE_REPORT_CREATION")
-    private Boolean creationReq;
+    private Long creationReq;
 
     @Column(name = "UZITGRELEVANCE_REPORT_DEVELOPM", nullable = false)
-    private Boolean developmentPlan;
+    private Long developmentPlan;
 
     @Column(name = "UZITGRELEVANCE_REPORT_ADITIONA", nullable = false)
-    private Boolean aditionalDocs;
+    private Long aditionalDocs;
 
     @Column(name = "UZITGRELEVANCE_REPORT_OBJ")
     private String objectives;
 
     @Column(name = "UZITGRELEVANCE_REPORT_ODS_PLAN")
-    private Boolean odsPlan;
+    private Long odsPlan;
 
     @Column(name = "UZITGRELEVANCE_REPORT_ACADEMIC")
     private String academicRelevance;
 
     @Column(name = "UZITGRELEVANCE_REPORT_AREA_LIN")
-    private Boolean areaLine;
+    private Long areaLine;
 
     @Column(name = "UZITGRELEVANCE_REPORT_COORDINA", nullable = false)
-    private Boolean coordinator;
+    private Long coordinator;
 
     @Column(name = "UZITGRELEVANCE_REPORT_MEMBERS", nullable = false)
-    private Boolean members;
+    private Long members;
 
     @Column(name = "UZITGRELEVANCE_REPORT_OBJ_PLAN", nullable = false)
-    private Boolean objectivesDevelopmentPlan;
+    private Long objectivesDevelopmentPlan;
 
     @Column(name = "UZITGRELEVANCE_REPORT_CONCLUSI")
     private String conclusions;

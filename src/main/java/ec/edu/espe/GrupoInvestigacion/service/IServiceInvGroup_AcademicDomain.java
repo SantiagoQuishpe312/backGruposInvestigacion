@@ -11,4 +11,5 @@ public interface IServiceInvGroup_AcademicDomain {
     public List<DtoInvGroup_AcademicDomain> find(Long id);
     Long save(DtoInvGroup_AcademicDomain dtoAcadCrea);
     public List<DtoAcademicDomain> findByGroup(Long id);
+    void delete (Long groupId, Long acadId);
 }

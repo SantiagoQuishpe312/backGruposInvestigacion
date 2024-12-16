@@ -14,4 +14,8 @@ public interface DaoRelevanceReport extends CrudRepository<ModelRelevanceReport,
 
     @Query(value = "SELECT mrr FROM ModelRelevanceReport mrr WHERE mrr.id =:id")
     public Optional<ModelRelevanceReport> findByIdEnable(Long id);
+
+    @Query(value = "SELECT mrr FROM ModelRelevanceReport mrr WHERE mrr.modelInvGroup.id =:id")
+    public Optional<ModelRelevanceReport> findByGroup(Long id);
+
 }

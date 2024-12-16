@@ -81,4 +81,14 @@ public class ServiceInvGroupArea implements IServiceInvGroup_Area {
             .map(areaMapper::toDto)
             .collect(Collectors.toList());
     }
+    @Override
+    public void delete(Long groupId, Long areaId){
+        Optional<ModelInvGroup_Area> invGroupArea=daoInvGroupArea.findByIds(groupId, areaId);
+        if (invGroupArea.isPresent()){
+            daoInvGroupArea.delete(invGroupArea.get());
+        }
+        else {
+            throw new RuntimeException("no se encontraron datos");
+        }
+    }
 }

@@ -80,4 +80,14 @@ private AcademicDomainMapper academicDomainMapper;
         .collect(Collectors.toList());
     }
 
+    @Override
+    public void delete(Long groupId, Long acadId){
+        Optional<ModelInvGroup_AcademicDomains> invGroupAcademicDomains=daoInvGroupAcademicDomain.findByIds(groupId, acadId);
+        if (invGroupAcademicDomains.isPresent()){
+            daoInvGroupAcademicDomain.delete(invGroupAcademicDomains.get());
+        }
+        else {
+            throw new RuntimeException("no se encontraron datos");
+        }
+    }
 }

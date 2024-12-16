@@ -17,4 +17,6 @@ public interface DaoInvGroup extends CrudRepository<ModelInvGroup, Long> {
     @Query(value = "SELECT mig FROM ModelInvGroup mig WHERE mig.modelUser.idUser =:id")
     public Optional<ModelInvGroup> findByIdUser(Long id);
 
+
+
 }

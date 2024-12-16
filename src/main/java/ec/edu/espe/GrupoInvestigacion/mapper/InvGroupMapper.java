@@ -13,6 +13,8 @@ public interface InvGroupMapper {
     @Mapping(source = "mission", target = "mision")
     @Mapping(source = "vision", target = "vision")
     @Mapping(source = "acronym", target = "acronimoGrupoinv")
+    @Mapping(source = "department", target = "departamento")
+
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "dateCreate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -25,6 +27,8 @@ public interface InvGroupMapper {
     @Mapping(source = "acronimoGrupoinv", target = "acronym")
     @Mapping(source = "mision", target = "mission")
     @Mapping(source = "vision", target = "vision")
+    @Mapping(source = "departamento", target = "department")
+
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")

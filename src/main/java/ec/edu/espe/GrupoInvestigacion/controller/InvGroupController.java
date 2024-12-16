@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroupGetData;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceInvGroup;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,6 +35,13 @@ public class InvGroupController {
     public ResponseEntity<DtoInvGroup> getInvGroupById(@PathVariable Long id) {
 
         return new ResponseEntity<>(invGroupService.find(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Obtener toda la informacion grupo de investigación por su ID")
+    @GetMapping("/all/{id}")
+    public ResponseEntity<DtoInvGroupGetData> getAllDataInvGroupById(@PathVariable Long id) {
+
+        return new ResponseEntity<>(invGroupService.findAllData(id), HttpStatus.OK);
     }
 
     @Operation(summary = "Obtener un grupo de investigación por su nombre")

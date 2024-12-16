@@ -16,4 +16,7 @@ public interface DaoInvGroup_AcademicDomain extends CrudRepository<ModelInvGroup
 
     @Query(value="SELECT a.modelAcademicDomain FROM  ModelInvGroup_AcademicDomains a WHERE a.modelInvGroup.id=:id")
     public Optional<List<ModelAcademicDomain>> findAcademicDomain(Long id);
+
+    @Query(value = "SELECT a FROM ModelInvGroup_AcademicDomains a WHERE a.modelInvGroup.id =:id and a.modelAcademicDomain.id=:idAcad")
+    public Optional<ModelInvGroup_AcademicDomains> findByIds(Long id, Long idAcad);
 }

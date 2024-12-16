@@ -12,6 +12,7 @@ public class DtoInvGroup {
     private String acronimoGrupoinv;
     private String mision;
     private String vision;
+    private String departamento;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModificacion;
