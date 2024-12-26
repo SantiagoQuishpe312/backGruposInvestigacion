@@ -28,6 +28,10 @@ public class ModelInvGroup {
     @Column(name = "UZITGINV_GROUP_ACRONYM")
     private String acronym;
 
+    @Column(name = "UZITGINV_GROUP_PROCESS")
+    private String process;
+
+
     @Column(name = "UZITGINV_GROUP_USER_CREATE")
     private String userCreate;
 
