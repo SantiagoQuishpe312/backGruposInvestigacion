@@ -11,12 +11,13 @@ public class DtoUser {
     private String nombre;
     private String idInstitucional;
     private String cedula;
-    private String telefono;
     private String correo;
     private String departamento;
     private String institucion;
     private String cargo;
     private String nacionalidad;
+    private String foto;
+    private String genero;
     private Date fechaCreacion;
     private Date fechaModificacion;
     private String usuarioCreacion;

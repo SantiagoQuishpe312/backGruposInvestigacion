@@ -42,4 +42,8 @@ public class ModelAnnexes {
     @JoinColumn(name = "UZITGINV_GROUP_ID", nullable = false)
     private ModelInvGroup modelInvGroup;
 
+    @ManyToOne
+    @JoinColumn(name = "UZITGDOCUMENT_ID", nullable = false)
+    private ModelDocument modelDocument;
+
 }

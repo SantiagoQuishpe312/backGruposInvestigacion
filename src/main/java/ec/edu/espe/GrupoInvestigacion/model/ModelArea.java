@@ -44,5 +44,4 @@ public class ModelArea {
     private List<ModelInvGroup_Area> modelInvGroupArea;
     @OneToMany(mappedBy = "modelArea")
     private List<ModelLine> modelLine;
-
 }
