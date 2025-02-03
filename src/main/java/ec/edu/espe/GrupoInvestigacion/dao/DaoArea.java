@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.dao;
 
 import ec.edu.espe.GrupoInvestigacion.model.ModelArea;
+import ec.edu.espe.GrupoInvestigacion.model.ModelLine;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,7 @@ public interface DaoArea extends CrudRepository<ModelArea, Long> {
 
     @Query("SELECT a FROM ModelArea a WHERE a.name = :name")
     Optional<ModelArea> findByName(@Param("name") String name);
+
+    @Query(value = "SELECT ma FROM ModelArea ma WHERE ma.modelAcademicDomain.id = :id")
+    public Optional<List<ModelArea>> findAreaByDominio(@Param("id") Long id);
 }

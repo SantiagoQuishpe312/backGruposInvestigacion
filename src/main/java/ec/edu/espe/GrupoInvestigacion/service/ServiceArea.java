@@ -43,6 +43,14 @@ public class ServiceArea implements IServiceArea {
                 .collect(Collectors.toList());
     }
 
+    public List<DtoArea> findAreaByDominio(Long id){
+        return daoArea.findAreaByDominio(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(areaMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public Long save(DtoArea dtoArea) {
         ModelArea modelArea=areaMapper.toEntity(dtoArea);

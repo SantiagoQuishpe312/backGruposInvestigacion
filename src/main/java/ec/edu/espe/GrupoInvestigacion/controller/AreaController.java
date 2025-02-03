@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoArea;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLineGetArea;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceArea;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,6 +35,12 @@ public class AreaController {
     @GetMapping("/{id}")
     public ResponseEntity<DtoArea> getAreaById(@PathVariable Long id) {
         return new ResponseEntity<>(areaService.find(id), HttpStatus.OK);
+    }
+    @Operation(summary = "Obtiene una Area de Investigación completa con el dominioAcademico al que pertenece")
+    @GetMapping ("/getAreaByDominio/{id}")
+    public ResponseEntity<List<DtoArea >>getAreaResponseEntity(@PathVariable Long id){
+        return new ResponseEntity<>(areaService.findAreaByDominio(id), HttpStatus.OK);
+
     }
     @Operation(summary = "Crea una nueva Área")
     @PostMapping("/create")

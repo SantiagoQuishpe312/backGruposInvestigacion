@@ -14,6 +14,8 @@ public class DtoInvGroup {
     private String vision;
     private String departamento;
     private String proceso;
+    private Date fechaCreacionGI;
+    private String adicional;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModificacion;

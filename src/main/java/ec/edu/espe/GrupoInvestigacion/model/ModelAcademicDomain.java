@@ -41,5 +41,7 @@ public class ModelAcademicDomain {
 
     @OneToMany(mappedBy = "modelAcademicDomain")
     private List<ModelInvGroup_AcademicDomains> modelInvGroupAcademicDomains;
+    @OneToMany(mappedBy = "modelAcademicDomain")
+    private List<ModelArea> modelArea;
 
 }

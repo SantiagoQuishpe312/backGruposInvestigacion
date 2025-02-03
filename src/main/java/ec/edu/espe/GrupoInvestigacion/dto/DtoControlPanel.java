@@ -26,7 +26,4 @@ public class DtoControlPanel {
     private Date fechaCreacion;
     private String usuarioModificacion;
     private Date fechaModificacion;
-
-
-
 }

@@ -1,12 +1,10 @@
 package ec.edu.espe.GrupoInvestigacion.service;
 
 
-import ec.edu.espe.GrupoInvestigacion.dao.DaoDevelopmentPlan;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoDevelopmentPlan;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoGroupRegForm;
-import ec.edu.espe.GrupoInvestigacion.mapper.DevelopmentPlanMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDevelopmentPlan;
-import ec.edu.espe.GrupoInvestigacion.model.ModelGroupRegForm;
+import ec.edu.espe.GrupoInvestigacion.dao.*;
+import ec.edu.espe.GrupoInvestigacion.dto.*;
+import ec.edu.espe.GrupoInvestigacion.mapper.*;
+import ec.edu.espe.GrupoInvestigacion.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +23,29 @@ public class ServiceDevelopmentPlan implements IServiceDevelopmentPlan{
     @Autowired
     private DevelopmentPlanMapper developmentPlanMapper;
 
+    @Autowired
+    private UpperLevelPlanMapper upperLevelPlanMapper;
+
+    @Autowired
+    private LegalFrameworkMapper legalFrameworkMapper;
+
+    @Autowired
+    private NationalPlanMapper nationalPlanMapper;
+    @Autowired
+    private InstStrategicObjMapper instStrategicObjMapper;
+
+    @Autowired
+    private DaoDeveUppe daoUpperLevelPlan;
+    @Autowired
+    private DaoDeveNati daoDeveNati;
+    @Autowired
+    private DaoDeveLega daoDeveLega;
+    @Autowired
+    private DaoInstStrategicObj daoInstStrategicObj;
+    @Autowired
+    private ServiceControlPanel serviceControlPanel;
+    @Autowired
+    private ServiceObj_Strategies_ODS serviceObjStrategiesOds;
     @Override
     public DtoDevelopmentPlan find(Long id) {
         return developmentPlanMapper.toDto(daoDevelopmentPlan.findByIdEnable(id).orElse(new ModelDevelopmentPlan()));
@@ -47,6 +65,38 @@ public class ServiceDevelopmentPlan implements IServiceDevelopmentPlan{
                 .map(developmentPlanMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public DtoDevelopmentPlanGetData findAllByGroupTypeState(Long id, Character tipo, Character estado) {
+        Optional<ModelDevelopmentPlan> modelDevelopmentPlan = daoDevelopmentPlan.findByGroupTypeState(id, tipo, estado);
+
+        if (modelDevelopmentPlan.isEmpty()) {
+            throw new NoSuchElementException("No Development Plan found for id: " + id + ", type: " + tipo + ", state: " + estado);
+        }
+
+        Long idDev = modelDevelopmentPlan.get().getId();
+
+        Optional<List<ModelUpperLevelPlan>> modelUpperLevelPlan = daoUpperLevelPlan.findUpperLevelPlan(idDev);
+        Optional<List<ModelLegalFramework>> modelLegalFramework = daoDeveLega.findLegalFramework(idDev);
+        Optional<List<ModelNationalPlan>> modelNationalPlan = daoDeveNati.findNationalPlan(idDev);
+        Optional<ModelInstStrategicObj> modelInstStrategicObj = daoInstStrategicObj.findByIdObj(
+                modelDevelopmentPlan.get().getModelInstStrategicObj().getId()
+        );
+
+        DtoDevelopmentPlanGetData dto = new DtoDevelopmentPlanGetData();
+
+        dto.setPlanDesarrollo(modelDevelopmentPlan.map(developmentPlanMapper::toDto).orElse(new DtoDevelopmentPlan()));
+        dto.setPanelControl(serviceControlPanel.findCompleteByDev(idDev));
+        dto.setPlanSuperior(modelUpperLevelPlan.orElse(new ArrayList<>()).stream().map(upperLevelPlanMapper::toDto).collect(Collectors.toList()));
+        dto.setMarcoLegal(modelLegalFramework.orElse(new ArrayList<>()).stream().map(legalFrameworkMapper::toDto).collect(Collectors.toList()));
+        dto.setPlanNacional(modelNationalPlan.orElse(new ArrayList<>()).stream().map(nationalPlanMapper::toDto).collect(Collectors.toList()));
+        dto.setObjEstrategicoInst(modelInstStrategicObj.map(instStrategicObjMapper::toDTO).orElse(new DtoInstStrategicObj()));
+        dto.setObjEstrategiasOds(serviceObjStrategiesOds.findCompleteByPlan(idDev));
+
+        return dto;
+    }
+
+
     @Override
     public List<DtoDevelopmentPlan> findAll() {
         return daoDevelopmentPlan.findAllEnable()

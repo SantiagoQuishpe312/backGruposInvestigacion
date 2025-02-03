@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 public interface AreaMapper {
 
     @Mapping(source = "id", target = "idArea")
+    @Mapping(source = "modelAcademicDomain.id", target = "idDominio")
+
     @Mapping(source = "name", target = "nombreArea")
     @Mapping(source = "state", target = "estado")
     @Mapping(source = "userCreate", target = "usuarioCreacionArea")
@@ -17,6 +19,7 @@ public interface AreaMapper {
     @Mapping(source = "dateModificate", target = "fechaModificacionArea")
     DtoArea toDto(ModelArea model);
     @Mapping(source = "idArea", target = "id")
+    @Mapping(source = "idDominio", target = "modelAcademicDomain.id")
     @Mapping(source = "nombreArea", target = "name")
     @Mapping(source = "estado", target = "state")
     @Mapping(source = "usuarioCreacionArea", target = "userCreate")

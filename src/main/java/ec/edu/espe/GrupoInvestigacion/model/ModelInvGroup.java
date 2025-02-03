@@ -31,7 +31,12 @@ public class ModelInvGroup {
     @Column(name = "UZITGINV_GROUP_PROCESS")
     private String process;
 
-
+    @Column(name = "UZITGINV_GROUP_DATE_CREATE_GI")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
+    @Temporal(TemporalType.DATE)
+    private Date dateCreateGI;
+    @Column(name = "UZITGINV_GROUP_ADD_INFO")
+    private String add;
     @Column(name = "UZITGINV_GROUP_USER_CREATE")
     private String userCreate;
 

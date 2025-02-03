@@ -40,6 +40,10 @@ public class ModelArea {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
 
+    @ManyToOne
+    @JoinColumn(name = "UZITGACADEMIC_DOM_ID")
+    private ModelAcademicDomain modelAcademicDomain;
+
     @OneToMany(mappedBy = "modelArea")
     private List<ModelInvGroup_Area> modelInvGroupArea;
     @OneToMany(mappedBy = "modelArea")

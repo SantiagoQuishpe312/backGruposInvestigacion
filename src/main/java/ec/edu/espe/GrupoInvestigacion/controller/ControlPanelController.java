@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoControlPanel;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoControlPanelGetData;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceControlPanel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,6 +34,12 @@ public class ControlPanelController {
     @GetMapping("/bydev/{id}")
     public ResponseEntity<List<DtoControlPanel>> getAllControlPanelByDev(@PathVariable Long id) {
         return new ResponseEntity<>(controlPanelService.findByDev(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Obtener todos los paneles de control por plan de desarrollo")
+    @GetMapping("/bycontrl/{id}")
+    public ResponseEntity<List<DtoControlPanelGetData>> getAllControlPanel(@PathVariable Long id) {
+        return new ResponseEntity<>(controlPanelService.findCompleteByDev(id), HttpStatus.OK);
     }
 
     @Operation(summary = "Obtener un panel de control por su ID")

@@ -6,6 +6,7 @@ import java.util.Date;
 @Data
 public class DtoArea {
     private Long idArea;
+    private Long idDominio;
     private String nombreArea;
     private Boolean estado;
     private String usuarioCreacionArea;

@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevelopmentPlan;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoDevelopmentPlanGetData;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoGroupRegForm;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceDevelopmentPlan;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,6 +47,14 @@ public class DevelopmentPlanController {
     public ResponseEntity<List<DtoDevelopmentPlan>> getDevelopmentPlanByGroupType(@PathVariable Long id, @PathVariable String tipo) {
         return new ResponseEntity<>(developmentPlanService.findGroupType(id, tipo.charAt(0)), HttpStatus.OK);
     }
+
+    @Operation(summary = "Obtener un plan de operación por su ID")
+    @GetMapping("/completePlan/group/{id}/type/{tipo}/state/{estado}")
+    public ResponseEntity<DtoDevelopmentPlanGetData> getDevelopmentPlanById(@PathVariable Long id,@PathVariable Character tipo, @PathVariable Character estado) {
+        return new ResponseEntity<>(developmentPlanService.findAllByGroupTypeState(id,tipo,estado), HttpStatus.OK);
+    }
+
+
 
     @Operation(summary = "Crear un nuevo plan de operación")
     @PostMapping("/create")

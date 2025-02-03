@@ -7,6 +7,7 @@ import java.util.Date;
 public class DtoAnnexes {
     private Long idAnexo;
     private Long idGrupo;
+    private Long idDocumento;
     private String nombreAnexo;
     private String rutaAnexo;
     private String usuarioCreacionAnexo;

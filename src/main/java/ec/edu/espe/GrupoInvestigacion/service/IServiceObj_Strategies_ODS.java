@@ -11,4 +11,5 @@ public interface IServiceObj_Strategies_ODS {
 
     public List<DtoObjGetStrategies> findCompleteByPlan(Long id);
 
+
 }

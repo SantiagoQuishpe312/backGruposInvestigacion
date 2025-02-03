@@ -10,6 +10,7 @@ public interface AnnexesMapper {
 
     @Mapping(source = "id", target = "idAnexo")
     @Mapping(source = "modelInvGroup.id", target = "idGrupo")
+    @Mapping(source = "modelDocument.id", target = "idDocumento")
     @Mapping(source = "name", target = "nombreAnexo")
     @Mapping(source = "route", target = "rutaAnexo")
     @Mapping(source = "userCreate", target = "usuarioCreacionAnexo")
@@ -20,6 +21,7 @@ public interface AnnexesMapper {
 
     @Mapping(source = "idAnexo", target = "id")
     @Mapping(source = "idGrupo", target = "modelInvGroup.id")
+    @Mapping(source = "idDocumento", target = "modelDocument.id")
     @Mapping(source = "nombreAnexo", target = "name")
     @Mapping(source = "rutaAnexo", target = "route")
     @Mapping(source = "usuarioCreacionAnexo", target = "userCreate")

@@ -21,6 +21,9 @@ public interface DaoDevelopmentPlan extends CrudRepository<ModelDevelopmentPlan,
 
     @Query(value = "SELECT mdp FROM ModelDevelopmentPlan mdp WHERE mdp.modelInvGroup.id=:id AND mdp.type=:tipo")
     public Optional<List<ModelDevelopmentPlan>> findByGroupAndType(Long id,Character tipo);
+
+    @Query(value = "SELECT mdp FROM ModelDevelopmentPlan mdp WHERE mdp.modelInvGroup.id=:id AND mdp.type=:tipo AND mdp.state=:estado")
+    public Optional <ModelDevelopmentPlan> findByGroupTypeState(Long id,Character tipo,Character estado);
     @Query(value = "SELECT mdp FROM ModelDevelopmentPlan mdp WHERE mdp.modelInvGroup.id=:id and mdp.type='c'")
     public Optional<ModelDevelopmentPlan> findByGroupCreation(Long id);
 
