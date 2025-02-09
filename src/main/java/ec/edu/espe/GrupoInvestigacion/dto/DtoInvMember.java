@@ -8,6 +8,10 @@ import java.util.Date;
 public class DtoInvMember {
     private Long idGrupoInv;
     private Long idUsuario;
+    private Boolean estado;
+    private String tipo;
+    private Date fechaVinculacion;
+    private Date fechaDesvinculacion;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModificacion;

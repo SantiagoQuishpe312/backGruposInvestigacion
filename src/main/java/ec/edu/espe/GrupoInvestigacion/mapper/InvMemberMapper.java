@@ -12,6 +12,10 @@ public interface InvMemberMapper {
 
     @Mapping(source = "modelInvGroup.id", target = "idGrupoInv")
     @Mapping(source = "modelUser.idUser", target = "idUsuario")
+    @Mapping(source = "state", target = "estado")
+    @Mapping(source = "type", target = "tipo")
+    @Mapping(source = "linkDate", target = "fechaVinculacion")
+    @Mapping(source = "dislinkDate", target = "fechaDesvinculacion")
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "dateCreate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -20,6 +24,10 @@ public interface InvMemberMapper {
 
     @Mapping(source = "idGrupoInv", target = "modelInvGroup.id")
     @Mapping(source = "idUsuario", target = "modelUser.idUser")
+    @Mapping(source = "tipo", target = "type")
+    @Mapping(source = "estado", target = "state")
+    @Mapping(source = "fechaVinculacion", target = "linkDate")
+    @Mapping(source = "fechaDesvinculacion", target = "dislinkDate")
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")

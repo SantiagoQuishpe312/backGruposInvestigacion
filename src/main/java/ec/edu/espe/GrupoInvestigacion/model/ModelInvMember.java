@@ -25,6 +25,22 @@ public class ModelInvMember {
     @Column(name = "UZITGINV_MEMBER_USER_CREATE")
     private String userCreate;
 
+    @Column(name = "UZITGINV_MEMBER_STATE")
+    private Boolean state;
+
+    @Column(name = "UZITGINV_MEMBER_TYPE")
+    private String type;
+
+    @Column(name = "UZITGINV_MEMBER_LINK_DATE")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
+    @Temporal(TemporalType.DATE)
+    private String linkDate;
+
+    @Column(name = "UZITGINV_MEMBER_DISLINK_DATE")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
+    @Temporal(TemporalType.DATE)
+    private String dislinkDate;
+
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UZITGINV_MEMBER_DATE_CREATE")
