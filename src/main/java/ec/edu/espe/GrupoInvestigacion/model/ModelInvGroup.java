@@ -37,6 +37,9 @@ public class ModelInvGroup {
     private Date dateCreateGI;
     @Column(name = "UZITGINV_GROUP_ADD_INFO")
     private String add;
+
+    @Column(name = "UZITGINV_GROUP_CAMPUS")
+    private String campus;
     @Column(name = "UZITGINV_GROUP_USER_CREATE")
     private String userCreate;
 
