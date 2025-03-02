@@ -12,6 +12,7 @@ public class DtoInvMember {
     private String tipo;
     private Date fechaVinculacion;
     private Date fechaDesvinculacion;
+    private String status;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModificacion;
