@@ -40,7 +40,6 @@ public interface UserMapper {
     @Mapping(source = "genero", target = "gender")
     @Mapping(source = "grado", target = "grade")
     @Mapping(source = "sede", target = "campus")
-
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "createdDate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")

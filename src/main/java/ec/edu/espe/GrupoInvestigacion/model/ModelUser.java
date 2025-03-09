@@ -54,6 +54,7 @@ public class ModelUser {
 
     @Column(name = "UZITGUSER_GRADE")
     private String grade;
+
     @Column(name = "UZITGUSER_CAMPUS")
     private String campus;
     @Column(name = "UZITGUSER_DATE_CREATE")

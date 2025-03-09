@@ -16,6 +16,7 @@ public interface InvMemberMapper {
     @Mapping(source = "type", target = "tipo")
     @Mapping(source = "linkDate", target = "fechaVinculacion")
     @Mapping(source = "dislinkDate", target = "fechaDesvinculacion")
+    @Mapping(source = "status", target = "status")
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "dateCreate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -28,6 +29,8 @@ public interface InvMemberMapper {
     @Mapping(source = "estado", target = "state")
     @Mapping(source = "fechaVinculacion", target = "linkDate")
     @Mapping(source = "fechaDesvinculacion", target = "dislinkDate")
+    @Mapping(source = "status", target = "status")
+
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")
