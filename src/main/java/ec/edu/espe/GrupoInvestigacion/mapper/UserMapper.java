@@ -19,6 +19,7 @@ public interface UserMapper {
     @Mapping(source = "photo", target = "foto")
     @Mapping(source = "gender", target = "genero")
     @Mapping(source = "grade", target = "grado")
+    @Mapping(source = "campus", target = "sede")
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "createdDate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -38,6 +39,8 @@ public interface UserMapper {
     @Mapping(source = "foto", target = "photo")
     @Mapping(source = "genero", target = "gender")
     @Mapping(source = "grado", target = "grade")
+    @Mapping(source = "sede", target = "campus")
+
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "createdDate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")

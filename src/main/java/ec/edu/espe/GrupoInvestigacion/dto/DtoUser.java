@@ -19,6 +19,7 @@ public class DtoUser {
     private String foto;
     private String genero;
     private String grado;
+    private String sede;
     private Date fechaCreacion;
     private Date fechaModificacion;
     private String usuarioCreacion;

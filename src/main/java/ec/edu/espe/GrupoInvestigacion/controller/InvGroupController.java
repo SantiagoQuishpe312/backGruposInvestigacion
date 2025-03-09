@@ -44,6 +44,20 @@ public class InvGroupController {
         return new ResponseEntity<>(invGroupService.findAllData(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Obtener toda la informacion grupo de investigación por su proceso")
+    @GetMapping("/process/{process}")
+    public ResponseEntity<List<DtoInvGroupGetData>> getAllByProcess(@PathVariable String process) {
+
+        return new ResponseEntity<>(invGroupService.findByProcess(process), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Obtener toda la informacion grupo de investigación por su proceso")
+    @GetMapping("/getprocessDepartment")
+    public ResponseEntity<List<DtoInvGroupGetData>> getAllByProcessDep(@RequestParam("process") String process,     @RequestParam("department") String departmentName
+ ) {
+
+        return new ResponseEntity<>(invGroupService.findByProcessAndDepartment(process, departmentName), HttpStatus.OK);
+    }
     @Operation(summary = "Obtener un grupo de investigación por su nombre")
     @GetMapping("/user/{id}")
     public ResponseEntity<DtoInvGroup> getInvGroupByUser(@PathVariable Long id) {

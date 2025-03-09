@@ -10,6 +10,7 @@ import ec.edu.espe.GrupoInvestigacion.mapper.InvGroupMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.InvMemberMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.UserMapper;
 import ec.edu.espe.GrupoInvestigacion.model.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,15 +83,26 @@ public class ServiceInvMember implements IServiceInvMember {
     public DtoInvGroup findByUsername(String username) {
         Optional<ModelInvMember> modelInvGroup = daoInvMember.findByUsername(username);
         DtoInvGroup dtoInvGroup = new DtoInvGroup();
-        dtoInvGroup.setNombreGrupoInv(modelInvGroup.get().getModelInvGroup().getName());
-        dtoInvGroup.setIdGrupoInv(modelInvGroup.get().getModelInvGroup().getId());
-        dtoInvGroup.setVision(modelInvGroup.get().getModelInvGroup().getVision());
-        dtoInvGroup.setMision(modelInvGroup.get().getModelInvGroup().getMission());
-        dtoInvGroup.setIdCoordinador(modelInvGroup.get().getModelUser().getIdUser());
-        dtoInvGroup.setAcronimoGrupoinv(modelInvGroup.get().getModelInvGroup().getAcronym());
-        dtoInvGroup.setEstadoGrupoInv(modelInvGroup.get().getModelInvGroup().getState());
+
+        // Verificar si el Optional tiene un valor
+        if (modelInvGroup.isPresent()) {
+            // Si tiene valor, setear los atributos en el DTO
+            dtoInvGroup.setNombreGrupoInv(modelInvGroup.get().getModelInvGroup().getName());
+            dtoInvGroup.setIdGrupoInv(modelInvGroup.get().getModelInvGroup().getId());
+            dtoInvGroup.setVision(modelInvGroup.get().getModelInvGroup().getVision());
+            dtoInvGroup.setMision(modelInvGroup.get().getModelInvGroup().getMission());
+            dtoInvGroup.setIdCoordinador(modelInvGroup.get().getModelUser().getIdUser());
+            dtoInvGroup.setAcronimoGrupoinv(modelInvGroup.get().getModelInvGroup().getAcronym());
+            dtoInvGroup.setEstadoGrupoInv(modelInvGroup.get().getModelInvGroup().getState());
+        } else {
+            // Si no tiene valor, puedes manejarlo de una manera apropiada
+            // Por ejemplo, puedes lanzar una excepción personalizada o devolver un DTO vacío.
+            throw new EntityNotFoundException("El miembro con el username " + username + " no fue encontrado.");
+        }
+
         return dtoInvGroup;
     }
+
 
     @Override
     public void deleteUser(Long userId, Long groupId) {
