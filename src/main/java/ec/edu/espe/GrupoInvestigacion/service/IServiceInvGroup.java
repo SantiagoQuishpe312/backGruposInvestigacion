@@ -13,5 +13,8 @@ public interface IServiceInvGroup {
     void update(DtoInvGroup dtoInvGroup);
     public DtoInvGroup findByUser(Long id);
     public DtoInvGroupGetData findAllData(Long id);
+    public List<DtoInvGroupGetData> findByProcess(String process);
+    public List<DtoInvGroupGetData> findByProcessAndDepartment(String process,String department);
+
 
 }
