@@ -33,7 +33,7 @@ public class InvMemberController {
 
     @Operation(summary = "Obtener un miembro de investigación por su ID")
     @GetMapping("/{id}")
-    public ResponseEntity<DtoInvMember> getInvMemberById(@PathVariable Long id) {
+    public ResponseEntity<List<DtoInvMember>> getInvMemberById(@PathVariable Long id) {
         return new ResponseEntity<>(invMemberService.find(id), HttpStatus.OK);
     }
     @Operation(summary = "Obtener los datos de los miembros del grupo de investigación por el id del grupo")
@@ -64,6 +64,11 @@ public class InvMemberController {
     @GetMapping("/username/{username}")
     public ResponseEntity<DtoInvGroup> getInvMemberByUsername(@PathVariable String username) {
         return new ResponseEntity<>(invMemberService.findByUsername(username), HttpStatus.OK);
+    }
+    @Operation(summary = "Obtener un miembro de investigación por su username")
+    @GetMapping("/byUsername/{username}")
+    public ResponseEntity<List<DtoInvMember>> getInvMemberById(@PathVariable String username) {
+        return new ResponseEntity<>(invMemberService.findByUserNameInvMember(username), HttpStatus.OK);
     }
 
 }

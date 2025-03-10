@@ -46,8 +46,12 @@ public class ServiceInvMember implements IServiceInvMember {
     }
 
     @Override
-    public DtoInvMember find(Long id) {
-        return invMemberMapper.toDto(daoInvMember.findByIdEnable(id).orElse(new ModelInvMember()));
+    public List<DtoInvMember> find(Long id) {
+        return daoInvMember.findByIdEnable(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(invMemberMapper::toDto)
+                .collect(Collectors.toList());
     }
     @Override
     public List<DtoInvMember> findGroup(Long id){
@@ -72,6 +76,15 @@ public class ServiceInvMember implements IServiceInvMember {
     @Override
     public List<DtoInvMember> findAll() {
         return daoInvMember.findAllEnable()
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(invMemberMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DtoInvMember> findByUserNameInvMember(String username) {
+        return daoInvMember.findByUsernameInvMember(username)
                 .orElse(new ArrayList<>())
                 .stream()
                 .map(invMemberMapper::toDto)

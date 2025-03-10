@@ -15,7 +15,7 @@ public interface DaoInvMember extends CrudRepository<ModelInvMember, Long> {
     public Optional<List<ModelInvMember>> findAllEnable();
 
     @Query(value = "SELECT mig FROM ModelInvMember mig WHERE mig.modelUser.idUser =:id")
-    public Optional<ModelInvMember> findByIdEnable(Long id);
+    public Optional<List<ModelInvMember>> findByIdEnable(Long id);
 
     @Query(value = "SELECT mig FROM ModelInvMember mig WHERE mig.modelInvGroup.id =:id")
     public Optional<List<ModelInvMember>> findByGroup(Long id);
@@ -29,6 +29,7 @@ public interface DaoInvMember extends CrudRepository<ModelInvMember, Long> {
     @Query(value = "SELECT mig.modelUser FROM ModelInvMember mig WHERE mig.modelInvGroup.id =:id")
     public Optional<List<ModelUser>> findMembersInfoByGroup(Long id);
 
-
+    @Query(value = "FROM ModelInvMember mig WHERE mig.modelUser.user =?1")
+    public Optional<List<ModelInvMember>> findByUsernameInvMember(String username);
 }
 
