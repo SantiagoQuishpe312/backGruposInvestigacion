@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN"
+        "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="inv_group_report" pageWidth="595" pageHeight="842"
+              columnWidth="535" leftMargin="30" rightMargin="30"
+              topMargin="30" bottomMargin="30">
+
+    <!-- Definición de parámetros -->
+    <parameter name="nombreGrupoInv" class="java.lang.String"/>
+    <parameter name="estadoGrupoInv" class="java.lang.String"/>
+    <parameter name="acronimoGrupoinv" class="java.lang.String"/>
+    <parameter name="mision" class="java.lang.String"/>
+    <parameter name="vision" class="java.lang.String"/>
+    <parameter name="departamento" class="java.lang.String"/>
+    <parameter name="proceso" class="java.lang.String"/>
+    <parameter name="fechaCreacionGI" class="java.util.Date"/>
+
+    <!-- Diseño del reporte -->
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="0" width="535" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Reporte del Grupo de Investigación]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <detail>
+        <band height="180">
+            <textField>
+                <reportElement x="0" y="0" width="500" height="20"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Nombre: " + $P{nombreGrupoInv}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="25" width="500" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Estado: " + $P{estadoGrupoInv}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="50" width="500" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Acrónimo: " + $P{acronimoGrupoinv}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="75" width="500" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Misión: " + $P{mision}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="100" width="500" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Visión: " + $P{vision}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="125" width="500" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Departamento: " + $P{departamento}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="150" width="500" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Proceso: " + $P{proceso}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>

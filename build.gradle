@@ -38,6 +38,8 @@ dependencies {
 	testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
 	testImplementation 'com.h2database:h2'
 	implementation 'net.sf.jasperreports:jasperreports:6.20.5'
+	//implementation("com.lowagie:itext:2.1.7") // Para la exportación a PDF
+
 	implementation group: 'com.github.librepdf', name: 'openpdf', version: '1.3.30'
 	implementation 'org.jboss.logging:jboss-logging:3.5.3.Final'
 

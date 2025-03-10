@@ -1,11 +1,13 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
+import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroupGetData;
 import ec.edu.espe.GrupoInvestigacion.reports.ReportService;
+import ec.edu.espe.GrupoInvestigacion.service.IServiceInvGroup;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import net.sf.jasperreports.engine.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -27,49 +28,29 @@ import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.V1_API_VERS
 
 public class ReportController {
    private ReportService reportService;
-
+    @Autowired
+    private IServiceInvGroup invGroupService;
+    @Autowired
+    private ReportService pdfService;
     public ReportController(ReportService reportService) {
         this.reportService = reportService;
     }
 
-    @GetMapping("/report")
-    public ResponseEntity<byte[]> generarReporte(){
-        try{
+    @GetMapping("/{id}/pdf")
+    public ResponseEntity<byte[]> generatePdf(@PathVariable Long id) {
+        DtoInvGroupGetData data = invGroupService.findAllData(id);
+        byte[] pdfBytes = pdfService.generatePdf(data);
 
-            byte[] report =reportService.generarReport("SolicitudDeCreacion");
-            HttpHeaders headers=new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.add("Content-Disposition","inLine;filename=report.pdf");
-            return new ResponseEntity<>(report,headers,HttpStatus.OK);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-}
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=grupo_" + id + ".pdf");
 
-    @GetMapping("/generate-static-report")
-    public ResponseEntity<byte[]> generateStaticReport() {
-        try (InputStream reportStream = getClass().getResourceAsStream("/reports/SolicitudDeCreacion.jasper")) {
-            if (reportStream == null) {
-                throw new FileNotFoundException("No se encontró el archivo de reporte en la ruta especificada.");
-            }
-
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportStream);
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("param1", "valor1"); // Si hay parámetros
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
-            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("inline").filename("SolicitudDeCreacion.pdf").build());
-
-            return ResponseEntity.ok().headers(headers).body(pdfBytes);
-        } catch (Exception e) {
-            // Log del error para depuración
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                .body(pdfBytes);
     }
-
 }
+
+
+
+
