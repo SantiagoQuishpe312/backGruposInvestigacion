@@ -9,32 +9,32 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "UZITGANNEXES")
-public class ModelAnnexes {
-
+@Table(name = "UZITGEVALUATION_REPORTS")
+public class ModelEvaluationReports {
     @Id
-    @GeneratedValue(generator = "UZITGANNEXES_Sequence", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGANNEXES_Sequence", sequenceName = "UZISGANNEXES")
-    @Column(name = "UZITGANNEXES_ID")
+    @GeneratedValue(generator = "UZITGEVALUATION_REPORTS_Sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGEVALUATION_REPORTS_Sequence", sequenceName = "UZISGEVALUATION_REPORTS")
+    @Column(name = "UZITGEVALUATION_REPORTS_ID")
     private Long id;
-    @Column(name = "UZITGANNEXES_NAME", nullable = false)
-    private String name;
 
-    @Column(name = "UZITGANNEXES_ROUTE", nullable = false)
-    private String route;
+    @Column(name="UZITGEVALUATION_REPORTS_STRATE")
+    private Float strategicCompliance;
 
-    @Column(name = "UZITGANNEXES_USER_CREATE")
+    @Column(name = "UZITGEVALUATION_REPORTS_OPERAT")
+    private Float operativeCompliance;
+
+    @Column(name = "UZITGEVALUATION_REPORTS_USER_C")
     private String userCreate;
 
-    @Column(name = "UZITGANNEXES_DATE_CREATE")
+    @Column(name = "UZITGEVALUATION_REPORTS_DATE_C")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreate;
 
-    @Column(name = "UZITGANNEXES_USER_MODIFICATE")
+    @Column(name = "UZITGEVALUATION_REPORTS_USER_M")
     private String userModificate;
 
-    @Column(name = "UZITGANNEXES_DATE_MODIFICATE")
+    @Column(name = "UZITGEVALUATION_REPORTS_DATE_M")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
@@ -43,11 +43,7 @@ public class ModelAnnexes {
     @JoinColumn(name = "UZITGINV_GROUP_ID", nullable = false)
     private ModelInvGroup modelInvGroup;
 
-    @ManyToOne
-    @JoinColumn(name = "UZITGDOCUMENT_ID", nullable = false)
-    private ModelDocument modelDocument;
-
-    @OneToMany(mappedBy = "modelAnnexes")
+    @OneToMany(mappedBy = "modelEvaluationReports")
     private List<ModelEvidences> modelEvidences;
 
 }

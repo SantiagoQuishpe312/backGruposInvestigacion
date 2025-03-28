@@ -96,6 +96,9 @@ public class ModelInvGroup {
 
     @OneToMany(mappedBy = "modelInvGroup")
     private List<ModelAnnualOperativePlan> modelAnnualOperativePlan;
+    @OneToMany(mappedBy = "modelInvGroup")
+    private List<ModelEvaluationReports> modelEvaluationReports;
+
     @ManyToOne
     @JoinColumn(name = "UZITGUSER_ID", nullable = false)
     private ModelUser modelUser;
