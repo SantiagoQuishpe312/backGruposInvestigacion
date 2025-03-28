@@ -6,7 +6,7 @@ import java.util.List;
 @Data
 public class DtoInvGroupGetData {
  private DtoInvGroup InvGroup;
- private List<DtoUser> Users;
+ private List<DtoInvMember> Users;
     private List <DtoLine> Line;
     private List<DtoArea> Area;
     private List<DtoAcademicDomain> AcademicDomain;

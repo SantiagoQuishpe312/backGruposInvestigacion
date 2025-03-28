@@ -1,15 +1,13 @@
 package ec.edu.espe.GrupoInvestigacion.mapper;
 
-import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoInvMember;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoUserRol;
-import ec.edu.espe.GrupoInvestigacion.model.ModelInvMember;
-import ec.edu.espe.GrupoInvestigacion.model.ModelUserRol;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoDislinkMember;
+import ec.edu.espe.GrupoInvestigacion.model.ModelDislinkMember;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-@Mapper(componentModel = "spring")
-public interface InvMemberMapper {
 
+@Mapper(componentModel = "spring")
+
+public interface DislinkMemberMapper {
     @Mapping(source = "modelInvGroup.id", target = "idGrupoInv")
     @Mapping(source = "modelUser.idUser", target = "idUsuario")
     @Mapping(source = "type", target = "tipo")
@@ -19,17 +17,15 @@ public interface InvMemberMapper {
     @Mapping(source = "dateCreate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
     @Mapping(source = "dateModificate", target = "fechaModificacion")
-    DtoInvMember toDto(ModelInvMember model);
-
+    DtoDislinkMember toDto(ModelDislinkMember model);
     @Mapping(source = "idGrupoInv", target = "modelInvGroup.id")
     @Mapping(source = "idUsuario", target = "modelUser.idUser")
     @Mapping(source = "tipo", target = "type")
     @Mapping(source = "fechaVinculacion", target = "linkDate")
     @Mapping(source = "status", target = "status")
-
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")
     @Mapping(source = "fechaModificacion", target = "dateModificate")
-    ModelInvMember toEntity(DtoInvMember dtoInvMember);
+    ModelDislinkMember toEntity(DtoDislinkMember dtoDislinkMember);
 }

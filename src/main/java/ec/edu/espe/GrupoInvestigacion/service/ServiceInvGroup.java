@@ -3,6 +3,7 @@ package ec.edu.espe.GrupoInvestigacion.service;
 import ec.edu.espe.GrupoInvestigacion.dao.*;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroupGetData;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoInvMember;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoUser;
 import ec.edu.espe.GrupoInvestigacion.mapper.*;
 import ec.edu.espe.GrupoInvestigacion.model.*;
@@ -36,6 +37,8 @@ public class ServiceInvGroup implements IServiceInvGroup {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private InvMemberMapper invMemberMapper;
     @Autowired
     private AcademicDomainMapper academicDomainMapper;
     @Autowired
@@ -113,85 +116,139 @@ public class ServiceInvGroup implements IServiceInvGroup {
     }
 
     @Override
-    public DtoInvGroupGetData findAllData(Long id){
-        Optional<ModelInvGroup> modelInvGroup=daoInvGroup.findByIdEnable(id);
-        Optional<List<ModelUser>> modelUser=daoInvMember.findMembersInfoByGroup(id);
-        Optional<List<ModelArea>> modelAreas=daoArea.findArea(id);
-        Optional<List<ModelAcademicDomain>> modelAcademicDomains=daoAcademicDomain.findAcademicDomain(id);
-        Optional<List<ModelLine>> modelLines=daoLine.findLine(id);
-        DtoInvGroupGetData dtoInvGroupGetData=new DtoInvGroupGetData();
-        if(!modelInvGroup.isEmpty()){
+    public DtoInvGroupGetData findAllData(Long id) {
+        Optional<ModelInvGroup> modelInvGroup = daoInvGroup.findByIdEnable(id);
+        Optional<List<ModelInvMember>> modelInvMembers = daoInvMember.findByGroup(id);
+        Optional<List<ModelArea>> modelAreas = daoArea.findArea(id);
+        Optional<List<ModelAcademicDomain>> modelAcademicDomains = daoAcademicDomain.findAcademicDomain(id);
+        Optional<List<ModelLine>> modelLines = daoLine.findLine(id);
+
+        DtoInvGroupGetData dtoInvGroupGetData = new DtoInvGroupGetData();
+
+        if (modelInvGroup.isPresent()) {
             dtoInvGroupGetData.setInvGroup(modelInvGroup.map(invGroupMapper::toDto).orElse(new DtoInvGroup()));
             dtoInvGroupGetData.setLine(modelLines.orElse(new ArrayList<>()).stream().map(lineMapper::toDto).collect(Collectors.toList()));
             dtoInvGroupGetData.setArea(modelAreas.orElse(new ArrayList<>()).stream().map(areaMapper::toDto).collect(Collectors.toList()));
             dtoInvGroupGetData.setAcademicDomain(modelAcademicDomains.orElse(new ArrayList<>()).stream().map(academicDomainMapper::toDTO).collect(Collectors.toList()));
-            dtoInvGroupGetData.setUsers(modelUser.orElse(new ArrayList<>()).stream().map(userMapper::toDto).collect(Collectors.toList()));
-            dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(modelInvGroup.get().getModelUser().getIdUser()).map(userMapper::toDto).orElse(new DtoUser()));
+
+            // Convertimos los miembros y agregamos su información de usuario
+            List<DtoInvMember> dtoMembers = modelInvMembers.orElse(new ArrayList<>()).stream().map(member -> {
+                DtoInvMember dtoMember = invMemberMapper.toDto(member);
+                daoUser.findByIdEnable(member.getModelUser().getIdUser()).ifPresent(user -> dtoMember.setUser(userMapper.toDto(user)));
+                return dtoMember;
+            }).collect(Collectors.toList());
+
+            dtoInvGroupGetData.setUsers(dtoMembers);
+
+            dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(modelInvGroup.get().getModelUser().getIdUser())
+                    .map(userMapper::toDto)
+                    .orElse(new DtoUser()));
+
             return dtoInvGroupGetData;
         }
+
         throw new RuntimeException("No se encontraron datos");
     }
-    @Override
-    public List<DtoInvGroupGetData> findByProcess(String process){
-        Optional<List<ModelInvGroup>> modelInvGroup=daoInvGroup.findByProcess(process);
-
-        List<DtoInvGroupGetData> list = new ArrayList<>();
-        if(modelInvGroup.isPresent() && !modelInvGroup.get().isEmpty()){
-            for(ModelInvGroup invGroup:modelInvGroup.get()){
-                DtoInvGroupGetData dtoInvGroupGetData = new DtoInvGroupGetData();
-
-                Optional<List<ModelUser>> modelUser=daoInvMember.findMembersInfoByGroup(invGroup.getId());
-                Optional<List<ModelArea>> modelAreas=daoArea.findArea(invGroup.getId());
-                Optional<List<ModelAcademicDomain>> modelAcademicDomains=daoAcademicDomain.findAcademicDomain(invGroup.getId());
-                Optional<List<ModelLine>> modelLines=daoLine.findLine(invGroup.getId());
-                dtoInvGroupGetData.setInvGroup(
-                        daoInvGroup.findByIdEnable(invGroup.getId())
-                                .map(invGroupMapper::toDto)
-                                .orElse(new DtoInvGroup())
-                );
-                dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(invGroup.getModelUser().getIdUser()).map(userMapper::toDto).orElse(new DtoUser()));
-
-                dtoInvGroupGetData.setLine(modelLines.orElse(new ArrayList<>()).stream().map(lineMapper::toDto).collect(Collectors.toList()));
-                dtoInvGroupGetData.setArea(modelAreas.orElse(new ArrayList<>()).stream().map(areaMapper::toDto).collect(Collectors.toList()));
-                dtoInvGroupGetData.setAcademicDomain(modelAcademicDomains.orElse(new ArrayList<>()).stream().map(academicDomainMapper::toDTO).collect(Collectors.toList()));
-                dtoInvGroupGetData.setUsers(modelUser.orElse(new ArrayList<>()).stream().map(userMapper::toDto).collect(Collectors.toList()));
-            list.add(dtoInvGroupGetData);
-            }
-        }
-return list;
-
-
-    }
 
     @Override
-    public List<DtoInvGroupGetData> findByProcessAndDepartment(String process,String department){
-        Optional<List<ModelInvGroup>> modelInvGroup=daoInvGroup.findByProcessAndDepartment(process,department);
+    public List<DtoInvGroupGetData> findByProcess(String process) {
+        Optional<List<ModelInvGroup>> modelInvGroup = daoInvGroup.findByProcess(process);
         List<DtoInvGroupGetData> list = new ArrayList<>();
-        if(modelInvGroup.isPresent() && !modelInvGroup.get().isEmpty()){
-            for(ModelInvGroup invGroup:modelInvGroup.get()){
+
+        if (modelInvGroup.isPresent() && !modelInvGroup.get().isEmpty()) {
+            for (ModelInvGroup invGroup : modelInvGroup.get()) {
                 DtoInvGroupGetData dtoInvGroupGetData = new DtoInvGroupGetData();
+                dtoInvGroupGetData.setInvGroup(invGroupMapper.toDto(invGroup));
+                dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(invGroup.getModelUser().getIdUser())
+                        .map(userMapper::toDto)
+                        .orElse(new DtoUser()));
 
-                Optional<List<ModelUser>> modelUser=daoInvMember.findMembersInfoByGroup(invGroup.getId());
-                Optional<List<ModelArea>> modelAreas=daoArea.findArea(invGroup.getId());
-                Optional<List<ModelAcademicDomain>> modelAcademicDomains=daoAcademicDomain.findAcademicDomain(invGroup.getId());
-                Optional<List<ModelLine>> modelLines=daoLine.findLine(invGroup.getId());
-                dtoInvGroupGetData.setInvGroup(
-                        daoInvGroup.findByIdEnable(invGroup.getId())
-                                .map(invGroupMapper::toDto)
-                                .orElse(new DtoInvGroup())
-                );
-                dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(invGroup.getModelUser().getIdUser()).map(userMapper::toDto).orElse(new DtoUser()));
+                dtoInvGroupGetData.setLine(daoLine.findLine(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(lineMapper::toDto)
+                        .collect(Collectors.toList()));
 
-                dtoInvGroupGetData.setLine(modelLines.orElse(new ArrayList<>()).stream().map(lineMapper::toDto).collect(Collectors.toList()));
-                dtoInvGroupGetData.setArea(modelAreas.orElse(new ArrayList<>()).stream().map(areaMapper::toDto).collect(Collectors.toList()));
-                dtoInvGroupGetData.setAcademicDomain(modelAcademicDomains.orElse(new ArrayList<>()).stream().map(academicDomainMapper::toDTO).collect(Collectors.toList()));
-                dtoInvGroupGetData.setUsers(modelUser.orElse(new ArrayList<>()).stream().map(userMapper::toDto).collect(Collectors.toList()));
+                dtoInvGroupGetData.setArea(daoArea.findArea(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(areaMapper::toDto)
+                        .collect(Collectors.toList()));
+
+                dtoInvGroupGetData.setAcademicDomain(daoAcademicDomain.findAcademicDomain(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(academicDomainMapper::toDTO)
+                        .collect(Collectors.toList()));
+
+                // Convertir miembros y agregar información del usuario
+                List<DtoInvMember> dtoMembers = daoInvMember.findByGroup(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(member -> {
+                            DtoInvMember dtoMember = invMemberMapper.toDto(member);
+                            daoUser.findByIdEnable(member.getModelUser().getIdUser())
+                                    .ifPresent(user -> dtoMember.setUser(userMapper.toDto(user)));
+                            return dtoMember;
+                        })
+                        .collect(Collectors.toList());
+
+                dtoInvGroupGetData.setUsers(dtoMembers);
                 list.add(dtoInvGroupGetData);
             }
         }
         return list;
-
-
     }
+
+    @Override
+    public List<DtoInvGroupGetData> findByProcessAndDepartment(String process, String department) {
+        Optional<List<ModelInvGroup>> modelInvGroup = daoInvGroup.findByProcessAndDepartment(process, department);
+        List<DtoInvGroupGetData> list = new ArrayList<>();
+
+        if (modelInvGroup.isPresent() && !modelInvGroup.get().isEmpty()) {
+            for (ModelInvGroup invGroup : modelInvGroup.get()) {
+                DtoInvGroupGetData dtoInvGroupGetData = new DtoInvGroupGetData();
+                dtoInvGroupGetData.setInvGroup(invGroupMapper.toDto(invGroup));
+                dtoInvGroupGetData.setCoordinador(daoUser.findByIdEnable(invGroup.getModelUser().getIdUser())
+                        .map(userMapper::toDto)
+                        .orElse(new DtoUser()));
+
+                dtoInvGroupGetData.setLine(daoLine.findLine(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(lineMapper::toDto)
+                        .collect(Collectors.toList()));
+
+                dtoInvGroupGetData.setArea(daoArea.findArea(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(areaMapper::toDto)
+                        .collect(Collectors.toList()));
+
+                dtoInvGroupGetData.setAcademicDomain(daoAcademicDomain.findAcademicDomain(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(academicDomainMapper::toDTO)
+                        .collect(Collectors.toList()));
+
+                // Convertir miembros y agregar información del usuario
+                List<DtoInvMember> dtoMembers = daoInvMember.findByGroup(invGroup.getId())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(member -> {
+                            DtoInvMember dtoMember = invMemberMapper.toDto(member);
+                            daoUser.findByIdEnable(member.getModelUser().getIdUser())
+                                    .ifPresent(user -> dtoMember.setUser(userMapper.toDto(user)));
+                            return dtoMember;
+                        })
+                        .collect(Collectors.toList());
+
+                dtoInvGroupGetData.setUsers(dtoMembers);
+                list.add(dtoInvGroupGetData);
+            }
+        }
+        return list;
+    }
+
 
 }
