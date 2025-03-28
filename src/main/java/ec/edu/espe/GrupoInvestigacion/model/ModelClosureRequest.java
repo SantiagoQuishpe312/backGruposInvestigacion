@@ -19,11 +19,11 @@ public class ModelClosureRequest {
 
     @Lob
     @Column(name = "UZITGCLOSURE_REQUEST_MOTIVATIO", columnDefinition = "CLOB")
-    private String Motivation;
+    private String motivation;
 
     @Lob
     @Column(name = "UZITGCLOSURE_REQUEST_JUSTIFICA", columnDefinition = "CLOB")
-    private String Justification;
+    private String justification;
 
     @Column(name = "UZITGCLOSURE_REQUEST_USER_CREA", length = 50)
     private String userCreate;

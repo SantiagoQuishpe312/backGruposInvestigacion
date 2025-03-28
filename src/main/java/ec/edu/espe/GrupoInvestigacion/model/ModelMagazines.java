@@ -30,7 +30,7 @@ public class ModelMagazines {
     @Column(name = "UZITGMAGAZINES_DOI_ISSN")
     private String doi;
 
-    @Column(name = "UZITGMAGAZINES_UQUARTIL_IF_SJR ")
+    @Column(name = "UZITGMAGAZINES_QUARTIL_IF_SJR")
     private String quartilIfSjr;
 
     @Column(name = "UZITGMAGAZINES_USER_CREATE")

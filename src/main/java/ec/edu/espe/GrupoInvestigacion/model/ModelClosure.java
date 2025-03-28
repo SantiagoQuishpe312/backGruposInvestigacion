@@ -41,7 +41,7 @@ public class ModelClosure {
 
     @Lob
     @Column(name = "UZITGCLOSURE_RELOCATION", columnDefinition = "CLOB")
-    private String Relocation;
+    private String relocation;
 
     @Lob
     @Column(name = "UZITGCLOSURE_CONCLUSION", columnDefinition = "CLOB")

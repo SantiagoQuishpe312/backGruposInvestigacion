@@ -9,8 +9,8 @@ import org.mapstruct.Mapping;
 public interface ClosureRequestMapper {
 
     @Mapping(source = "modelClosure.id", target = "idCierre")
-    @Mapping(source = "Motivation", target = "motivacion")
-    @Mapping(source = "Justification", target = "justificacion")
+    @Mapping(source = "motivation", target = "motivacion")
+    @Mapping(source = "justification", target = "justificacion")
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "dateCreate", target = "fechaCreacion")
     @Mapping(source = "userModificate", target = "usuarioModificacion")
@@ -18,8 +18,8 @@ public interface ClosureRequestMapper {
     DtoClosureRequest toDto(ModelClosureRequest modelClosureRequest);
 
     @Mapping(source = "idCierre", target = "modelClosure.id")
-    @Mapping(source = "motivacion", target = "Motivation")
-    @Mapping(source = "justificacion", target = "Justification")
+    @Mapping(source = "motivacion", target = "motivation")
+    @Mapping(source = "justificacion", target = "justification")
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")
     @Mapping(source = "usuarioModificacion", target = "userModificate")
