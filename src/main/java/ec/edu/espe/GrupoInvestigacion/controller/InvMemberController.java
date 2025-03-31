@@ -71,4 +71,16 @@ public class InvMemberController {
         return new ResponseEntity<>(invMemberService.findByUserNameInvMember(username), HttpStatus.OK);
     }
 
+    @Operation(summary = "Actualizar Datos de los miembros del Grupo de Investigación")
+    @PutMapping("/update/{idUser}/{idGroup}")
+    public ResponseEntity<Void> update(@PathVariable Long idUser, @PathVariable Long idGroup, @RequestBody DtoInvMember dtoInvMember){
+        DtoInvMember existingData=invMemberService.findExact(idUser,idGroup);
+        if(existingData==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        dtoInvMember.setIdGrupoInv(idGroup);
+        dtoInvMember.setIdUsuario(idUser);
+        invMemberService.update(dtoInvMember);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 }

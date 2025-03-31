@@ -10,5 +10,6 @@ public interface IServiceUser {
     public DtoUser find(Long id);
     public DtoUser findByUser(String user);
     Long save (DtoUser dtoUser);
+    void update (DtoUser dtoUser);
 }
 

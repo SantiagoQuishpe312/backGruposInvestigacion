@@ -11,12 +11,14 @@ import ec.edu.espe.GrupoInvestigacion.mapper.InvMemberMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.UserMapper;
 import ec.edu.espe.GrupoInvestigacion.model.*;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,6 +84,10 @@ public class ServiceInvMember implements IServiceInvMember {
                 .map(invMemberMapper::toDto)
                 .collect(Collectors.toList());
     }
+    @Override
+    public DtoInvMember findExact(Long idUser, Long idGroup){
+        return invMemberMapper.toDto(daoInvMember.findByuserGroup(idUser, idGroup).orElse(new ModelInvMember()));
+    }
 
     @Override
     public List<DtoInvMember> findByUserNameInvMember(String username) {
@@ -139,5 +145,33 @@ public class ServiceInvMember implements IServiceInvMember {
         modelInvMember.setId(id);
         daoInvMember.save(modelInvMember);
         return modelUser.getIdUser();
+    }
+
+
+    @Override
+    public void update(DtoInvMember dtoInvMember){
+        ModelInvMember existingEntity=daoInvMember.findByuserGroup(dtoInvMember.getIdUsuario(), dtoInvMember.getIdGrupoInv()).orElse(null);
+        if(existingEntity!=null){
+            ModelInvMember updatedEntity=invMemberMapper.toEntity(dtoInvMember);
+            BeanUtils.copyProperties(updatedEntity,existingEntity,getNullPropertyNames(updatedEntity));
+            daoInvMember.save(existingEntity);
+        }
+    }
+    private String[] getNullPropertyNames(Object source) {
+        try {
+            final BeanInfo beanInfo = Introspector.getBeanInfo(source.getClass());
+            final PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            final Set<String> emptyNames = new HashSet<>();
+            for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+                final Object propertyValue = propertyDescriptor.getReadMethod().invoke(source);
+                if (propertyValue == null) {
+                    emptyNames.add(propertyDescriptor.getName());
+                }
+            }
+            String[] result = new String[emptyNames.size()];
+            return emptyNames.toArray(result);
+        } catch (Exception e) {
+            return new String[0];
+        }
     }
 }

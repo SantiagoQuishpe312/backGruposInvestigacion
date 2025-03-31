@@ -31,7 +31,7 @@ public class ModelInvMember {
     @Column(name = "UZITGINV_MEMBER_LINK_DATE")
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.DATE)
-    private String linkDate;
+    private Date linkDate;
 
 
     @Column(name = "UZITGINV_MEMBER_STATUS")

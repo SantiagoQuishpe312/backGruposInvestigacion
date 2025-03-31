@@ -48,4 +48,16 @@ public class UserController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Actualizar Datos del Usuario")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id,@RequestBody DtoUser dtoUser){
+        DtoUser exist=userService.find(id);
+        if(exist==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
+        dtoUser.setId(id);
+        userService.update(dtoUser);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 }

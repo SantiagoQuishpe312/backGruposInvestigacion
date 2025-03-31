@@ -16,7 +16,9 @@ public interface IServiceInvMember {
     public List<DtoInvMember> findByUserNameInvMember(String username);
     public List<DtoInvMember> findGroup(Long id);
     public List<DtoUser> findInfoMembersByGroup(Long id);
+    public DtoInvMember findExact(Long idUser, Long idGrupo);
     void deleteUser(Long userId, Long groupId);
 
     Long save(DtoInvMember dtoInvMember);
+    void update(DtoInvMember dtoInvMember);
 }
