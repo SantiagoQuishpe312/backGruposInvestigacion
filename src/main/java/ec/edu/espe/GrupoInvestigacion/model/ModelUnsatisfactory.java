@@ -11,7 +11,7 @@ import java.util.List;
 public class ModelUnsatisfactory {
 
     @Id
-    @GeneratedValue(generator = "UZITGUNSATISFACTORY", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UZITGUNSATISFACTORY_Sequence", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGUNSATISFACTORY_Sequence", sequenceName = "UZISGUNSATISFACTORY")
     @Column(name = "UZITGUNSATISFACTORY_ID")
     private Long id;
