@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "UZITGCLOSURE", schema = "UTIC")
 public class ModelClosure {
     @Id
-    @GeneratedValue(generator = "UZITGCLOSURE", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UZITGCLOSURE_Sequence", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGCLOSURE_Sequence", sequenceName = "UZISGCLOSURE")
     @Column(name = "UZITGCLOSURE_ID")
     private Long id;
