@@ -37,7 +37,7 @@ public class AnnualControlController {
     }
 
     @Operation(summary = "Obtener el Control Anual Filtrado especifico")
-    @GetMapping("/")
+    @GetMapping("/ap/{idPlan}/pc/{idPanel}")
     public ResponseEntity<DtoAnnualControl> getbyControlAndPlan(@PathVariable Long idPanel,@PathVariable Long idPlan) {
         return new ResponseEntity<>(serviceAnnualControl.findByIds(idPanel,idPlan), HttpStatus.OK);
     }
