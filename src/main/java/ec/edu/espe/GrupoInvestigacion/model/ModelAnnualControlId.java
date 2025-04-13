@@ -17,4 +17,13 @@ public class ModelAnnualControlId implements Serializable {
     @ManyToOne
     @JoinColumn(name = "UZITGANNUAL_OP_PLAN_ID",insertable = false,updatable = false)
     private  ModelAnnualOperativePlan modelAnnualOperativePlan;
+
+    @ManyToOne
+    @JoinColumn(name = "UZITGODS_ID",insertable = false,updatable = false)
+    private  ModelOds modelOds;
+
+    @ManyToOne
+    @JoinColumn(name = "UZITGSTRATEGIES_ID", insertable = false, updatable = false)
+    private ModelStrategies modelStrategies;
+
 }
