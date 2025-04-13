@@ -102,7 +102,20 @@ private StrategiesMapper strategiesMapper;
         return list;
     }
 
-
+@Override
+public DtoObjGetStrategies findCompleteByObj(Long id){
+        Optional<ModelSpecificObjectives> modelSpecificObjectives=daoSpecificObjectives.findByIdEnable(id);
+        Optional<List<ModelOds>> modelOds=daoOds.findBySpecificObj(id);
+        Optional<List<ModelStrategies>> modelStrategies=daoStrategies.findBySpecificObj(id);
+        DtoObjGetStrategies dtoObjGetStrategies=new DtoObjGetStrategies();
+        if(modelStrategies.isPresent()){
+            dtoObjGetStrategies.setObj(modelSpecificObjectives.map(specificObjectivesMapper::toDto).orElse(new DtoSpecificObjectives()));
+            dtoObjGetStrategies.setOds(modelOds.orElse(new ArrayList<>()).stream().map(odsMapper::toDto).collect(Collectors.toList()));
+            dtoObjGetStrategies.setStrategies(modelStrategies.orElse(new ArrayList<>()).stream().map(strategiesMapper::toDto).collect(Collectors.toList()));
+            return dtoObjGetStrategies;
+        }
+        throw new RuntimeException("No se encontro datos");
+}
 
     @Override
     public Long save(DtoObj_Strategies_ODS dtoObjStrategiesOds) {

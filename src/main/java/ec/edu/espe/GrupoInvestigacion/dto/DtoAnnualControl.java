@@ -9,6 +9,8 @@ import java.util.Date;
 public class DtoAnnualControl {
     private Long idPanelControl;      // ID del panel de control
     private Long idPlanAnual;         // ID del plan anual
+    private Long idOds;
+    private Long idEstrategia;
     private String objetivoAnual;     // Objetivo anual
     private String producto;           // Producto
     private String financiamiento;     // Financiamiento

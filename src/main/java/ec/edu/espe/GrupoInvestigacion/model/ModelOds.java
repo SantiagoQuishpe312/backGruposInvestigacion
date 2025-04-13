@@ -43,6 +43,7 @@ public class ModelOds {
 
     @OneToMany(mappedBy = "modelOds")
     private List<ModelObj_Strategies_ODS> modelObjStrategiesOds;
-
+    @OneToMany(mappedBy = "modelOds")
+    private List<ModelAnnualControl> modelAnnualControl;
 
 }

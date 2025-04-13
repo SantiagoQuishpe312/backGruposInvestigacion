@@ -35,6 +35,12 @@ public class Obj_Strategies_ODSController {
         return new ResponseEntity<>(serviceObjStrategiesOds.findCompleteByPlan(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Obtener una lista completa con la informacion desde el id del objetivo")
+    @GetMapping("/all-by-obj/{id}")
+    public ResponseEntity<DtoObjGetStrategies> getAllByObj(@PathVariable Long id){
+        return new ResponseEntity<>(serviceObjStrategiesOds.findCompleteByObj(id),HttpStatus.OK);
+    }
+
     @Operation(summary = "Crear una nueva relacion de control")
     @PostMapping("/create")
     public ResponseEntity<Long> create(@RequestBody DtoObj_Strategies_ODS dtoObjStrategiesOds){

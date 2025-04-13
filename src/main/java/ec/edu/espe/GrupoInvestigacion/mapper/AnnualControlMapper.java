@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 public interface AnnualControlMapper {
     @Mapping(source = "idPlanAnual", target = "modelAnnualOperativePlan.id")
     @Mapping(source = "idPanelControl", target = "modelControlPanel.id")
+    @Mapping(source="idOds",target = "modelOds.id")
+    @Mapping(source = "idEstrategia", target = "modelStrategies.id")
     @Mapping(source = "objetivoAnual", target = "annualGoal")
     @Mapping(source = "producto", target = "product")
     @Mapping(source = "financiamiento", target = "financing")
@@ -33,6 +35,8 @@ public interface AnnualControlMapper {
 
     @Mapping(source = "modelAnnualOperativePlan.id", target = "idPlanAnual")
     @Mapping(source = "modelControlPanel.id", target = "idPanelControl")
+    @Mapping(source="modelOds.id",target = "idOds")
+    @Mapping(source = "modelStrategies.id", target = "idEstrategia")
     @Mapping(source = "annualGoal", target = "objetivoAnual")
     @Mapping(source = "product", target = "producto")
     @Mapping(source = "financing", target = "financiamiento")

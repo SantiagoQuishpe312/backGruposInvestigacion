@@ -44,4 +44,6 @@ public class ModelStrategies {
     @OneToMany(mappedBy = "modelStrategies",cascade = CascadeType.ALL)
     private List<ModelObj_Strategies_ODS> modelObjStrategiesOds;
 
+    @OneToMany(mappedBy = "modelStrategies",cascade = CascadeType.ALL)
+    private List<ModelAnnualControl> modelAnnualControl;
 }
