@@ -15,6 +15,6 @@ public class ModelAnnualControlId implements Serializable {
     private ModelControlPanel modelControlPanel;
 
     @ManyToOne
-    @JoinColumn(name = "UZITGZANNUAL_OP_PLAN_ID",insertable = false,updatable = false)
+    @JoinColumn(name = "UZITGANNUAL_OP_PLAN_ID",insertable = false,updatable = false)
     private  ModelAnnualOperativePlan modelAnnualOperativePlan;
 }
