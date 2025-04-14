@@ -21,4 +21,9 @@ public interface DaoAnnualControl extends CrudRepository<ModelAnnualControl, Lon
 
     @Query("SELECT ac FROM ModelAnnualControl ac WHERE ac.modelControlPanel.id = :idPanel AND ac.modelAnnualOperativePlan.id = :idPlan")
     Optional<ModelAnnualControl> findByIdControlPlan(@Param("idPanel") Long idPanel, @Param("idPlan") Long idPlan);
+
+    @Query("SELECT ac from ModelAnnualControl ac where ac.modelAnnualOperativePlan.id= :idAnualOperativePlan AND ac.modelControlPanel.id= :idPanel AND ac.modelOds.id= :idOds AND ac.modelStrategies.id= :idEstrategia")
+    Optional<ModelAnnualControl> findByIds(@Param("idAnualOperativePlan") Long idAnualOperativePlan, @Param("idPanel") Long idPanel, @Param("idOds") Long idOds, @Param("idEstrategia") Long idEstrategia);
 }
+
+

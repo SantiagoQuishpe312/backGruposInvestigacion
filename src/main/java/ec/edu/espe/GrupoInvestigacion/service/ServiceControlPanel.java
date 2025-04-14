@@ -4,10 +4,7 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoControlPanel;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoDevelopmentPlan;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoSpecificObjectives;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoUser;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoControlPanel;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoControlPanelGetData;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoSpecificObjectives;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoUser;
+import ec.edu.espe.GrupoInvestigacion.dto.*;
 import ec.edu.espe.GrupoInvestigacion.mapper.ControlPanelMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.SpecificObjectivesMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.UserMapper;
@@ -109,6 +106,27 @@ public class ServiceControlPanel implements IServiceControlPanel {
 
         // Retornar la lista de DTOs
         return dtoList;
+    }
+
+    @Override
+    public DtoControlPanelGetData findAllById(Long id) {
+        Optional<ModelControlPanel> modelControlPanel = daoControlPanel.findByIdEnable(id);
+
+        if (modelControlPanel.isEmpty()) {
+            throw new NoSuchElementException("No Development Plan found for id: " + id);
+        }
+
+        Long idControl = modelControlPanel.get().getId();
+        Optional<ModelControlPanel> modelControlPanel1 = daoControlPanel.findByIdEnable(idControl);
+        Optional<ModelSpecificObjectives> modelSpecificObjectives = daoSpecificObjectives.findByIdEnable(modelControlPanel.get().getModelSpecificObjectives().getId());
+        Optional<ModelUser> modelUser = daoUser.findByIdEnable(modelControlPanel.get().getModelUser().getIdUser());
+
+        DtoControlPanelGetData dto = new DtoControlPanelGetData();
+        dto.setPanelControl(modelControlPanel1.map(controlPanelMapper::toDto).orElse(new DtoControlPanel()));
+        dto.setObjetivoEspecífico(modelSpecificObjectives.map(specificObjectivesMapper::toDto).orElse(new DtoSpecificObjectives()));
+        dto.setResponsable(modelUser.map(userMapper::toDto).orElse(new DtoUser()));
+
+        return dto;
     }
 
     @Override

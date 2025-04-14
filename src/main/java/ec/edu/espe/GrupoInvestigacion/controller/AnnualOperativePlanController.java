@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 
+import ec.edu.espe.GrupoInvestigacion.dto.DtoAnnualOpGetControl;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoAnnualOperativePlan;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceAnnualOperativePlan;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,6 +35,11 @@ public class AnnualOperativePlanController {
     public ResponseEntity<DtoAnnualOperativePlan> getAnnualOperativePlanById(@PathVariable Long id) {
         return new ResponseEntity<>(annualOperativePlanService.findById(id), HttpStatus.OK);
     }
+    @Operation(summary = "Obtener el documento completo")
+    @GetMapping("/allReport/{id}")
+    public ResponseEntity<DtoAnnualOpGetControl> getAnnualOpCompletePlanById(@PathVariable Long id) {
+        return new ResponseEntity<>(annualOperativePlanService.findDoc(id), HttpStatus.OK);
+    }
 
     @Operation(summary = "Creal nuevos planes operativos")
     @PostMapping("/created")
@@ -53,4 +59,5 @@ public class AnnualOperativePlanController {
         annualOperativePlanService.update(dtoAnnualOperativePlan);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
+
 }
