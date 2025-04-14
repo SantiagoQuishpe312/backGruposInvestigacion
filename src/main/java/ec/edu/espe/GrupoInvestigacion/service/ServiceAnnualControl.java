@@ -74,12 +74,18 @@ public class ServiceAnnualControl implements IServiceAnnualControl{
     public Long save(DtoAnnualControl dtoAnnualControl) {
         Long annualPlanId=dtoAnnualControl.getIdPlanAnual();
         Long controlPanelId=dtoAnnualControl.getIdPanelControl();
+        Long strategiesId=dtoAnnualControl.getIdEstrategia();
+        Long odsId=dtoAnnualControl.getIdOds();
         ModelAnnualOperativePlan modelAnnualOperativePlan=daoAnnualOperativePlan.findByIdEnable(annualPlanId).orElse(new ModelAnnualOperativePlan());
         ModelControlPanel modelControlPanel=daoControlPanel.findByIdEnable(controlPanelId).orElse(new ModelControlPanel());
-        ModelAnnualControl modelAnnualControl=annualControlMapper.toEntity(dtoAnnualControl);
+        ModelStrategies modelStrategies=daoStrategies.findByIdEnable(strategiesId).orElse(new ModelStrategies());
+        ModelOds modelOds=daoOds.findByIdEnable(odsId).orElse(new ModelOds());
         ModelAnnualControlId id=new ModelAnnualControlId();
+        ModelAnnualControl modelAnnualControl=annualControlMapper.toEntity(dtoAnnualControl);
         id.setModelControlPanel(modelControlPanel);
         id.setModelAnnualOperativePlan(modelAnnualOperativePlan);
+        id.setModelStrategies(modelStrategies);
+        id.setModelOds(modelOds);
         modelAnnualControl.setId(id);
         daoAnnualControl.save(modelAnnualControl);
         return modelAnnualControl.getModelAnnualOperativePlan().getId();
