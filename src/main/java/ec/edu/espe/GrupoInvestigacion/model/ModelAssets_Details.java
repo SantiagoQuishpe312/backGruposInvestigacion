@@ -12,7 +12,7 @@ import java.util.Date;
 public class ModelAssets_Details {
     @Id
     @GeneratedValue(generator = "UZITGASSETS_DETAILS_Sequence", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZISGASSETS_DETAILS_Sequence", sequenceName = "UZISGASSETS_DETAILS")
+    @SequenceGenerator(schema = "UTIC", allocationSize = 1, name = "UZITGASSETS_DETAILS_Sequence", sequenceName = "UZISGASSETS_DETAIL")
     @Column(name = "UZITGASSETS_DETAILS_ID")
     private Long id;
 
