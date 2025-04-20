@@ -15,4 +15,8 @@ public interface DaoUnsatisfactory extends CrudRepository<ModelUnsatisfactory, L
 
     @Query("SELECT u FROM ModelUnsatisfactory u WHERE u.id = :id")
     Optional<ModelUnsatisfactory> findByIdEnable(@Param("id") Long id);
+
+    @Query("SELECT u FROM ModelUnsatisfactory u WHERE u.modelClosure.id= :id")
+    Optional<ModelUnsatisfactory> findByClosure(@Param("id") Long id);
+
 }

@@ -15,7 +15,7 @@ import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.PRIVATE_PAT
 import static ec.edu.espe.GrupoInvestigacion.constant.GlobalConstant.V1_API_VERSION;
 
 @RestController
-@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/assestsReport/")
+@RequestMapping(V1_API_VERSION + PRIVATE_PATH + "/assetsReport/")
 @CrossOrigin(origins = "*")
 @Tag(name = "AssetsReportController",description = "Controlador de informe de bienes y equipos de Grupos de investigacion")
 public class AssetsReportController {

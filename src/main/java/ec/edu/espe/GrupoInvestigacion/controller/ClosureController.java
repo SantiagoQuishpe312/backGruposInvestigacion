@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoClosure;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoClosureGetAllData;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceClosure;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +36,11 @@ public class ClosureController {
         return new ResponseEntity<>(serviceClosure.find(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Obtener un cierre por su ID del Grupo")
+    @GetMapping("/all/{id}")
+    public ResponseEntity<DtoClosureGetAllData> getClosureAllById(@PathVariable Long id) {
+        return new ResponseEntity<>(serviceClosure.findByClosure(id), HttpStatus.OK);
+    }
     @Operation(summary = "Crear un nuevo cierre")
     @PostMapping("/create")
     public ResponseEntity<Long> createClosure(@RequestBody DtoClosure dtoClosure) {

@@ -15,4 +15,7 @@ public interface DaoClosureRequest extends CrudRepository<ModelClosureRequest, L
 
     @Query("SELECT c FROM ModelClosureRequest c WHERE c.id = :id")
     Optional<ModelClosureRequest> findByIdEnable(@Param("id") Long id);
+
+    @Query("SELECT c from ModelClosureRequest c where c.modelClosure.id= :id")
+    Optional<ModelClosureRequest> findByClosure(@Param("id")Long id);
 }
