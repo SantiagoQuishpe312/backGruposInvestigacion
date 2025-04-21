@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoAssetsReport;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoAssetsReportGetData;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceAssetsReport;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,6 +33,11 @@ public class AssetsReportController {
     @GetMapping("/{id}")
     public ResponseEntity<DtoAssetsReport> getAssetsReportById(@PathVariable Long id) {
         return new ResponseEntity<>(assetsReportService.find(id), HttpStatus.OK);
+    }
+    @Operation(summary = "Obtener reportes completo por id del Grupo")
+    @GetMapping("/allByGroup/{id}")
+    public ResponseEntity<DtoAssetsReportGetData> getAssetsReportByGroup(@PathVariable Long id) {
+        return new ResponseEntity<>(assetsReportService.findAllData(id), HttpStatus.OK);
     }
 
     @Operation(summary = "Crear nuevos reportes")

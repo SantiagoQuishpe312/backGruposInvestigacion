@@ -14,4 +14,7 @@ public interface DaoAssetsReport extends CrudRepository<ModelAssetsReport, Long>
 
     @Query("SELECT ar FROM ModelAssetsReport ar WHERE ar.id=:id")
     public Optional<ModelAssetsReport> findByIdEnable(@Param("id")Long id);
+
+    @Query("select ar from ModelAssetsReport ar where ar.modelInvGroup.id= :id")
+    public Optional<ModelAssetsReport> findByGroup(@Param("id") Long id);
 }

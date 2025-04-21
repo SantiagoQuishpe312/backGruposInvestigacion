@@ -14,4 +14,7 @@ public interface DaoAssets_Details  extends CrudRepository<ModelAssets_Details,L
 
     @Query("SELECT ad FROM ModelAssets_Details ad WHERE ad.id=:id")
     public Optional<ModelAssets_Details> findByIdEnable(@Param("id") Long id);
+
+    @Query("select ad from ModelAssets_Details ad where ad.modelAssetsReport.id=:id")
+    public Optional<List<ModelAssets_Details>> findByReport (@Param("id") Long id);
 }

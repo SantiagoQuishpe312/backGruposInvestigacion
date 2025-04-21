@@ -2,20 +2,22 @@ package ec.edu.espe.GrupoInvestigacion.service;
 
 
 import ec.edu.espe.GrupoInvestigacion.dao.DaoAssetsReport;
+import ec.edu.espe.GrupoInvestigacion.dao.DaoAssets_Details;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoAssetsReport;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoAssetsReportGetData;
+import ec.edu.espe.GrupoInvestigacion.mapper.AssetsDetailsMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.AssetsReportMapper;
 import ec.edu.espe.GrupoInvestigacion.model.ModelAssetsReport;
+import ec.edu.espe.GrupoInvestigacion.model.ModelAssets_Details;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +27,13 @@ public class ServiceAssetsReport implements IServiceAssetsReport{
     @Autowired
     private AssetsReportMapper assetsReportMapper;
 
+    @Autowired
+    private DaoAssets_Details daoAssetsDetails;
+
+    @Autowired
+    private AssetsDetailsMapper assetsDetailsMapper;
+
+
     @Override
     public List<DtoAssetsReport> findAll(){
         return daoAssetsReport.findAllEnable().orElse(new ArrayList<>()).stream().map(assetsReportMapper::toDTO).collect(Collectors.toList());
@@ -32,6 +41,22 @@ public class ServiceAssetsReport implements IServiceAssetsReport{
     @Override
     public DtoAssetsReport find(Long id){
         return assetsReportMapper.toDTO(daoAssetsReport.findByIdEnable(id).orElse(new ModelAssetsReport()));
+    }
+
+    @Override
+    public DtoAssetsReportGetData findAllData(Long id){
+        Optional<ModelAssetsReport> modelAssetsReport=daoAssetsReport.findByGroup(id);
+        if(modelAssetsReport.isEmpty()){
+            throw new NoSuchElementException("");
+        }
+        Long idReport=modelAssetsReport.get().getId();
+
+        Optional<List<ModelAssets_Details>> modelAssetsDetails=daoAssetsDetails.findByReport(idReport);
+        DtoAssetsReportGetData dto=new DtoAssetsReportGetData();
+        dto.setReporteBienes(modelAssetsReport.map(assetsReportMapper::toDTO).orElse(new DtoAssetsReport()));
+
+        dto.setDetalleBienes(modelAssetsDetails.orElse(new ArrayList<>()).stream().map(assetsDetailsMapper::toDTO).collect(Collectors.toList()));
+        return dto;
     }
 
     @Override
