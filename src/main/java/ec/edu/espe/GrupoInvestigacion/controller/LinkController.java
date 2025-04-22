@@ -1,6 +1,7 @@
 package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoLink;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLinkGetData;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceLink;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,6 +39,12 @@ public class LinkController {
     @GetMapping("/{id}")
     public ResponseEntity<DtoLink> getLinkById(@PathVariable Long id) {
         return new ResponseEntity<>(linkService.find(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Obtener formulario completo por el ID deñ Grupo")
+    @GetMapping("/all/{id}/state/{state}/type/{type}")
+    public ResponseEntity<DtoLinkGetData> getAllById(@PathVariable Long id, @PathVariable Character type, @PathVariable Character state) {
+        return new ResponseEntity<>(linkService.findAllByGroup(id,type,state), HttpStatus.OK);
     }
 
     @Operation(summary = "Crear un nuevo enlace")

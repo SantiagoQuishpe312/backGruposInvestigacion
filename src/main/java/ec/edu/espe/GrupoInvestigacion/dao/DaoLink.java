@@ -15,4 +15,7 @@ public interface DaoLink extends CrudRepository<ModelLink, Long> {
     Optional<ModelLink> findByIdEnable(@Param("id") Long id);
     @Query(value = "SELECT l FROM ModelLink l WHERE l.state = :estado")
     Optional<List<ModelLink>> findByState(@Param("estado") Character estado);
+
+    @Query(value="SELECT l FROM ModelLink l WHERE l.modelInvGroup.id= :id AND l.state=: estado AND l.type=: tipo")
+    Optional<ModelLink> findAllByGroup(@Param("id")Long id,@Param("estado")Character estado,@Param("tipo")Character tipo);
 }
