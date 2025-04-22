@@ -11,7 +11,7 @@ public interface IServiceLink {
     public DtoLink find(Long id);
     public List<DtoLink> findByState(Character estado);
 
-    public DtoLinkGetData findAllByGroup(Long id,Character tipo,Character estado);
+    public DtoLinkGetData findAllByGroup(Long id,String tipo,Character estado);
     Long save(DtoLink dtoLink);
     void update(DtoLink dtoLink);
 }

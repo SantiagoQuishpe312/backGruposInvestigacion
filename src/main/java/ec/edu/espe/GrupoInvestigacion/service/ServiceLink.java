@@ -71,8 +71,8 @@ public class ServiceLink implements IServiceLink {
     }
 
     @Override
-    public DtoLinkGetData findAllByGroup(Long id,Character tipo,Character estado){
-        Optional<ModelLink> modelLink=daoLink.findAllByGroup(id, tipo, estado);
+    public DtoLinkGetData findAllByGroup(Long id,String tipo,Character estado){
+        Optional<ModelLink> modelLink = daoLink.findAllByGroup(id, estado, tipo);
         if(modelLink.isEmpty()){
             throw new NoSuchElementException("");
         }

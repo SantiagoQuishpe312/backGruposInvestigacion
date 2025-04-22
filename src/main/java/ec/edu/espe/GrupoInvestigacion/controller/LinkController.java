@@ -43,7 +43,7 @@ public class LinkController {
 
     @Operation(summary = "Obtener formulario completo por el ID deñ Grupo")
     @GetMapping("/all/{id}/state/{state}/type/{type}")
-    public ResponseEntity<DtoLinkGetData> getAllById(@PathVariable Long id, @PathVariable Character type, @PathVariable Character state) {
+    public ResponseEntity<DtoLinkGetData> getAllById(@PathVariable Long id, @PathVariable String type, @PathVariable Character state) {
         return new ResponseEntity<>(linkService.findAllByGroup(id,type,state), HttpStatus.OK);
     }
 
