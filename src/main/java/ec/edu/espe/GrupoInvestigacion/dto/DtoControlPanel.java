@@ -16,11 +16,11 @@ public class DtoControlPanel {
     private String indicadorForma;
     private String indicadorCondicional;
     private String indicadorAcumulativo;
-    private BigDecimal meta1;
-    private BigDecimal meta2;
-    private BigDecimal meta3;
-    private BigDecimal meta4;
-    private BigDecimal financiamiento;
+    private Float meta1;
+    private Float meta2;
+    private Float meta3;
+    private Float meta4;
+    private Float financiamiento;
     private String observacion;
     private String usuarioCreacion;
     private Date fechaCreacion;

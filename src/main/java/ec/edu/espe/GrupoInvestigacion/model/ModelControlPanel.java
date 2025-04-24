@@ -37,19 +37,19 @@ public class ModelControlPanel {
     private String indicatorAccumulative;
 
     @Column(name = "UZITGCONTROLPANEL_GOALS1")
-    private BigDecimal goals1;
+    private Float goals1;
 
     @Column(name = "UZITGCONTROLPANEL_GOALS2")
-    private BigDecimal goals2;
+    private Float goals2;
 
     @Column(name = "UZITGCONTROLPANEL_GOALS3")
-    private BigDecimal goals3;
+    private Float goals3;
 
     @Column(name = "UZITGCONTROLPANEL_GOALS4")
-    private BigDecimal goals4;
+    private Float goals4;
 
     @Column(name = "UZITGCONTROLPANEL_FINANCING")
-    private BigDecimal financing;
+    private Float financing;
 
     @Column(name = "UZITGCONTROLPANEL_OBSERVATION", nullable = false)
     private String observation;
