@@ -9,6 +9,8 @@ import java.util.List;
 public interface IServiceAnnualOperativePlan {
     public List<DtoAnnualOperativePlan> findAll();
     public DtoAnnualOperativePlan findById(Long id);
+    //public List<DtoAnnualOperativePlan> findByGroup(Long id);
+    public DtoAnnualOpGetControl findLatestByGroup(Long id);
     public DtoAnnualOpGetControl findDoc(Long id);
     Long save(DtoAnnualOperativePlan dtoAnnualOperativePlan);
     void update(DtoAnnualOperativePlan dtoAnnualOperativePlan);

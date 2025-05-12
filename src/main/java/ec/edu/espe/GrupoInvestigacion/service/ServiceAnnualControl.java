@@ -92,31 +92,45 @@ public class ServiceAnnualControl implements IServiceAnnualControl{
     }
 
     @Override
-    public List<DtoAnnualControlGetDetails> findAllByPlan(Long id){
-        List<DtoAnnualControlGetDetails> dtoList=new ArrayList<>();
-        Optional<List<ModelAnnualControl>> modelAnnualControl=daoAnnualControl.findByIdPlan(id);
-        if(modelAnnualControl.isPresent()){
-            List<ModelAnnualControl> lista=modelAnnualControl.get();
-            for(ModelAnnualControl annualControl:lista){
-                Optional<ModelAnnualControl> modelAnnualControl1=daoAnnualControl.findByIds(annualControl.getModelAnnualOperativePlan().getId(),annualControl.getModelControlPanel().getId(),annualControl.getModelOds().getId(),annualControl.getModelStrategies().getId());
-                //Optional<ModelControlPanel> modelControlPanel=daoControlPanel.findByIdEnable(annualControl.getModelControlPanel().getId());
-                Optional<ModelStrategies> modelStrategies=daoStrategies.findByIdEnable(annualControl.getModelStrategies().getId());
-                Optional<ModelOds> modelOds=daoOds.findByIdEnable(annualControl.getModelOds().getId());
-                DtoAnnualControlGetDetails dto=new DtoAnnualControlGetDetails();
+    public List<DtoAnnualControlGetDetails> findAllByPlan(Long id) {
+        List<DtoAnnualControlGetDetails> dtoList = new ArrayList<>();
+
+        // Obtener la lista de ModelAnnualControl por el id del plan
+        Optional<List<ModelAnnualControl>> modelAnnualControls = daoAnnualControl.findByIdPlan(id);
+        if (modelAnnualControls.isPresent()) {
+            // Si se encuentran resultados, procesarlos
+            List<ModelAnnualControl> lista = modelAnnualControls.get();
+            for (ModelAnnualControl annualControl : lista) {
+
+                // Buscar el ModelAnnualControl relacionado usando los ids necesarios
+                Optional<ModelAnnualControl> modelAnnualControl1 = daoAnnualControl
+                        .findByIds(annualControl.getModelAnnualOperativePlan().getId(),
+                                annualControl.getModelControlPanel().getId(),
+                                annualControl.getModelOds().getId(),
+                                annualControl.getModelStrategies().getId());
+
+                // Obtener las entidades relacionadas (si existen)
+                Optional<ModelStrategies> modelStrategies = daoStrategies.findByIdEnable(annualControl.getModelStrategies().getId());
+                Optional<ModelOds> modelOds = daoOds.findByIdEnable(annualControl.getModelOds().getId());
+
+                // Crear y mapear el DTO de la entidad ModelAnnualControl
+                DtoAnnualControlGetDetails dto = new DtoAnnualControlGetDetails();
                 dto.setControlAnual(modelAnnualControl1.map(annualControlMapper::toDto).orElse(new DtoAnnualControl()));
                 dto.setControlPanel(serviceControlPanel.findAllById(annualControl.getModelControlPanel().getId()));
                 dto.setEstrategias(modelStrategies.map(strategiesMapper::toDto).orElse(new DtoStrategies()));
                 dto.setOds(modelOds.map(odsMapper::toDto).orElse(new DtoOds()));
+
+                // Agregar el DTO al listado
                 dtoList.add(dto);
-
-
             }
-        }else{
+        } else {
+            // Si no se encuentran resultados
             System.out.println("No se encontraron resultados.");
-
         }
+
         return dtoList;
     }
+
     @Override
     public void update(DtoAnnualControl dtoAnnualControl){
         ModelAnnualControl existingEntity=daoAnnualControl.findByIds(dtoAnnualControl.getIdPlanAnual(), dtoAnnualControl.getIdPanelControl(), dtoAnnualControl.getIdOds(), dtoAnnualControl.getIdEstrategia()).orElse(null);

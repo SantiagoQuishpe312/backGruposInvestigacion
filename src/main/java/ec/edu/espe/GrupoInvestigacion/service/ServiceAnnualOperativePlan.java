@@ -77,6 +77,26 @@ public class ServiceAnnualOperativePlan implements IServiceAnnualOperativePlan {
     }
 
     @Override
+    public DtoAnnualOpGetControl findLatestByGroup(Long id) {
+        Optional<ModelAnnualOperativePlan> modelAnnualOperativePlan = daoAnnualOperativePlan.findLatestByGroup(id);
+        if (modelAnnualOperativePlan.isEmpty()) {
+            throw new NoSuchElementException("No se encontró el plan más reciente.");
+        }
+
+        Long idAnnualOpPlan = modelAnnualOperativePlan.get().getId();
+        Optional<List<ModelAnnualControl>> modelAnnualControls = daoAnnualControl.findByIdPlan(idAnnualOpPlan);
+        if (modelAnnualControls.isEmpty()) {
+            throw new NoSuchElementException("No se encontraron controles asociados al plan.");
+        }
+
+        DtoAnnualOpGetControl dto = new DtoAnnualOpGetControl();
+        dto.setPlanOpAnual(modelAnnualOperativePlan.map(annualOperativePlanMapper::toDto).orElse(new DtoAnnualOperativePlan()));
+        dto.setControlAnual(serviceAnnualControl.findAllByPlan(idAnnualOpPlan));  // Asegúrate de que esta llamada funcione bien
+        return dto;
+    }
+
+
+    @Override
     public DtoAnnualOpGetControl findDoc(Long id) {
         Optional<ModelAnnualOperativePlan> modelAnnualOperativePlan = daoAnnualOperativePlan.findByIdEnable(id);
         if (modelAnnualOperativePlan.isEmpty()) {
@@ -84,7 +104,6 @@ public class ServiceAnnualOperativePlan implements IServiceAnnualOperativePlan {
         }
         Long idAnnualOpPlan = modelAnnualOperativePlan.get().getId();
         Optional<List<ModelAnnualControl>> modelAnnualControls = daoAnnualControl.findByIdPlan(idAnnualOpPlan);
-
         DtoAnnualOpGetControl dto = new DtoAnnualOpGetControl();
         dto.setPlanOpAnual(modelAnnualOperativePlan.map(annualOperativePlanMapper::toDto).orElse(new DtoAnnualOperativePlan()));
         dto.setControlAnual(serviceAnnualControl.findAllByPlan(id));

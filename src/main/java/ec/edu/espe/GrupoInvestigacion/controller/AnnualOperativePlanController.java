@@ -40,6 +40,11 @@ public class AnnualOperativePlanController {
     public ResponseEntity<DtoAnnualOpGetControl> getAnnualOpCompletePlanById(@PathVariable Long id) {
         return new ResponseEntity<>(annualOperativePlanService.findDoc(id), HttpStatus.OK);
     }
+    @Operation(summary = "Obtener el documento completo")
+    @GetMapping("/allReportByGroup/{id}")
+    public ResponseEntity<DtoAnnualOpGetControl> getAnnualOpCompletePlanGroup(@PathVariable Long id) {
+        return new ResponseEntity<>(annualOperativePlanService.findLatestByGroup(id), HttpStatus.OK);
+    }
 
     @Operation(summary = "Creal nuevos planes operativos")
     @PostMapping("/created")

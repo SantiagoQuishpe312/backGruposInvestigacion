@@ -5,6 +5,7 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoInvMember;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoUser;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvGroup;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoInvMember;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoInvMemberGetGroup;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoUser;
 import ec.edu.espe.GrupoInvestigacion.mapper.InvGroupMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.InvMemberMapper;
@@ -132,6 +133,38 @@ public class ServiceInvMember implements IServiceInvMember {
             throw new RuntimeException("No se encontró el grupo para el usuario");
         }
     }
+
+    public DtoInvMemberGetGroup getMiembro(Long userId) {
+        Optional<List<ModelInvMember>> modelInvMembersOpt = daoInvMember.findByIdEnable(userId);
+        DtoInvMemberGetGroup dto = new DtoInvMemberGetGroup();
+
+        if (modelInvMembersOpt.isPresent()) {
+            List<ModelInvMember> miembros = modelInvMembersOpt.get();
+            Set<ModelInvGroup> grupos = new HashSet<>(); // para evitar duplicados
+
+            for (ModelInvMember miembro : miembros) {
+                ModelInvGroup grupo = miembro.getModelInvGroup();
+                if (grupo != null) {
+                    grupos.add(grupo);
+                }
+            }
+
+            List<DtoInvGroup> gruposDto = grupos.stream()
+                    .map(grupo -> {
+                        DtoInvGroup dtoGroup = new DtoInvGroup();
+                        dtoGroup.setIdGrupoInv(grupo.getId()); // Asume que ModelInvGroup tiene getId()
+                        return dtoGroup;
+                    })
+                    .collect(Collectors.toList());
+
+            dto.setGrupo(gruposDto);
+        } else {
+            dto.setGrupo(Collections.emptyList());
+        }
+
+        return dto;
+    }
+
     @Override
     public Long save(DtoInvMember dtoInvMember) {
         Long userId = dtoInvMember.getIdUsuario();
