@@ -17,6 +17,7 @@ public class DtoInvGroup {
     private Date fechaCreacionGI;
     private String adicional;
     private String sede;
+    private String cumplimiento;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModificacion;

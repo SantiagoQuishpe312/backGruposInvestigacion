@@ -65,13 +65,15 @@ public class ModelInvGroup {
     @Column(name = "UZITGINV_GROUP_DEPARTMENT")
     private String department;
 
+    @Column(name = "UZITGINV_GROUP_CUMPLIMIENTO")
+    private String compliance;
     @OneToMany(mappedBy = "modelInvGroup", cascade = CascadeType.ALL)
     private List<ModelCreationReq> modelCreationReq;
     @OneToMany(mappedBy = "modelInvGroup", cascade = CascadeType.ALL)
     private List<ModelInvMember> modelInvMember;
     @OneToMany(mappedBy = "modelInvGroup")
     private List<ModelDevelopmentPlan> modelDevelopmentPlan;
-    @OneToMany(mappedBy = "modelInvGroup",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "modelInvGroup", cascade = CascadeType.ALL)
     private List<ModelLink> modelLink;
     @OneToMany(mappedBy = "modelInvGroup")
     private List<ModelAnnexes> modelAnnexes;
@@ -102,6 +104,5 @@ public class ModelInvGroup {
     @ManyToOne
     @JoinColumn(name = "UZITGUSER_ID", nullable = false)
     private ModelUser modelUser;
-
 
 }
