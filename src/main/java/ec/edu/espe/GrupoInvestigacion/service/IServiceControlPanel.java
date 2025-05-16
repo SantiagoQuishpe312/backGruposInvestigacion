@@ -13,6 +13,7 @@ public interface IServiceControlPanel {
     public List<DtoControlPanel> findByDev(Long id);
     public List<DtoControlPanelGetData> findCompleteByDev(Long id);
     public DtoControlPanelGetData findAllById(Long id);
+    public List<DtoControlPanel> findBySpecificObj(Long id);
     Long save(DtoControlPanel dtoControlPanel);
     void update(DtoControlPanel dtoControlPanel);
 }

@@ -18,4 +18,7 @@ public interface DaoControlPanel extends CrudRepository<ModelControlPanel, Long>
     public Optional<List<ModelControlPanel>> findByIdDev(Long id);
 
 
+    @Query(value = "SELECT mcp FROM ModelControlPanel mcp WHERE mcp.modelSpecificObjectives.id=:id")
+    public Optional<List<ModelControlPanel>> findBySpecificObj(Long id);
+
 }

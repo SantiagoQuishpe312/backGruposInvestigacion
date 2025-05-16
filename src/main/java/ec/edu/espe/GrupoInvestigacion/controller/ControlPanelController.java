@@ -41,6 +41,11 @@ public class ControlPanelController {
     public ResponseEntity<List<DtoControlPanelGetData>> getAllControlPanel(@PathVariable Long id) {
         return new ResponseEntity<>(controlPanelService.findCompleteByDev(id), HttpStatus.OK);
     }
+    @Operation(summary = "Obtener todos los paneles de control por plan de desarrollo")
+    @GetMapping("/bySpecificObj/{id}")
+    public ResponseEntity<List<DtoControlPanel>> getBySpecificObj(@PathVariable Long id) {
+        return new ResponseEntity<>(controlPanelService.findBySpecificObj(id), HttpStatus.OK);
+    }
 
     @Operation(summary = "Obtener un panel de control por su ID")
     @GetMapping("/{id}")

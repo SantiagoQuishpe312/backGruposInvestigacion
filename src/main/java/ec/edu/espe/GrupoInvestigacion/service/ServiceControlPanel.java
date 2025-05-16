@@ -130,6 +130,14 @@ public class ServiceControlPanel implements IServiceControlPanel {
     }
 
     @Override
+    public List<DtoControlPanel> findBySpecificObj(Long id) {
+        return daoControlPanel.findBySpecificObj(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(controlPanelMapper::toDto)
+                .collect(Collectors.toList());    }
+
+    @Override
     public Long save(DtoControlPanel dtoControlPanel){
         ModelControlPanel modelControlPanel=controlPanelMapper.toEntity(dtoControlPanel);
         ModelControlPanel createdEntity=daoControlPanel.save(modelControlPanel);
