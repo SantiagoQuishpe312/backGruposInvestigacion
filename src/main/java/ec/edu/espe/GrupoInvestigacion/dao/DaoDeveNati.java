@@ -17,4 +17,6 @@ public interface DaoDeveNati extends CrudRepository<ModelDeveNati, Long> {
 
     @Query(value = "SELECT dl.modelNationalPlan FROM ModelDeveNati dl where dl.modelDevelopmentPlan.id=:id")
     public Optional<List<ModelNationalPlan>> findNationalPlan(Long id);
+    @Query(value = "SELECT dl FROM ModelDeveNati dl where dl.modelDevelopmentPlan.id=:id AND dl.modelNationalPlan.id=:idMod")
+    public Optional<ModelDeveNati> findNationalPlanSpecific(Long id,Long idMod);
 }

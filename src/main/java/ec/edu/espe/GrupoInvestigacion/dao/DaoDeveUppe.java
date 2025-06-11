@@ -1,7 +1,6 @@
 package ec.edu.espe.GrupoInvestigacion.dao;
 
 import ec.edu.espe.GrupoInvestigacion.model.ModelDeveUppe;
-import ec.edu.espe.GrupoInvestigacion.model.ModelLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.model.ModelUpperLevelPlan;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,4 +16,6 @@ public interface DaoDeveUppe extends CrudRepository<ModelDeveUppe, Long> {
 
     @Query(value = "SELECT dl.modelUpperLevelPlan FROM ModelDeveUppe dl where dl.modelDevelopmentPlan.id=:id")
     public Optional<List<ModelUpperLevelPlan>> findUpperLevelPlan(Long id);
+    @Query(value = "SELECT dl FROM ModelDeveUppe dl where dl.modelDevelopmentPlan.id=:id and dl.modelUpperLevelPlan.id=:idMod" )
+    public Optional<ModelDeveUppe> findUpperLevelPlanSpecific(Long id, Long idMod);
 }

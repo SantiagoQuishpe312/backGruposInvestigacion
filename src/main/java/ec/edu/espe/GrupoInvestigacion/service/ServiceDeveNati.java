@@ -7,12 +7,10 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoDevelopmentPlan;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoNationalPlan;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetNationalPlan;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDeveNati;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoNationalPlan;
 import ec.edu.espe.GrupoInvestigacion.mapper.DeveNatiMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.NationalPlanMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDeveNati;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDeveNatiId;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDevelopmentPlan;
-import ec.edu.espe.GrupoInvestigacion.model.ModelNationalPlan;
+import ec.edu.espe.GrupoInvestigacion.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,14 +70,23 @@ private NationalPlanMapper nationalPlanMapper;
 
     }
     @Override
-    public DtoDevGetNationalPlan findByDev(Long id){
-        Optional<List<ModelNationalPlan>> modelNationalPlans=daoDeveNati.findNationalPlan(id);
-        DtoDevGetNationalPlan dtoDevGetNationalPlan=new DtoDevGetNationalPlan();
-        if(!modelNationalPlans.isEmpty()){
-            dtoDevGetNationalPlan.setPlanNacional(modelNationalPlans.get().stream().map(nationalPlanMapper::toDto).collect(Collectors.toList()));
-            return dtoDevGetNationalPlan;
-        }
-        throw new RuntimeException("No se encontraron planes Nacionale para el plan de desarrollo");
+    public void delete(Long devId,Long id){
+        Optional<ModelDeveNati> deveLegaOptional=daoDeveNati.findNationalPlanSpecific(devId,id);
+        if(deveLegaOptional.isPresent()){
+            daoDeveNati.delete(deveLegaOptional.get());
 
+        }else{
+            throw new RuntimeException("No se encontro datos");
+        }
     }
+    @Override
+    public List<DtoNationalPlan> findByDev(Long id){
+        return daoDeveNati.findNationalPlan(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(nationalPlanMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+
 }

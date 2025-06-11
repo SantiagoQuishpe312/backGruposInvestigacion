@@ -4,12 +4,10 @@ import ec.edu.espe.GrupoInvestigacion.dao.*;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetUpperLevelPlan;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDeveUppe;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoReqGetAcademicDom;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoUpperLevelPlan;
 import ec.edu.espe.GrupoInvestigacion.mapper.DeveUppeMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.UpperLevelPlanMapper;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDeveUppe;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDeveUppeId;
-import ec.edu.espe.GrupoInvestigacion.model.ModelDevelopmentPlan;
-import ec.edu.espe.GrupoInvestigacion.model.ModelUpperLevelPlan;
+import ec.edu.espe.GrupoInvestigacion.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,14 +63,22 @@ private UpperLevelPlanMapper upperLevelPlanMapper;
 
         return modelDeveUppe.getModelUpperLevelPlan().getId();
     }
+    @Override
+    public void delete(Long devId,Long id){
+        Optional<ModelDeveUppe> deveLegaOptional=daoDeveUppe.findUpperLevelPlanSpecific(devId,id);
+        if(deveLegaOptional.isPresent()){
+            daoDeveUppe.delete(deveLegaOptional.get());
 
-    @Override public DtoDevGetUpperLevelPlan findByDev(Long id){
-        Optional<List<ModelUpperLevelPlan>> modelUpperLevelPlans=daoDeveUppe.findUpperLevelPlan(id);
-        DtoDevGetUpperLevelPlan dtoDevGetUpperLevelPlan=new DtoDevGetUpperLevelPlan();
-        if(!modelUpperLevelPlans.isEmpty()){
-            dtoDevGetUpperLevelPlan.setPlanDeNivelSuperior(modelUpperLevelPlans.get().stream().map(upperLevelPlanMapper::toDto).collect(Collectors.toList()));
-            return dtoDevGetUpperLevelPlan;
+        }else{
+            throw new RuntimeException("No se encontro datos");
         }
-        throw new RuntimeException("No se encontraron planes de nivel superior para el plan de desarrollo");
+    }
+    @Override
+    public List<DtoUpperLevelPlan> findByDev(Long id){
+        return daoDeveUppe.findUpperLevelPlan(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(upperLevelPlanMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

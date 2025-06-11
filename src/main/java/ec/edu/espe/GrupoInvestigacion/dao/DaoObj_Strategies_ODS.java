@@ -18,9 +18,17 @@ public interface DaoObj_Strategies_ODS extends CrudRepository<ModelObj_Strategie
     @Query(value = "SELECT oso FROM ModelObj_Strategies_ODS oso WHERE oso.modelSpecificObjectives.id=:id")
     public Optional<List<ModelObj_Strategies_ODS>> findByPlan(Long id);
 
-    @Query("SELECT o FROM ModelSpecificObjectives o JOIN o.modelControlPanel p On o.id=p.modelSpecificObjectives.id where p.modelDevelopmentPlan.id = :planId")
+    @Query(value = "SELECT oso FROM ModelObj_Strategies_ODS oso WHERE oso.modelSpecificObjectives.modelDevelopmentPlan.id=:id")
+    public Optional<List<ModelObj_Strategies_ODS>> findByPlanRelations(Long id);
+
+    @Query("SELECT o FROM ModelSpecificObjectives o where o.modelDevelopmentPlan.id = :planId")
     Optional<List<ModelSpecificObjectives>> findOdsObjByPlan(@Param("planId") Long planId);
 
+    @Query("SELECT o FROM ModelSpecificObjectives o where o.modelDevelopmentPlan.id = :planId")
+    Optional<List<ModelSpecificObjectives>> findOdsObjByPlanEnable(@Param("planId") Long planId);
     @Query("SELECT o FROM ModelSpecificObjectives o WHERE o.id=:id")
     Optional <ModelSpecificObjectives> findByObj(@Param("id") Long id);
+
+    @Query ("SELECT o FROM ModelObj_Strategies_ODS o WHERE o.modelSpecificObjectives.id=:idObj AND o.modelStrategies.id=:idStrategy AND o.modelOds.id=:idOds")
+    Optional <ModelObj_Strategies_ODS> findEnable(@Param("idObj") Long idObj, @Param("idStrategy") Long idStrategy,@Param("idOds")Long idOds);
 }

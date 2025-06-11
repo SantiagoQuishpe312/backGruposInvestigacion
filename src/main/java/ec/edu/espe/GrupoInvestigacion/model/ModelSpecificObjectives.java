@@ -37,7 +37,9 @@ public class ModelSpecificObjectives {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModificate;
-
+    @ManyToOne
+    @JoinColumn(name = "UZITGDEVELOPMENT_PLAN_ID")
+    private  ModelDevelopmentPlan modelDevelopmentPlan;
     @OneToMany(mappedBy = "modelSpecificObjectives",cascade = CascadeType.ALL)
     private List<ModelObj_Strategies_ODS> modelObjStrategiesOds;
     @OneToMany(mappedBy = "modelSpecificObjectives",cascade = CascadeType.ALL)

@@ -6,6 +6,7 @@ import java.util.Date;
 @Data
 public class DtoSpecificObjectives {
     private Long idObjetivo;
+    private Long idPlanDesarrollo;
     private String objetivo;
 
     private String usuarioCreacion;

@@ -5,6 +5,7 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoDevelopmentPlan;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDeveLega;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.mapper.DeveLegaMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.LegalFrameworkMapper;
 import ec.edu.espe.GrupoInvestigacion.model.ModelDeveLega;
@@ -53,6 +54,16 @@ public class ServiceDeveLega implements IServiceDeveLega{
              .collect(Collectors.toList());
  }
  @Override
+ public void delete(Long devId,Long id){
+     Optional<ModelDeveLega> deveLegaOptional=daoDeveLega.findLegalFrameworkSpecific(devId,id);
+    if(deveLegaOptional.isPresent()){
+        daoDeveLega.delete(deveLegaOptional.get());
+
+    }else{
+        throw new RuntimeException("No se encontro datos");
+ }
+ }
+ @Override
     public Long save(DtoDeveLega dtoDeveLega){
      Long developmentPlanId=dtoDeveLega.getIdPlan();
      Long legalFrameworkId=dtoDeveLega.getIdMarco();
@@ -67,14 +78,13 @@ public class ServiceDeveLega implements IServiceDeveLega{
      return modelDeveLega.getModelLegalFramework().getId();
  }
 
- @Override public DtoDevGetLegalFramework findByDev(Long id){
-     Optional<List<ModelLegalFramework>> modelLegalFrameworks=daoDeveLega.findLegalFramework(id);
-     DtoDevGetLegalFramework dtoDevGetLegalFramework=new DtoDevGetLegalFramework();
-     if(!modelLegalFrameworks.isEmpty()){
-         dtoDevGetLegalFramework.setMarcoLegal(modelLegalFrameworks.get().stream().map(legalFrameworkMapper::toDto).collect(Collectors.toList()));
-        return dtoDevGetLegalFramework;
-     }
-     throw new RuntimeException("No se encontraron marcos legales para el plan de desarrollo");
+ @Override
+ public List<DtoLegalFramework> findByDev(Long id){
+     return daoDeveLega.findLegalFramework(id)
+             .orElse(new ArrayList<>())
+             .stream()
+             .map(legalFrameworkMapper::toDto)
+             .collect(Collectors.toList());
 
  }
 }

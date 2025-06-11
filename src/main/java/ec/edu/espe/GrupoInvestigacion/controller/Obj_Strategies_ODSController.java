@@ -28,6 +28,11 @@ public class Obj_Strategies_ODSController {
     public ResponseEntity<List<DtoObj_Strategies_ODS>> getByObj(@PathVariable Long id){
         return new ResponseEntity<>(serviceObjStrategiesOds.findByObj(id), HttpStatus.OK);
     }
+    @Operation(summary = "Obtener datos por el Id del Objetivo Específico")
+    @GetMapping("/plan_relations/{id}")
+    public ResponseEntity<List<DtoObj_Strategies_ODS>> getByPlanRelations(@PathVariable Long id){
+        return new ResponseEntity<>(serviceObjStrategiesOds.findByPlanRelations(id), HttpStatus.OK);
+    }
 
     @Operation(summary = "Obtener datos por el Id del Plan de Desarrollo")
     @GetMapping("/developmentPlan/{id}")
@@ -46,5 +51,11 @@ public class Obj_Strategies_ODSController {
     public ResponseEntity<Long> create(@RequestBody DtoObj_Strategies_ODS dtoObjStrategiesOds){
         Long saved=serviceObjStrategiesOds.save(dtoObjStrategiesOds);
         return new ResponseEntity<>(saved,HttpStatus.CREATED);
+    }
+    @Operation(summary = "Eliminar un marco legal con su relacion a un plan de desarrollo por su ID")
+    @DeleteMapping("/{idObj}/strategy/{idStrategy}/ods/{idOds}")
+    public ResponseEntity<Void> deleteObjStrategyOds(@PathVariable Long idObj, @PathVariable Long idStrategy, @PathVariable Long idOds) {
+        serviceObjStrategiesOds.delete(idObj,idStrategy,idOds);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

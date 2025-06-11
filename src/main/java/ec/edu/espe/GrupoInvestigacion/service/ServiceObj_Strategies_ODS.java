@@ -52,20 +52,35 @@ private StrategiesMapper strategiesMapper;
                 .stream()
                 .map(objStrategiesOdsMapper::toDto)
                 .collect(Collectors.toList());
+    }@Override
+    public List<DtoObj_Strategies_ODS> findByPlanRelations(Long id) {
+
+        return daoObjStrategiesOds.findByPlanRelations(id)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(objStrategiesOdsMapper::toDto)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public void delete (Long idObj, Long idStrategy, Long idOds){
+        Optional<ModelObj_Strategies_ODS> objStrategiesOds=daoObjStrategiesOds.findEnable(idObj,idStrategy,idOds);
+        if(objStrategiesOds.isPresent()){
+            daoObjStrategiesOds.delete(objStrategiesOds.get());
+        }else{
+            throw new RuntimeException("No se encontro datos");
+
+        }
     }
 
     @Override
     public List<DtoObjGetStrategies> findCompleteByPlan(Long id) {
-        // Buscar los objetivos específicos asociados al plan
-        Optional<List<ModelSpecificObjectives>> modelObj = daoObjStrategiesOds.findOdsObjByPlan(id);
+        Optional<List<ModelSpecificObjectives>> modelObj = daoObjStrategiesOds.findOdsObjByPlanEnable(id);
 
-        // Lista para almacenar los DTOs
         List<DtoObjGetStrategies> list = new ArrayList<>();
 
-        // Validar si existen objetivos específicos asociados
         if (modelObj.isPresent() && !modelObj.get().isEmpty()) {
             for (ModelSpecificObjectives specificObjective : modelObj.get()) {
-                // Crear un nuevo DTO para cada objetivo
+                System.out.println("SpecificObjective ID: " + specificObjective.getId());
                 DtoObjGetStrategies dtoObjGetStrategies = new DtoObjGetStrategies();
 
                 // Asignar datos al DTO

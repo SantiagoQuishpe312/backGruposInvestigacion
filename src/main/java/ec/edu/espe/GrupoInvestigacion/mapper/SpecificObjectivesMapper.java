@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 public interface SpecificObjectivesMapper {
 
     @Mapping(source = "id", target = "idObjetivo")
+    @Mapping(source = "modelDevelopmentPlan.id", target = "idPlanDesarrollo")
     @Mapping(source = "objective", target = "objetivo")
     @Mapping(source = "userCreate", target = "usuarioCreacion")
     @Mapping(source = "dateCreate", target = "fechaCreacion")
@@ -17,6 +18,7 @@ public interface SpecificObjectivesMapper {
     DtoSpecificObjectives toDto(ModelSpecificObjectives model);
 
     @Mapping(source = "idObjetivo", target = "id")
+    @Mapping(source = "idPlanDesarrollo", target = "modelDevelopmentPlan.id")
     @Mapping(source = "objetivo", target = "objective")
     @Mapping(source = "usuarioCreacion", target = "userCreate")
     @Mapping(source = "fechaCreacion", target = "dateCreate")

@@ -3,6 +3,7 @@ package ec.edu.espe.GrupoInvestigacion.controller;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetNationalPlan;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetUpperLevelPlan;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDeveUppe;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoUpperLevelPlan;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceDeveUppe;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,7 +46,13 @@ public class DeveUppeController {
     }
     @Operation(summary = "Obtiene los  planes de nivel superior por el id del Plan de Desarrollo")
     @GetMapping ("/bydev/{id}")
-    public ResponseEntity <DtoDevGetUpperLevelPlan> devGetUpperLevelPlan(@PathVariable Long id){
+    public ResponseEntity <List<DtoUpperLevelPlan>> devGetUpperLevelPlan(@PathVariable Long id){
         return new ResponseEntity<>(deveUppeService.findByDev(id),HttpStatus.OK);
+    }
+    @Operation(summary = "Eliminar un marco legal con su relacion a un plan de desarrollo por su ID")
+    @DeleteMapping("/{id}/dev/{devId}")
+    public ResponseEntity<Void> deleteDeveUppe(@PathVariable Long id, @PathVariable Long devId) {
+        deveUppeService.delete(devId,id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -58,6 +58,8 @@ public class ModelDevelopmentPlan {
     @OneToMany(mappedBy = "modelDevelopmentPlan")
     private List<ModelControlPanel> modelControlPanel;
     @OneToMany(mappedBy = "modelDevelopmentPlan")
+    private List<ModelSpecificObjectives> modelSpecificObjectives;
+    @OneToMany(mappedBy = "modelDevelopmentPlan")
     private List<ModelDeveNati> modelDeveNati;
     @OneToMany(mappedBy = "modelDevelopmentPlan")
     private List<ModelDeveUppe> modelDeveUppe;

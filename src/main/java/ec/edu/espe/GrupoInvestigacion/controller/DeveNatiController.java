@@ -3,6 +3,7 @@ package ec.edu.espe.GrupoInvestigacion.controller;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetNationalPlan;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDeveNati;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoNationalPlan;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceDeveNati;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,7 +46,13 @@ public class DeveNatiController {
     }
     @Operation(summary = "Obtiene los  planes nacionales por el id del Plan de Desarrollo")
     @GetMapping ("/bydev/{id}")
-    public ResponseEntity <DtoDevGetNationalPlan> devGetNationalPlan(@PathVariable Long id){
+    public ResponseEntity <List<DtoNationalPlan>> devGetNationalPlan(@PathVariable Long id){
         return new ResponseEntity<>(deveNatiService.findByDev(id),HttpStatus.OK);
+    }
+    @Operation(summary = "Eliminar un marco legal con su relacion a un plan de desarrollo por su ID")
+    @DeleteMapping("/{id}/dev/{devId}")
+    public ResponseEntity<Void> deleteDeveNati(@PathVariable Long id, @PathVariable Long devId) {
+        deveNatiService.delete(devId,id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

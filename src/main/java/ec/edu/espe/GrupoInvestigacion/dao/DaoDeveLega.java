@@ -16,5 +16,6 @@ public interface DaoDeveLega extends CrudRepository<ModelDeveLega, Long> {
 
     @Query(value = "SELECT dl.modelLegalFramework FROM ModelDeveLega dl where dl.modelDevelopmentPlan.id=:id")
     public Optional<List<ModelLegalFramework>> findLegalFramework(Long id);
-
+    @Query(value = "SELECT dl FROM ModelDeveLega dl where dl.modelDevelopmentPlan.id=:id and dl.modelLegalFramework.id=:idMod")
+    public Optional<ModelDeveLega> findLegalFrameworkSpecific(Long id,Long idMod);
 }

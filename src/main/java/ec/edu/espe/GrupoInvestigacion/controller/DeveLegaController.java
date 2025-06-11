@@ -2,6 +2,7 @@ package ec.edu.espe.GrupoInvestigacion.controller;
 
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDevGetLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoDeveLega;
+import ec.edu.espe.GrupoInvestigacion.dto.DtoLegalFramework;
 import ec.edu.espe.GrupoInvestigacion.dto.DtoReqGetAcademicDom;
 import ec.edu.espe.GrupoInvestigacion.service.IServiceDeveLega;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +46,13 @@ public class DeveLegaController {
     }
     @Operation(summary = "Obtiene los  marcos legales por el id del Plan de Desarrollo")
     @GetMapping ("/bydev/{id}")
-    public ResponseEntity <DtoDevGetLegalFramework> devGetLegalFramework(@PathVariable Long id){
+    public ResponseEntity <List<DtoLegalFramework>> devGetLegalFramework(@PathVariable Long id){
         return new ResponseEntity<>(deveLegaService.findByDev(id),HttpStatus.OK);
+    }
+    @Operation(summary = "Eliminar un marco legal con su relacion a un plan de desarrollo por su ID")
+    @DeleteMapping("/{id}/dev/{devId}")
+    public ResponseEntity<Void> deleteDeveLega(@PathVariable Long id, @PathVariable Long devId) {
+        deveLegaService.delete(devId,id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
