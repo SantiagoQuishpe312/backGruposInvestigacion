@@ -4,9 +4,7 @@ import ec.edu.espe.GrupoInvestigacion.dao.DaoObj_Strategies_ODS;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoSpecificObjectives;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoOds;
 import ec.edu.espe.GrupoInvestigacion.dao.DaoStrategies;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObjGetStrategies;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoObj_Strategies_ODS;
-import ec.edu.espe.GrupoInvestigacion.dto.DtoSpecificObjectives;
+import ec.edu.espe.GrupoInvestigacion.dto.*;
 import ec.edu.espe.GrupoInvestigacion.mapper.Obj_Strategies_ODSMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.OdsMapper;
 import ec.edu.espe.GrupoInvestigacion.mapper.SpecificObjectivesMapper;
@@ -71,6 +69,54 @@ private StrategiesMapper strategiesMapper;
 
         }
     }
+    @Override
+    public List<DtoObjGetStrategiesRelation> findCompleteByPlanRelations(Long id) {
+        System.out.println("🔍 Buscando objetivos específicos para el plan ID: " + id);
+
+        Optional<List<ModelSpecificObjectives>> modelObj = daoObjStrategiesOds.findOdsObjByPlanEnable(id);
+        List<DtoObjGetStrategiesRelation> list = new ArrayList<>();
+
+        if (modelObj.isPresent() && !modelObj.get().isEmpty()) {
+            for (ModelSpecificObjectives specificObjective : modelObj.get()) {
+                System.out.println("➡️ Procesando ObjectiveSpecific ID: " + specificObjective.getId());
+
+                DtoObjGetStrategiesRelation dto = new DtoObjGetStrategiesRelation();
+
+                // Obtener DTO del objetivo
+                DtoSpecificObjectives dtoObjective = daoSpecificObjectives.findByIdEnable(specificObjective.getId())
+                        .map(specificObjectivesMapper::toDto)
+                        .orElse(new DtoSpecificObjectives());
+
+                System.out.println("✅ DTO del objetivo: " + dtoObjective.getObjetivo());
+                dto.setObj(dtoObjective);
+
+                // Obtener relaciones estrategia + ODS
+                List<ModelObj_Strategies_ODS> relaciones = daoObjStrategiesOds.findBySpecificObjective2(specificObjective.getId())
+                        .orElse(new ArrayList<>());
+
+                System.out.println("🔗 Se encontraron " + relaciones.size() + " relaciones para el objetivo ID " + specificObjective.getId());
+
+                List<DtoEstrategiaOds> estrategiasOds = relaciones.stream().map(rel -> {
+                    DtoEstrategiaOds dtoRel = new DtoEstrategiaOds();
+
+                    System.out.println("📌 Relación - Estrategia ID: " + rel.getModelStrategies().getId() + ", ODS ID: " + rel.getModelOds().getId());
+
+                    dtoRel.setEstrategia(strategiesMapper.toDto(rel.getModelStrategies()));
+                    dtoRel.setOds(odsMapper.toDto(rel.getModelOds()));
+                    return dtoRel;
+                }).collect(Collectors.toList());
+
+                dto.setEstrategiasOds(estrategiasOds);
+                list.add(dto);
+            }
+        } else {
+            System.out.println("⚠️ No se encontraron objetivos específicos para el plan ID: " + id);
+        }
+
+        System.out.println("✅ Total DTOs construidos: " + list.size());
+        return list;
+    }
+
 
     @Override
     public List<DtoObjGetStrategies> findCompleteByPlan(Long id) {

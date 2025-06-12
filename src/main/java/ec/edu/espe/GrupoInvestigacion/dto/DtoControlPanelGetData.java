@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class DtoControlPanelGetData {
     private DtoControlPanel PanelControl;
-    private DtoSpecificObjectives ObjetivoEspecífico;
+    private DtoSpecificObjectives ObjetivoEspecifico;
     private DtoUser Responsable;
 }

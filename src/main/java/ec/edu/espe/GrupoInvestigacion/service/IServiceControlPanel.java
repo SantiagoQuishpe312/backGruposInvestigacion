@@ -16,4 +16,5 @@ public interface IServiceControlPanel {
     public List<DtoControlPanel> findBySpecificObj(Long id);
     Long save(DtoControlPanel dtoControlPanel);
     void update(DtoControlPanel dtoControlPanel);
+    void delete(Long id);
 }

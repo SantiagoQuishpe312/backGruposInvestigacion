@@ -94,7 +94,7 @@ public class ServiceControlPanel implements IServiceControlPanel {
 
                 // Asignar los valores si existen
                 dto.setPanelControl(modelControlPanel1.map(controlPanelMapper::toDto).orElse(new DtoControlPanel()));
-                dto.setObjetivoEspecífico(modelSpecificObjectives.map(specificObjectivesMapper::toDto).orElse(new DtoSpecificObjectives()));
+                dto.setObjetivoEspecifico(modelSpecificObjectives.map(specificObjectivesMapper::toDto).orElse(new DtoSpecificObjectives()));
                 dto.setResponsable(modelUser.map(userMapper::toDto).orElse(new DtoUser()));
 
                 // Agregar el DTO a la lista
@@ -123,7 +123,7 @@ public class ServiceControlPanel implements IServiceControlPanel {
 
         DtoControlPanelGetData dto = new DtoControlPanelGetData();
         dto.setPanelControl(modelControlPanel1.map(controlPanelMapper::toDto).orElse(new DtoControlPanel()));
-        dto.setObjetivoEspecífico(modelSpecificObjectives.map(specificObjectivesMapper::toDto).orElse(new DtoSpecificObjectives()));
+        dto.setObjetivoEspecifico(modelSpecificObjectives.map(specificObjectivesMapper::toDto).orElse(new DtoSpecificObjectives()));
         dto.setResponsable(modelUser.map(userMapper::toDto).orElse(new DtoUser()));
 
         return dto;
@@ -153,6 +153,15 @@ public class ServiceControlPanel implements IServiceControlPanel {
         }
     }
 
+    public void delete(Long id){
+        Optional<ModelControlPanel> modelControlPanel=daoControlPanel.findByIdEnable(id);
+        if(modelControlPanel.isPresent()){
+            daoControlPanel.delete(modelControlPanel.get());
+        }else{
+            throw new RuntimeException("No data");
+        }
+
+    }
     private String[] getNullPropertyNames(Object source) {
         try {
             final BeanInfo beanInfo = Introspector.getBeanInfo(source.getClass());

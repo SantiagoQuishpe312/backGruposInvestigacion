@@ -46,6 +46,12 @@ public class ControlPanelController {
     public ResponseEntity<List<DtoControlPanel>> getBySpecificObj(@PathVariable Long id) {
         return new ResponseEntity<>(controlPanelService.findBySpecificObj(id), HttpStatus.OK);
     }
+    @Operation(summary = "Eliminar un panel de control por su ID")
+    @DeleteMapping("/delete/{panelId}")
+    public ResponseEntity<Void> deleteUserRole(@PathVariable Long panelId) {
+        controlPanelService.delete(panelId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @Operation(summary = "Obtener un panel de control por su ID")
     @GetMapping("/{id}")

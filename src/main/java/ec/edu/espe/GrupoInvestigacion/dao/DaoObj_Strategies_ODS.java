@@ -31,4 +31,10 @@ public interface DaoObj_Strategies_ODS extends CrudRepository<ModelObj_Strategie
 
     @Query ("SELECT o FROM ModelObj_Strategies_ODS o WHERE o.modelSpecificObjectives.id=:idObj AND o.modelStrategies.id=:idStrategy AND o.modelOds.id=:idOds")
     Optional <ModelObj_Strategies_ODS> findEnable(@Param("idObj") Long idObj, @Param("idStrategy") Long idStrategy,@Param("idOds")Long idOds);
+
+
+    @Query("SELECT o FROM ModelObj_Strategies_ODS o WHERE o.modelSpecificObjectives.modelDevelopmentPlan.id = :id")
+    Optional<List<ModelObj_Strategies_ODS>> findBySpecificObjective(@Param("id") Long specificObjectiveId);
+    @Query("SELECT o FROM ModelObj_Strategies_ODS o WHERE o.modelSpecificObjectives.id = :id")
+    Optional<List<ModelObj_Strategies_ODS>> findBySpecificObjective2(@Param("id") Long specificObjectiveId);
 }
